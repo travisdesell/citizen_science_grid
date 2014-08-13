@@ -1,0 +1,71 @@
+<!-- Fixed navbar -->
+<div class='navbar navbar-default navbar-fixed-top' role='navigation'>
+    <div class='container'>
+        <div class='navbar-header'>
+            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+                <span class='sr-only'>Toggle navigation</span>
+                <span class='icon-bar'></span>
+                <span class='icon-bar'></span>
+                <span class='icon-bar'></span>
+            </button>
+            <a class='navbar-brand' href='{{{url}}}'>{{project_name}}</a>
+        </div>
+        <div class='navbar-collapse collapse'>
+            <ul class='nav navbar-nav'>
+                {{#left_headers}}
+                {{#title}}
+                <li class='{{classes}}'>
+                <a href='{{{url}}}'>{{{title}}}</a>
+                </li>
+                {{/title}}
+                {{#dropdown_title}}
+                <li class='{{classes}} dropdown'>
+                <a href='#' class='dropdown-toggle' data-toggle='dropdown'>{{{dropdown_title}}} <span class='caret'></span></a>
+                <ul class='dropdown-menu' role='menu'>
+                    {{#dropdowns}}
+                    {{#divider}}
+                    <li class="divider"></li>
+                    <li class="dropdown-header">{{dropdown_title}}</li>
+                    {{/divider}}
+
+                    {{^divider}}
+                    <li><a href='{{{url}}}'>{{dropdown_title}}</a></li>
+                    {{/divider}}
+                    {{/dropdowns}}
+                </ul>
+                </li>
+                {{/dropdown_title}}
+                {{/left_headers}}
+            </ul>
+
+            <ul class='nav navbar-nav navbar-right'>
+                {{#right_headers}}
+                {{#title}}
+                <li class='{{classes}}'>
+                <a href='{{{url}}}'>{{{title}}}</a>
+                </li>
+                {{/title}}
+                {{#dropdown_title}}
+                <li class='{{classes}} dropdown'>
+                <a href='#' class='dropdown-toggle' data-toggle='dropdown'>{{{dropdown_title}}} <span class='caret'></span></a>
+                <ul class='dropdown-menu' role='menu'>
+                    {{#dropdowns}}
+                    {{#divider}}
+                    <li class="divider"></li>
+                    <li class="dropdown-header">{{dropdown_title}}</li>
+                    {{/divider}}
+
+                    {{^divider}}
+                    <li><a href='{{{url}}}'>{{dropdown_title}}</a></li>
+                    {{/divider}}
+                    {{/dropdowns}}
+                </ul>
+                </li>
+                {{/dropdown_title}}
+                {{/right_headers}}
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div> <!-- container -->
+</div> <!-- navbar -->
+
+
