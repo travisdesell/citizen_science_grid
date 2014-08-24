@@ -19,6 +19,8 @@ function print_header($page_title, $additional_scripts = "", $scheduler = "csg")
 
             <!-- Latest compiled and minified CSS -->
             <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+            <!-- <link rel='stylesheet' href='./css/bootstrap-slate.min.css'> -->
+
 
             <!-- Optional theme
             <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>

@@ -101,12 +101,7 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                                     array('dropdown_title' => 'Top Bird Watching Teams',
                                           'url' => 'http://volunteer.cs.und.edu/wildlife/top_bossa_teams.php')
                                )
-                            ),
-                            array(
-                                'title' => 'Contact',
-                                'url' => 'mailto:tdesell@cs.und.edu',
-                                'classes' => ''
-                           )
+                            )
                        ),
 
                        'right_headers' => array()
@@ -118,6 +113,9 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
     } else if ($project_name == "SubsetSum@Home") {
         $user = sss_get_user(false);
         $navbar_info['left_headers'][0]['dropdown_title'] .= ": SubsetSum@Home";
+    } else if ($project_name == "Wildlife@Home") {
+        $user = sss_get_user(false);
+        $navbar_info['left_headers'][0]['dropdown_title'] .= ": Wildlife@Home";
     } else {
         $user = csg_get_user(false);
     }
@@ -161,7 +159,70 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                                           'url' => '../csg/create_account_form.php?next_url=')
                                )
                              );
+    }
 
+    if ($project_name == "Wildlife@Home") {
+        $navbar_info['left_headers'][] =
+            array(
+                'dropdown_title' => 'Watch Video',
+                'url' => '#',
+                'classes' => '',
+                'dropdowns' => array(
+                    array('dropdown_title' => 'Site and Species Descriptions',
+                    'url' => '../wildlife/video_selector.php'),
+                    array('dropdown_title' => 'Sharp-Tailed Grouse',
+                    'divider' => true,
+                    'url' => 'javascript:;'),
+                    array('dropdown_title' => 'Belden, ND',
+                    'url' => '../wildlife/watch.php?location=1&species=1'),
+                    array('dropdown_title' => 'Blaisdell, ND',
+                    'url' => '../wildlife/watch.php?location=2&species=1'),
+                    array('dropdown_title' => 'Lostwood Wildlife Refuge, ND',
+                    'url' => '../wildlife/watch.php?location=3&species=1'),
+                    array('dropdown_title' => 'Interior Least Tern',
+                    'divider' => true,
+                    'url' => 'javascript:;'),
+                    array('dropdown_title' => 'Missouri River, ND',
+                    'url' => '../wildlife/watch.php?location=4&species=2'),
+                    array('dropdown_title' => 'Piping Plover',
+                    'divider' => true,
+                    'url' => 'javascript:;'),
+                    array('dropdown_title' => 'Missouri River, ND',
+                    'url' => '../wildlife/watch.php?location=4&species=3')
+                )
+            );
+
+        $navbar_info['left_headers'][] =
+            array(
+                'dropdown_title' => 'Wildlife',
+                'url' => '#',
+                'classes' => '',
+                'dropdowns' => array(
+                    array('dropdown_title' => 'Sharp-Tailed Grouse',
+                    'divider' => true,
+                    'url' => 'javascript:;'),
+                    array('dropdown_title' => 'Ecology and Information',
+                    'url' => '../wildlife/sharptailed_grouse_info.php'),
+                    array('dropdown_title' => 'Training Videos',
+                    'url' => '../wildlife/sharptailed_grouse_training.php'),
+
+                    array('dropdown_title' => 'Interior Least Tern',
+                    'divider' => true,
+                    'url' => 'javascript:;'),
+                    array('dropdown_title' => 'Ecology and Information',
+                    'url' => '../wildlife/least_tern_info.php'),
+                    array('dropdown_title' => 'Training Videos (Coming Soon)',
+                    'url' => 'javascript:;'),
+
+                    array('dropdown_title' => 'Piping Plover',
+                    'divider' => true,
+                    'url' => 'javascript:;'),
+                    array('dropdown_title' => 'Ecology and Information',
+                    'url' => '../wildlife/piping_plover_info.php'),
+                    array('dropdown_title' => 'Training Videos (Coming Soon)',
+                    'url' => 'javascript:;'),
+                )
+            );
     }
 
     if ($active_title != "") {

@@ -33,12 +33,20 @@ if ($linked_row[$project . "_linked"] == 1) {
         $sss_result = query_subset_sum_db("SELECT total_credit, expavg_credit, expavg_time FROM user WHERE id = $userid");
         $sss_row = $sss_result->fetch_assoc();
 
-        query_boinc_db("UPDATE user SET sss_total_credit = sss_total_credit + " . $sss_row['total_credit'] . ", sss_expavg_credit = sss_expavg_credit + " . $sss_row['expavg_credit'] . ", sss_expavg_time = " . $sss_row['expavg_time'] . " WHERE id = " . $user['id']);
+        query_boinc_db("UPDATE user SET total_credit = total_credit + " . $sss_row['total_credit'] . ", sss_total_credit = sss_total_credit + " . $sss_row['total_credit'] . ", sss_expavg_credit = sss_expavg_credit + " . $sss_row['expavg_credit'] . ", sss_expavg_time = " . $sss_row['expavg_time'] . " WHERE id = " . $user['id']);
+
+        if ($user['teamid'] > 0) {
+            query_boinc_db("UPDATE team SET sss_total_credit = sss_total_credit + " . $sss_row['total_credit'] . " WHERE id = " . $user['teamid']);
+        }
     } else if ($project == "dna") {
         $dna_result = query_dna_db("SELECT total_credit, expavg_credit, expavg_time FROM user WHERE id = $userid");
         $dna_row = $dna_result->fetch_assoc();
 
-        query_boinc_db("UPDATE user SET dna_total_credit = dna_total_credit + " . $dna_row['total_credit'] . ", dna_expavg_credit = dna_expavg_credit + " . $dna_row['expavg_credit'] . ", dna_expavg_time = " . $dna_row['expavg_time'] . " WHERE id = " . $user['id']);
+        query_boinc_db("UPDATE user SET total_credit = total_credit + " . $dna_row['total_credit'] . ", dna_total_credit = dna_total_credit + " . $dna_row['total_credit'] . ", dna_expavg_credit = dna_expavg_credit + " . $dna_row['expavg_credit'] . ", dna_expavg_time = " . $dna_row['expavg_time'] . " WHERE id = " . $user['id']);
+
+        if ($user['teamid'] > 0) {
+            query_boinc_db("UPDATE team SET dna_total_credit = dna_total_credit + " . $dna_row['total_credit'] . " WHERE id = " . $user['teamid']);
+        }
 
     }
 }
