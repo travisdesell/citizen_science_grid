@@ -42,9 +42,11 @@ function connect_subset_sum_db() {
 
 function connect_wildlife_db() {
     global $wildlife_db, $wildlife_user, $wildlife_passwd;
+
     $wildlife_db = new mysqli("wildlife.und.edu", $wildlife_user, $wildlife_passwd, "wildlife_video");
     if ($wildlife_db->connect_errno) {
         echo "Failed to connect to MySQL: (" . $wildlife_db->connect_errno . ") " . $wildlife_db->connect_error;
+        error_log("Failed to connect to MySQL: (" . $wildlife_db->connect_errno . ") " . $wildlife_db->connect_error);
     }
 }
 
@@ -101,7 +103,7 @@ function query_wildlife_video_db($query) {
 
     if (!$wildlife_db->ping()) connect_wildlife_db();
 
-    $result = $wildilfe_db->query($query);
+    $result = $wildlife_db->query($query);
 
     if (!$result) mysqli_error_msg($wildlife_db, $query);
 

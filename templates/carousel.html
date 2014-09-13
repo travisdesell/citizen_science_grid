@@ -1,0 +1,32 @@
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="0">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        {{#items}}
+        <div class="item {{#active}}active{{/active}}">
+            <div class="row">
+                <div class='col-sm-offset-2 col-sm-4'>
+                    <img class='img-responsive' src='{{image}}' alt=''>
+                    {{#caption}}
+                        <div class='carousel-caption'>{{caption}}</div>
+                    {{/caption}}
+                </div>
+                <div class='col-sm-4'>
+                    <div style="display: table; height:300px; overflow: hidden;">
+                        <div style="display: table-cell; vertical-align: middle;">
+                            {{{text}}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/items}}
+    </div> <!-- carousel-inner -->
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div> <!-- carousel -->

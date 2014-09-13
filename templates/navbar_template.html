@@ -8,7 +8,25 @@
                 <span class='icon-bar'></span>
                 <span class='icon-bar'></span>
             </button>
-            <a class='navbar-brand' href='{{{url}}}'>{{project_name}}</a>
+            <div class='navbar-collapse collapse navbar-brand' style='padding-top:0px;'>
+                <ul class='nav navbar-nav'>
+                    <li class='dropdown'>
+                    <a href='#' class='dropdown-toggle' data-toggle='dropdown'>{{project_name}} <span class='caret'></span></a>
+                        <ul class='dropdown-menu' role='menu'>
+                            {{#brand-dropdowns}}
+                            {{#divider}}
+                            <li class="divider"></li>
+                            <li class="dropdown-header">{{dropdown_title}}</li>
+                            {{/divider}}
+
+                            {{^divider}}
+                            <li><a href='{{{url}}}'>{{dropdown_title}}</a></li>
+                            {{/divider}}
+                            {{/brand-dropdowns}}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class='navbar-collapse collapse'>
             <ul class='nav navbar-nav'>

@@ -16,24 +16,25 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
     if (is_link($cwd[__FILE__])) $cwd[__FILE__] = readlink($cwd[__FILE__]);
     $cwd[__FILE__] = dirname($cwd[__FILE__]);
 
-    $navbar_info = array('project_name' => 'Citizen Science Grid',
+    $navbar_info = array('project_name' => 'CSG',
                        'url' => 'http://volunteer.cs.und.edu/csg/',
+                       'brand-dropdowns' => array(
+                            array('dropdown_title' => 'Citizen Science Grid',
+                                  'url' => 'http://volunteer.cs.und.edu/csg'),
+                            array('dropdown_title' => 'Projects',
+                                  'divider' => true,
+                                  'url' => 'javascript:;'),
+                            array('dropdown_title' => 'DNA@Home',
+                                  'url' => 'http://volunteer.cs.und.edu/dna'),
+                            array('dropdown_title' => 'SubsetSum@Home',
+                                  'url' => 'http://volunteer.cs.und.edu/subset_sum'),
+                            array('dropdown_title' => 'Wildlife@Home',
+                            'url' => 'http://volunteer.cs.und.edu/wildlife')
+                        ),
+
                        'left_headers' => array(
                             array(
-                                'dropdown_title' => 'Projects',
-                                'classes' => '',
-                                'dropdowns' => array(
-                                    array('dropdown_title' => 'DNA@Home',
-                                          'url' => 'http://volunteer.cs.und.edu/dna'),
-                                    array('dropdown_title' => 'SubsetSum@Home',
-                                          'url' => 'http://volunteer.cs.und.edu/subset_sum'),
-                                    array('dropdown_title' => 'Wildlife@Home',
-                                          'url' => 'http://volunteer.cs.und.edu/wildlife')
-                                )
-                            ),
-
-                            array(
-                                'dropdown_title' => 'CSG Information',
+                                'dropdown_title' => 'Information',
                                 'classes' => '',
                                 'dropdowns' => array(
                                     array('dropdown_title' => 'Instructions, Rules & Policies',
@@ -49,12 +50,6 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                                     array('dropdown_title' => 'User Search',
                                           'url' => '../csg/user_search.php')
                                  )
-                            ),
-
-                            array(
-                                'title' => 'Message Boards',
-                                'url' => '../csg/forum_index.php',
-                                'classes' => ''
                             ),
 
                             array(
@@ -101,7 +96,14 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                                     array('dropdown_title' => 'Top Bird Watching Teams',
                                           'url' => 'http://volunteer.cs.und.edu/wildlife/top_bossa_teams.php')
                                )
+                            ),
+
+                            array(
+                                'title' => 'Message Boards',
+                                'url' => '../csg/forum_index.php',
+                                'classes' => ''
                             )
+
                        ),
 
                        'right_headers' => array()
@@ -109,16 +111,85 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
 
     if ($project_name == "DNA@Home") {
         $user = dna_get_user(false);
-        $navbar_info['left_headers'][0]['dropdown_title'] .= ": DNA@Home";
+        $navbar_info['project_name'] = "DNA@Home";
     } else if ($project_name == "SubsetSum@Home") {
         $user = sss_get_user(false);
-        $navbar_info['left_headers'][0]['dropdown_title'] .= ": SubsetSum@Home";
+        $navbar_info['project_name'] = "SubsetSum@Home";
     } else if ($project_name == "Wildlife@Home") {
-        $user = sss_get_user(false);
-        $navbar_info['left_headers'][0]['dropdown_title'] .= ": Wildlife@Home";
+        $user = csg_get_user(false);
+        $navbar_info['project_name'] = "Wildlife@Home";
     } else {
         $user = csg_get_user(false);
+        $navbar_info['project_name'] = "Citizen Science Grid";
     }
+
+    if ($project_name == "Wildlife@Home") {
+        $navbar_info['right_headers'][] =
+            array(
+                'dropdown_title' => 'Wildlife Video',
+                'url' => '#',
+                'classes' => '',
+                'dropdowns' => array(
+                    array('dropdown_title' => 'Site and Species Descriptions',
+                    'url' => '../wildlife/video_selector.php'),
+                    array('dropdown_title' => 'Review Videos',
+                    'url' => '../wildlife/review_videos.php'),
+                    array('dropdown_title' => 'Sharp-Tailed Grouse',
+                    'divider' => true,
+                    'url' => 'javascript:;'),
+                    array('dropdown_title' => 'Belden, ND',
+                    'url' => '../wildlife/watch.php?location=1&species=1'),
+                    array('dropdown_title' => 'Blaisdell, ND',
+                    'url' => '../wildlife/watch.php?location=2&species=1'),
+                    array('dropdown_title' => 'Lostwood Wildlife Refuge, ND',
+                    'url' => '../wildlife/watch.php?location=3&species=1'),
+                    array('dropdown_title' => 'Interior Least Tern',
+                    'divider' => true,
+                    'url' => 'javascript:;'),
+                    array('dropdown_title' => 'Missouri River, ND',
+                    'url' => '../wildlife/watch.php?location=4&species=2'),
+                    array('dropdown_title' => 'Piping Plover',
+                    'divider' => true,
+                    'url' => 'javascript:;'),
+                    array('dropdown_title' => 'Missouri River, ND',
+                    'url' => '../wildlife/watch.php?location=4&species=3')
+                )
+            );
+
+        $navbar_info['right_headers'][] =
+            array(
+                'dropdown_title' => 'About the Wildlife',
+                'url' => '#',
+                'classes' => '',
+                'dropdowns' => array(
+                    array('dropdown_title' => 'Sharp-Tailed Grouse',
+                    'divider' => true,
+                    'url' => 'javascript:;'),
+                    array('dropdown_title' => 'Ecology and Information',
+                    'url' => '../wildlife/sharptailed_grouse_info.php'),
+                    array('dropdown_title' => 'Training Videos',
+                    'url' => '../wildlife/sharptailed_grouse_training.php'),
+
+                    array('dropdown_title' => 'Interior Least Tern',
+                    'divider' => true,
+                    'url' => 'javascript:;'),
+                    array('dropdown_title' => 'Ecology and Information',
+                    'url' => '../wildlife/least_tern_info.php'),
+                    array('dropdown_title' => 'Training Videos (Coming Soon)',
+                    'url' => 'javascript:;'),
+
+                    array('dropdown_title' => 'Piping Plover',
+                    'divider' => true,
+                    'url' => 'javascript:;'),
+                    array('dropdown_title' => 'Ecology and Information',
+                    'url' => '../wildlife/piping_plover_info.php'),
+                    array('dropdown_title' => 'Training Videos (Coming Soon)',
+                    'url' => 'javascript:;'),
+                )
+            );
+
+    }
+
 
     if ($user) {    //user is logged in
         $url_tokens = csg_url_tokens($user['authenticator']);
@@ -161,70 +232,6 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                              );
     }
 
-    if ($project_name == "Wildlife@Home") {
-        $navbar_info['left_headers'][] =
-            array(
-                'dropdown_title' => 'Watch Video',
-                'url' => '#',
-                'classes' => '',
-                'dropdowns' => array(
-                    array('dropdown_title' => 'Site and Species Descriptions',
-                    'url' => '../wildlife/video_selector.php'),
-                    array('dropdown_title' => 'Sharp-Tailed Grouse',
-                    'divider' => true,
-                    'url' => 'javascript:;'),
-                    array('dropdown_title' => 'Belden, ND',
-                    'url' => '../wildlife/watch.php?location=1&species=1'),
-                    array('dropdown_title' => 'Blaisdell, ND',
-                    'url' => '../wildlife/watch.php?location=2&species=1'),
-                    array('dropdown_title' => 'Lostwood Wildlife Refuge, ND',
-                    'url' => '../wildlife/watch.php?location=3&species=1'),
-                    array('dropdown_title' => 'Interior Least Tern',
-                    'divider' => true,
-                    'url' => 'javascript:;'),
-                    array('dropdown_title' => 'Missouri River, ND',
-                    'url' => '../wildlife/watch.php?location=4&species=2'),
-                    array('dropdown_title' => 'Piping Plover',
-                    'divider' => true,
-                    'url' => 'javascript:;'),
-                    array('dropdown_title' => 'Missouri River, ND',
-                    'url' => '../wildlife/watch.php?location=4&species=3')
-                )
-            );
-
-        $navbar_info['left_headers'][] =
-            array(
-                'dropdown_title' => 'Wildlife',
-                'url' => '#',
-                'classes' => '',
-                'dropdowns' => array(
-                    array('dropdown_title' => 'Sharp-Tailed Grouse',
-                    'divider' => true,
-                    'url' => 'javascript:;'),
-                    array('dropdown_title' => 'Ecology and Information',
-                    'url' => '../wildlife/sharptailed_grouse_info.php'),
-                    array('dropdown_title' => 'Training Videos',
-                    'url' => '../wildlife/sharptailed_grouse_training.php'),
-
-                    array('dropdown_title' => 'Interior Least Tern',
-                    'divider' => true,
-                    'url' => 'javascript:;'),
-                    array('dropdown_title' => 'Ecology and Information',
-                    'url' => '../wildlife/least_tern_info.php'),
-                    array('dropdown_title' => 'Training Videos (Coming Soon)',
-                    'url' => 'javascript:;'),
-
-                    array('dropdown_title' => 'Piping Plover',
-                    'divider' => true,
-                    'url' => 'javascript:;'),
-                    array('dropdown_title' => 'Ecology and Information',
-                    'url' => '../wildlife/piping_plover_info.php'),
-                    array('dropdown_title' => 'Training Videos (Coming Soon)',
-                    'url' => 'javascript:;'),
-                )
-            );
-    }
-
     if ($active_title != "") {
         for ($i = 0; $i < count($navbar_info['left_headers']); $i++) {
     //        error_log("comparing title '" . $navbar_info['left_headers'][$i]['title'] . "' to '$active_title'");
@@ -239,6 +246,21 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                 $navbar_info['right_headers'][$i]['classes'] .= " active";
             }
         }
+    }
+
+    if ($project_name == "Wildlife@Home" && $user && csg_is_special_user($user)) {
+
+        $result = query_wildlife_video_db("SELECT count(*) FROM timed_observations WHERE report_status = 'REPORTED'");
+        $row = $result->fetch_assoc();
+        $waiting_review = $row['count(*)'];
+
+        if ($waiting_review == 0) {
+            $waiting_review = "";
+        } else {
+            $waiting_review = " (" . $waiting_review . ")";
+        }
+        $navbar_info['right_headers'][0]['dropdown_title'] .= $waiting_review;
+        $navbar_info['right_headers'][0]['dropdowns'][1]['dropdown_title'] .= $waiting_review;
     }
 
     $navbar_template = file_get_contents($cwd[__FILE__] . "/templates/navbar_template.html");
