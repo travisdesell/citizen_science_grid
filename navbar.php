@@ -6,7 +6,7 @@ $cwd[__FILE__] = dirname($cwd[__FILE__]);
 
 require_once($cwd[__FILE__] . "/user.php");
 
-require_once $cwd[__FILE__] . '/mustache.php/src/Mustache/Autoloader.php';
+require_once $cwd[__FILE__] . '/../mustache.php/src/Mustache/Autoloader.php';
 Mustache_Autoloader::register();
 
 function print_navbar($active_title, $project_name = "Citizen Science Grid") {
