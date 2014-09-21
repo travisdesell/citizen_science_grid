@@ -4,10 +4,10 @@ $cwd[__FILE__] = __FILE__;
 if (is_link($cwd[__FILE__])) $cwd[__FILE__] = readlink($cwd[__FILE__]);
 $cwd[__FILE__] = dirname($cwd[__FILE__]);
 
-require_once($cwd[__FILE__] . '/../boinc_db.php');
-require_once($cwd[__FILE__] . '/../dna_db.php');
-require_once($cwd[__FILE__] . '/../subset_sum_db.php');
-require_once($cwd[__FILE__] . '/../wildlife_db.php');
+require_once($cwd[__FILE__] . '/../db_info/boinc_db.php');
+require_once($cwd[__FILE__] . '/../db_info/dna_db.php');
+require_once($cwd[__FILE__] . '/../db_info/subset_sum_db.php');
+require_once($cwd[__FILE__] . '/../db_info/wildlife_db.php');
 
 $boinc_db = null;
 $dna_db = null;
