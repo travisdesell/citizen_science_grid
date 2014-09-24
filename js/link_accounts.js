@@ -13,7 +13,6 @@ $(document).ready(function() {
         var userid = document.getElementById(project + "InputUserid").value;
 
         console.log(project + " " + userid + " '" + username + "' '" + email + "'");
-        return;
 
         var link_accounts_button = $(this);
 
@@ -29,18 +28,18 @@ $(document).ready(function() {
             dataType : 'json',
             success : function(response) {
                 if (response['status'] === 'success') {
-                    link_accounts_button.text("Accounts Successfully Linked");
+                    link_accounts_button.text("Account Successfully Linked");
                 } else {
                     link_accounts_button.removeClass("btn-primary");
                     link_accounts_button.addClass("btn-danger");
-                    link_accounts_button.text("Accounts Unsuccessfully Linked");
+                    link_accounts_button.text("Account Unsuccessfully Linked");
                     alert(response['error_msg']);
                 }
             },
             error : function(jqXHR, textStatus, errorThrown) {
                 link_accounts_button.removeClass("btn-primary");
                 link_accounts_button.addClass("btn-danger");
-                link_accounts_button.text("Accounts Unsuccessfully Linked");
+                link_accounts_button.text("Account Unsuccessfully Linked");
                 alert(errorThrown);
             },
             async: true

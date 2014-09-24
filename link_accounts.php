@@ -81,21 +81,21 @@ function print_link_well($linked, $can_link, $project_name, $project, $userid, $
                 <form>
                     <div class='row'>
                     <input type='hidden' id='InputUserid' value='$userid'>
-                        <div class='col-xs-2'>
-                            <div class='input-group'>
-                                <button type='button' project='$project' class='btn btn-primary link-accounts-button disabled'>Account Linked</button>
-                            </div>
-                        </div>
-                        <div class='col-xs-5'>
+                        <div class='col-xs-4'>
                             <div class='input-group col-xs-12'>
                                 <span class='input-group-addon'>Username</span>
                                 <input type='text' class='form-control disabled' readonly value='$username'>
                             </div>
                         </div>
-                        <div class='col-xs-5'>
+                        <div class='col-xs-4'>
                             <div class='input-group col-xs-12'>
                                 <span class='input-group-addon'>Email</span>
                                 <input type='text' class='form-control disabled' readonly value='$email'>
+                            </div>
+                        </div>
+                        <div class='col-xs-4'>
+                            <div class='input-group'>
+                                <button type='button' project='$project' class='btn btn-primary link-accounts-button disabled'>Account Linked</button>
                             </div>
                         </div>
                     </div>
@@ -110,21 +110,21 @@ function print_link_well($linked, $can_link, $project_name, $project, $userid, $
                     <form>
                         <div class='row'>
                         <input type='hidden' id='" . $project . "InputUserid' value='$userid'>
-                            <div class='col-xs-2'>
-                                <div class='input-group'>
-                                    <button type='button' project='$project' class='btn btn-primary link-accounts-button'>Link Account</button>
-                                </div>
-                            </div>
-                            <div class='col-xs-5'>
+                            <div class='col-xs-4'>
                                 <div class='input-group col-xs-12'>
                                     <span class='input-group-addon'>Username</span>
                                     <input type='text' id='" . $project . "InputUsername' class='form-control'  readonly value='$username'>
                                 </div>
                             </div>
-                            <div class='col-xs-5'>
+                            <div class='col-xs-4'>
                                 <div class='input-group col-xs-12'>
                                     <span class='input-group-addon'>Email</span>
                                     <input type='text' id='" . $project . "InputEmail' class='form-control'  readonly value='$email'>
+                                </div>
+                            </div>
+                            <div class='col-xs-4'>
+                                <div class='input-group'>
+                                    <button type='button' project='$project' class='btn btn-primary link-accounts-button'>Link Account</button>
                                 </div>
                             </div>
                         </div>
