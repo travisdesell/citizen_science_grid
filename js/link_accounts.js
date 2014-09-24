@@ -12,7 +12,8 @@ $(document).ready(function() {
         var username = document.getElementById(project + "InputUsername").value;
         var userid = document.getElementById(project + "InputUserid").value;
 
-        console.log(userid + " " + username + " " + email);
+        console.log(project + " " + userid + " '" + username + "' '" + email + "'");
+        return;
 
         var link_accounts_button = $(this);
 
