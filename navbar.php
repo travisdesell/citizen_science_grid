@@ -207,7 +207,7 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                                           'url' => 'link_accounts.php'),
                                     array('dropdown_title' => 'Teams',
                                           'url' => 'team.php'),
-                                    array('dropdown_title' => 'Your Preferences',
+                                    array('dropdown_title' => 'Your Account',
                                           'url' => 'home.php'),
                                     array('dropdown_title' => '',
                                           'divider' => true,
@@ -235,14 +235,16 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
     if ($active_title != "") {
         for ($i = 0; $i < count($navbar_info['left_headers']); $i++) {
     //        error_log("comparing title '" . $navbar_info['left_headers'][$i]['title'] . "' to '$active_title'");
-            if ($navbar_info['left_headers'][$i]['title'] == $active_title || $navbar_info['left_headers'][$i]['dropdown_title'] == $active_title) {
+            if ((array_key_exists('title', $navbar_info['left_headers'][$i]) && $navbar_info['left_headers'][$i]['title'] == $active_title) || 
+                (array_key_exists('dropdown_title', $navbar_info['left_headers'][$i]) && $navbar_info['left_headers'][$i]['dropdown_title'] == $active_title)) {
                 $navbar_info['left_headers'][$i]['classes'] .= " active";
             }
         }
 
         for ($i = 0; $i < count($navbar_info['right_headers']); $i++) {
     //        error_log("comparing title '" . $navbar_info['right_headers'][$i]['title'] . "' to '$active_title'");
-            if ($navbar_info['right_headers'][$i]['title'] == $active_title || $navbar_info['right_headers'][$i]['dropdown_title'] == $active_title) {
+            if ((array_key_exists('title', $navbar_info['right_headers'][$i]) && $navbar_info['right_headers'][$i]['title'] == $active_title) || 
+                (array_key_exists('dropdown_title', $navbar_info['right_headers'][$i]) && $navbar_info['right_headers'][$i]['dropdown_title'] == $active_title)) {
                 $navbar_info['right_headers'][$i]['classes'] .= " active";
             }
         }

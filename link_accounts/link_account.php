@@ -29,23 +29,54 @@ if ($linked_row[$project . "_linked"] == 1) {
     query_boinc_db("UPDATE user SET " . $project . "_linked = 1, " . $project . "_username = '$username', " . $project . "_userid = $userid WHERE id = " . $user['id']);
     $response_array['status'] = 'success';
 
+    //dna_app is 13
+    //wildlife_app is 7, 9, 12
+    //subset_sum is 15
+
     if ($project == "subset_sum") {
         $sss_result = query_subset_sum_db("SELECT total_credit, expavg_credit, expavg_time FROM user WHERE id = $userid");
         $sss_row = $sss_result->fetch_assoc();
 
-        query_boinc_db("UPDATE user SET total_credit = total_credit + " . $sss_row['total_credit'] . ", sss_total_credit = sss_total_credit + " . $sss_row['total_credit'] . ", sss_expavg_credit = sss_expavg_credit + " . $sss_row['expavg_credit'] . ", sss_expavg_time = " . $sss_row['expavg_time'] . " WHERE id = " . $user['id']);
+        $per_app_result = query_boinc_db("SELECT * FROM credit_user WHERE userid = $userid AND appid = 15");
+        $per_app_row = $per_app_result->fetch_assoc();
+        if ($per_app_row) {
+            query_boinc_db("UPDATE credit_user SET total = total + " . $sss_row['total_credit'] . " WHERE userid = $userid AND appid = 15");
+        } else {
+            query_boinc_db("INSERT INTO credit_user SET userid = $userid, appid = 15, njobs = 0, total=" . $sss_row['total_credit'] . ", expavg=" . $sss_row['expavg_credit'] . ", credit_type = 0");
+        }
 
         if ($user['teamid'] > 0) {
-            query_boinc_db("UPDATE team SET sss_total_credit = sss_total_credit + " . $sss_row['total_credit'] . " WHERE id = " . $user['teamid']);
+            $team_result = query_boinc_db("SELECT * FROM credit_team WHERE teamid = " . $user['teamid'] . " AND appid = 15");
+            $team_row = $team_result->fetch_assoc();
+
+            if ($team_row) {
+                query_boinc_db("UPDATE credit_team SET total = total + " . $sss_row['total_credit'] . " WHERE teamid = " . $user['teamid'] . " AND appid = 15");
+            } else {
+                query_boinc_db("INSERT INTO credit_team SET teamid = " . $user['teamid'] . ", appid = 15, njobs = 0, total=" . $sss_row['total_credit'] . ", expavg=" . $sss_row['expavg_credit'] . ", credit_type = 0");
+            }
         }
+
     } else if ($project == "dna") {
         $dna_result = query_dna_db("SELECT total_credit, expavg_credit, expavg_time FROM user WHERE id = $userid");
         $dna_row = $dna_result->fetch_assoc();
 
-        query_boinc_db("UPDATE user SET total_credit = total_credit + " . $dna_row['total_credit'] . ", dna_total_credit = dna_total_credit + " . $dna_row['total_credit'] . ", dna_expavg_credit = dna_expavg_credit + " . $dna_row['expavg_credit'] . ", dna_expavg_time = " . $dna_row['expavg_time'] . " WHERE id = " . $user['id']);
+        $per_app_result = query_boinc_db("SELECT * FROM credit_user WHERE userid = $userid AND appid = 13");
+        $per_app_row = $per_app_result->fetch_assoc();
+        if ($per_app_row) {
+            query_boinc_db("UPDATE credit_user SET total = total + " . $dna_row['total_credit'] . " WHERE userid = $userid AND appid = 13");
+        } else {
+            query_boinc_db("INSERT INTO credit_user SET userid = $userid, appid = 13, njobs = 0, total=" . $dna_row['total_credit'] . ", expavg=" . $dna_row['expavg_credit'] . ", credit_type = 0");
+        }
 
         if ($user['teamid'] > 0) {
-            query_boinc_db("UPDATE team SET dna_total_credit = dna_total_credit + " . $dna_row['total_credit'] . " WHERE id = " . $user['teamid']);
+            $team_result = query_boinc_db("SELECT * FROM credit_team WHERE teamid = " . $user['teamid'] . " AND appid = 13");
+            $team_row = $team_result->fetch_assoc();
+
+            if ($team_row) {
+                query_boinc_db("UPDATE credit_team SET total = total + " . $dna_row['total_credit'] . " WHERE teamid = " . $user['teamid'] . " AND appid = 13");
+            } else {
+                query_boinc_db("INSERT INTO credit_team SET teamid = " . $user['teamid'] . ", appid = 13, njobs = 0, total=" . $dna_row['total_credit'] . ", expavg=" . $dna_row['expavg_credit'] . ", credit_type = 0");
+            }
         }
 
     }
