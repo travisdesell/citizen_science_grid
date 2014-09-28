@@ -8,7 +8,7 @@ require_once($cwd[__FILE__] . "/my_query.php");
 
 require_once("/projects/csg/html/inc/text_transform.inc");
 
-function show_news() {
+function csg_show_news() {
     echo "
                 <div class='well'>
                     <h3><a href='http://volunteer.cs.und.edu/csg/forum_forum.php?id=1'>News</a> <img href='rss_main.php' src='http://volunteer.cs.und.edu/csg/img/rss_icon.gif' alt='RSS'> </h3>";

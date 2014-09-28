@@ -1,42 +1,79 @@
 <?php
-// This file is part of BOINC.
-// http://boinc.berkeley.edu
-// Copyright (C) 2014 University of California
-//
-// BOINC is free software; you can redistribute it and/or modify it
-// under the terms of the GNU Lesser General Public License
-// as published by the Free Software Foundation,
-// either version 3 of the License, or (at your option) any later version.
-//
-// BOINC is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-// See the GNU Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public License
-// along with BOINC.  If not, see <http://www.gnu.org/licenses/>.
+$cwd[__FILE__] = __FILE__;
+if (is_link($cwd[__FILE__])) $cwd[__FILE__] = readlink($cwd[__FILE__]);
+$cwd[__FILE__] = dirname($cwd[__FILE__]);
 
-require_once("../inc/util.inc");
-require_once("../inc/uotd.inc");
-require_once("../inc/profile.inc");
+require_once($cwd[__FILE__] . "/my_query.php");
 
-if (DISABLE_PROFILES) error_page("Profiles are disabled");
 
-check_get_args(array());
+// Returns a string containing as many words
+// (being collections of characters separated by the character $delimiter)
+// as possible such that the total string length is <= $chars characters long.
+// If $ellipsis is true, then an ellipsis is added to any sentence which
+// is cut short.
 
-db_init();
+function sub_sentence($sentence, $delimiter, $max_chars, $ellipsis=false) {
+    $words = explode($delimiter, $sentence);
+    $total_chars = 0;
+    $trunc = false;
+    $result = ""; 
 
-$profile = get_current_uotd();
-if (!$profile) {
-    echo tra("No user of the day has been chosen.");
-} else {
-    $d = gmdate("d F Y", time());
-    $user = BoincUser::lookup_id($profile->userid);
-    page_head(tra("User of the Day for %1: %2", $d, $user->name));
-    start_table();
-    show_profile($user, get_logged_in_user(false));
-    end_table();
+    foreach ($words as $word) {
+        if (strlen($result) + strlen($word) > $max_chars) {
+            $trunc = true;
+            break;
+        }   
+        if ($result) {
+            $result .= " $word";
+        } else {
+            $result = $word;
+        }   
+    }   
+
+    if ($ellipsis && $trunc) {
+        $result .= "...";
+    }   
+
+    return $result;
 }
 
-page_tail();
+function show_uotd($col1, $col2, $style="") {
+    $uotd_result = query_boinc_db("SELECT * FROM profile ORDER BY uotd_time DESC LIMIT 1");
+
+    if ($uotd_result->num_rows == 1) {
+        $uotd_row = $uotd_result->fetch_assoc();
+        $uotd = csg_get_user_from_id($uotd_row['userid']);
+
+        echo "
+            <div class='well' $style>
+            <h3>User of the Day</h3>
+            <div class='row'>
+            ";
+
+        $uotd_text = "";
+        if ($uotd['has_profile']) {
+            $img_url = "../csg/img/head_20.png";
+            $uotd_text .= " <a href='../csg/view_profile.php?userid='" . $uotd['id'] . "'><img title='View the profile of " . $uotd['name'] . "' src='" . $img_url . "' alt='Profile'></img></a>";
+        }    
+        $uotd_text .= " <a href='../csg/show_uotd.php?userid=" . $uotd['id'] . "'>" . $uotd['name'] . "</a><br>";
+        $response = output_transform($uotd_row['response1']);
+        $response = strip_tags($response);
+        $response = sub_sentence($response, ' ', 150, true);
+        $uotd_text .= $response;
+
+        if ($uotd_row['has_picture']) {
+            $uotd_picture = "<a href='../csg/view_profile.php?userid=" . $uotd['id'] . "'><img border=0 vspace=4 hspace=8 align=left src='../csg/user_profile/images/" . $uotd['id'] . "_sm.jpg' alt='User profile'></img></a>";
+        }
+
+        if ($uotd_picture) {
+            echo "          <div class='col-sm-$col1'>$uotd_picture</div>";
+        }
+        echo "
+            <div class='col-sm-$col2'>$uotd_text</div>
+            </div> <!-- row -->
+            </div> <!--well -->";
+    }
+
+}
+
 ?>

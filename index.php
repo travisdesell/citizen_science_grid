@@ -28,7 +28,7 @@ echo "
         <div class='col-sm-4'>";
 
 show_uotd(3, 9);
-show_news();
+csg_show_news();
 
 echo "
         </div> <!-- col-sm-4 -->
