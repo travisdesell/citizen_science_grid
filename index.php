@@ -9,7 +9,7 @@ require_once($cwd[__FILE__] . "/navbar.php");
 require_once($cwd[__FILE__] . "/news.php");
 require_once($cwd[__FILE__] . "/footer.php");
 require_once($cwd[__FILE__] . "/my_query.php");
-require_once($cwd[__FILE__] . "/uotd.php");
+require_once($cwd[__FILE__] . "/csg_uotd.php");
 
 print_header("The University of North Dakota Citizen Science Grid");
 print_navbar("Citizen Science Grid");
