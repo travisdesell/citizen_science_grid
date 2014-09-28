@@ -189,9 +189,28 @@ function get_badges($user) {
 function print_badge_table() {
     global $bossa_badge_info, $wildlife_credit_badge_info, $dna_credit_badge_info;
 
-    echo "<div class='well' style='padding-top:10px; padding-bottom:10px;'>";
 
-    echo "<h3>Watched Video Badges <small>&nbsp;These badges are earned by <a href='../wildlife/video_selector.php'>watching video</a>.</small></h3>";
+    echo "<div class='well' style='padding-top:10px; padding-bottom:10px;'>";
+    echo "<h3>DNA@Home BOINC Credit Badges <small>&nbsp;These badges are earned by <a href='./instructions.php'>calculating workunits for DNA@Home with BOINC</a>.</small></h3>";
+    echo "<table class='table table-bordered table-striped'>";
+    echo "<thead>";
+    echo "<th>Badge</th> <th>Description</th>";
+    echo "</thead>";
+
+    echo "<tbody>";
+    for ($i = 0; $i < count($dna_credit_badge_info); $i++) {
+        echo "<tr>";
+        echo "<td style='text-align:center;'><img style='height:28px;' src='../dna/dna_badges/" . $dna_credit_badge_info[$i]['img_src'] . "' title='" . $dna_credit_badge_info[$i]['name'] . " badge for earning " . $dna_credit_badge_info[$i]['value'] . " DNA@Home credit.'></img></td>";
+        echo "<td style='vertical-align:middle;'>" . $dna_credit_badge_info[$i]['name'] . " badge for earning " . $dna_credit_badge_info[$i]['value'] . " DNA@Home credit.</td>";
+        echo "</tr>";
+    }
+    echo "</tbody>";
+    echo "</table>";
+    echo "</div>";
+
+
+    echo "<div class='well' style='padding-top:10px; padding-bottom:10px;'>";
+    echo "<h3>Wildlife@Home Watched Video Badges <small>&nbsp;These badges are earned by <a href='../wildlife/video_selector.php'>watching video</a>.</small></h3>";
     echo "<table class='table table-bordered table-striped'>";
     echo "<thead>";
     echo "<th>Badge</th> <th>Description</th>";
@@ -220,24 +239,6 @@ function print_badge_table() {
         echo "<tr>";
         echo "<td style='text-align:center;'><img style='height:28px;' src='../wildlife/wildlife_badges/" . $wildlife_credit_badge_info[$i]['img_src'] . "' title='" . $wildlife_credit_badge_info[$i]['name'] . " badge for earning " . $wildlife_credit_badge_info[$i]['value'] . " Wildlife@Home credit.'></img></td>";
         echo "<td style='vertical-align:middle;'>" . $wildlife_credit_badge_info[$i]['name'] . " badge for earning " . $wildlife_credit_badge_info[$i]['value'] . " Wildlife@Home credit.</td>";
-        echo "</tr>";
-    }
-    echo "</tbody>";
-    echo "</table>";
-    echo "</div>";
-
-    echo "<div class='well' style='padding-top:10px; padding-bottom:10px;'>";
-    echo "<h3>DNA@Home BOINC Credit Badges <small>&nbsp;These badges are earned by <a href='./instructions.php'>calculating workunits for DNA@Home with BOINC</a>.</small></h3>";
-    echo "<table class='table table-bordered table-striped'>";
-    echo "<thead>";
-    echo "<th>Badge</th> <th>Description</th>";
-    echo "</thead>";
-
-    echo "<tbody>";
-    for ($i = 0; $i < count($dna_credit_badge_info); $i++) {
-        echo "<tr>";
-        echo "<td style='text-align:center;'><img style='height:28px;' src='../dna/dna_badges/" . $dna_credit_badge_info[$i]['img_src'] . "' title='" . $dna_credit_badge_info[$i]['name'] . " badge for earning " . $dna_credit_badge_info[$i]['value'] . " DNA@Home credit.'></img></td>";
-        echo "<td style='vertical-align:middle;'>" . $dna_credit_badge_info[$i]['name'] . " badge for earning " . $dna_credit_badge_info[$i]['value'] . " DNA@Home credit.</td>";
         echo "</tr>";
     }
     echo "</tbody>";

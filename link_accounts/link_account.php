@@ -26,9 +26,6 @@ if ($linked_row[$project . "_linked"] == 1) {
     $response_array['status'] = 'error';
     $response_array['error_msg'] = 'Accounts already linked!';
 } else {
-    query_boinc_db("UPDATE user SET " . $project . "_linked = 1, " . $project . "_username = '$username', " . $project . "_userid = $userid WHERE id = " . $user['id']);
-    $response_array['status'] = 'success';
-
     //dna_app is 13
     //wildlife_app is 7, 9, 12
     //subset_sum is 15
@@ -78,8 +75,13 @@ if ($linked_row[$project . "_linked"] == 1) {
                 query_boinc_db("INSERT INTO credit_team SET teamid = " . $user['teamid'] . ", appid = 13, njobs = 0, total=" . $dna_row['total_credit'] . ", expavg=" . $dna_row['expavg_credit'] . ", credit_type = 0");
             }
         }
-
+    } else {
+        error_log("unspecified project for account linking!");
+        die ("unspecified project!");
     }
+
+    query_boinc_db("UPDATE user SET " . $project . "_linked = 1, " . $project . "_username = '$username', " . $project . "_userid = $userid WHERE id = " . $user['id']);
+    $response_array['status'] = 'success';
 }
 
 echo json_encode($response_array);
