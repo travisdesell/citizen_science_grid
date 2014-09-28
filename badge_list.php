@@ -30,7 +30,7 @@ echo "</div>";
 echo "</div>";
 echo "</div>";
 
-print_footer();
+print_footer('Travis Desell, the DNA@Home, SubsetSum@Home and Wildlife@Home Teams', 'Travis Desell, Archana Dhasarathy, Susan Ellis-Felege, Tom O\'Neil, Sergei Nechaev');
 
 echo "
 </body>
