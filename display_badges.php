@@ -58,12 +58,12 @@ $wildlife_credit_badge_info = array(
 );
 
 $dna_credit_badge_info = array(
-    array( 'credit' =>  50000000, 'img_src' => 'dna_emerald.png', 'name' => 'An emerald', 'value' => '50 million' ),
-    array( 'credit' =>  10000000, 'img_src' => 'dna_ruby.png', 'name' => 'A ruby', 'value' => '10 million' ),
-    array( 'credit' =>   5000000, 'img_src' => 'dna_sapphire.png', 'name' => 'A sapphire', 'value' => '5 million' ),
-    array( 'credit' =>   1000000, 'img_src' => 'dna_gold.png', 'name' => 'A gold', 'value' => '1 million' ),
-    array( 'credit' =>    100000, 'img_src' => 'dna_silver.png', 'name' => 'A silver', 'value' => '100 thousand' ),
-    array( 'credit' =>     10000, 'img_src' => 'dna_bronze.png', 'name' => 'A bronze ', 'value' => '10 thousand' )
+    array( 'credit' =>  50000000, 'img_src' => 'dna_emerald_32.png', 'name' => 'An emerald', 'value' => '50 million' ),
+    array( 'credit' =>  10000000, 'img_src' => 'dna_ruby_32.png', 'name' => 'A ruby', 'value' => '10 million' ),
+    array( 'credit' =>   5000000, 'img_src' => 'dna_sapphire_32.png', 'name' => 'A sapphire', 'value' => '5 million' ),
+    array( 'credit' =>   1000000, 'img_src' => 'dna_gold_32.png', 'name' => 'A gold', 'value' => '1 million' ),
+    array( 'credit' =>    100000, 'img_src' => 'dna_silver_32.png', 'name' => 'A silver', 'value' => '100 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'dna_bronze_32.png', 'name' => 'A bronze ', 'value' => '10 thousand' )
 );
 
 
