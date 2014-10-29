@@ -37,8 +37,11 @@ function sub_sentence($sentence, $delimiter, $max_chars, $ellipsis=false) {
     return $result;
 }
 
-function show_uotd($col1, $col2, $style="") {
+function show_uotd($col1, $col2, $style="", $use_base_dir) {
     $uotd_result = query_boinc_db("SELECT * FROM profile ORDER BY uotd_time DESC LIMIT 1");
+
+    $base_dir = "..";
+    if ($use_base_dir) $base_dir = ".";
 
     if ($uotd_result->num_rows == 1) {
         $uotd_row = $uotd_result->fetch_assoc();
@@ -52,17 +55,17 @@ function show_uotd($col1, $col2, $style="") {
 
         $uotd_text = "";
         if ($uotd['has_profile']) {
-            $img_url = "../csg/img/head_20.png";
-            $uotd_text .= " <a href='../csg/view_profile.php?userid='" . $uotd['id'] . "'><img title='View the profile of " . $uotd['name'] . "' src='" . $img_url . "' alt='Profile'></img></a>";
+            $img_url = "../img/head_20.png";
+            $uotd_text .= " <a href='$base_dir/view_profile.php?userid='" . $uotd['id'] . "'><img title='View the profile of " . $uotd['name'] . "' src='" . $img_url . "' alt='Profile'></img></a>";
         }    
-        $uotd_text .= " <a href='../csg/show_uotd.php?userid=" . $uotd['id'] . "'>" . $uotd['name'] . "</a><br>";
+        $uotd_text .= " <a href='$base_dir/show_uotd.php?userid=" . $uotd['id'] . "'>" . $uotd['name'] . "</a><br>";
         $response = output_transform($uotd_row['response1']);
         $response = strip_tags($response);
         $response = sub_sentence($response, ' ', 150, true);
         $uotd_text .= $response;
 
         if ($uotd_row['has_picture']) {
-            $uotd_picture = "<a href='../csg/view_profile.php?userid=" . $uotd['id'] . "'><img border=0 vspace=4 hspace=8 align=left src='../csg/user_profile/images/" . $uotd['id'] . "_sm.jpg' alt='User profile'></img></a>";
+            $uotd_picture = "<a href='$base_dir/view_profile.php?userid=" . $uotd['id'] . "'><img border=0 vspace=4 hspace=8 align=left src='$base_dir/user_profile/images/" . $uotd['id'] . "_sm.jpg' alt='User profile'></img></a>";
         }
 
         if ($uotd_picture) {
