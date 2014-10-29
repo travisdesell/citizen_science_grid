@@ -44,6 +44,7 @@ function connect_wildlife_db() {
     global $wildlife_db, $wildlife_user, $wildlife_passwd;
 
     $wildlife_db = new mysqli("wildlife.und.edu", $wildlife_user, $wildlife_passwd, "wildlife_video");
+
     if ($wildlife_db->connect_errno) {
         echo "Failed to connect to MySQL: (" . $wildlife_db->connect_errno . ") " . $wildlife_db->connect_error;
         error_log("Failed to connect to MySQL: (" . $wildlife_db->connect_errno . ") " . $wildlife_db->connect_error);
@@ -106,6 +107,23 @@ function query_wildlife_video_db($query) {
     $result = $wildlife_db->query($query);
 
     if (!$result) mysqli_error_msg($wildlife_db, $query);
+
+    return $result;
+}
+
+function query_wildlife_video_db_prepared($query, $a_bind_params) {
+    global $wildlife_user, $wildlife_passwd;
+
+    $wildlife_pdo = new PDO("mysql:host=wildlife.und.edu;dbname=wildlife_video;", $wildlife_user, $wildlife_passwd);
+
+    try {
+        $stmt = $wildlife_pdo->prepare($query);
+        $stmt->execute($a_bind_params);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e) {
+        trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $e->getMessage(), E_USER_ERROR);
+        mysqli_error_msg($wildlife_db, $query);
+    }
 
     return $result;
 }

@@ -34,8 +34,7 @@ echo "
     </div>
     ";
 
-
-show_uotd(3, 9);
+show_uotd(3, 9, "", true);
 csg_show_news();
 
 echo "

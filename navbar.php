@@ -53,7 +53,9 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                                     array('dropdown_title' => 'Server Status',
                                           'url' => '../csg/server_status.php'),
                                     array('dropdown_title' => 'User Search',
-                                          'url' => '../csg/user_search.php')
+                                          'url' => '../csg/user_search.php'),
+                                    array('dropdown_title' => 'Badge Descriptions',
+                                          'url' => '../csg/badge_list.php')
                                  )
                             ),
 
@@ -78,6 +80,9 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                                           'url' => 'http://volunteer.cs.und.edu/csg/per_app_list.php?appid=15&is_team=&is_total=1'),
                                     array('dropdown_title' => 'Top Wildlife@Home Users',
                                           'url' => 'http://volunteer.cs.und.edu/csg/per_app_list.php?appid=12&is_team=&is_total=1'),
+                                    array('dropdown_title' => 'Wildlife@Home',
+                                          'divider' => true,
+                                          'url' => 'javascript:;'),
                                     array('dropdown_title' => 'Top Bird Watchers',
                                           'url' => 'http://volunteer.cs.und.edu/wildlife/top_bossa_users.php'),
                                     array('dropdown_title' => 'Top Bird Watching Teams',
