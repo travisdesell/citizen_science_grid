@@ -127,7 +127,7 @@ function get_dna_credit_badge($user) {
 
     for ($i = 0; $i < count($dna_credit_badge_info); $i++) {
         if ($dna_total_credit > $dna_credit_badge_info[$i]['credit']) {
-            $badges .= "<img style='height:28px;' src='../dna/dna_badges/" . $dna_credit_badge_info[$i]['img_src'] . "' title='" . $dna_credit_badge_info[$i]['name'] . " badge for earning " . $dna_credit_badge_info[$i]['value'] . " DNA@Home credit.'></img>";
+            $badges .= "<img style='height:28px;' src='./dna/dna_badges/" . $dna_credit_badge_info[$i]['img_src'] . "' title='" . $dna_credit_badge_info[$i]['name'] . " badge for earning " . $dna_credit_badge_info[$i]['value'] . " DNA@Home credit.'></img>";
             break;
         }
     }
@@ -147,7 +147,7 @@ function get_wildlife_credit_badge($user) {
 
     for ($i = 0; $i < count($wildlife_credit_badge_info); $i++) {
         if ($wildlife_total_credit > $wildlife_credit_badge_info[$i]['credit']) {
-            $badges .= "<img style='height:28px;' src='../wildlife/wildlife_badges/" . $wildlife_credit_badge_info[$i]['img_src'] . "' title='" . $wildlife_credit_badge_info[$i]['name'] . " badge for earning " . $wildlife_credit_badge_info[$i]['value'] . " Wildlife@Home credit.'></img>";
+            $badges .= "<img style='height:28px;' src='./wildlife/wildlife_badges/" . $wildlife_credit_badge_info[$i]['img_src'] . "' title='" . $wildlife_credit_badge_info[$i]['name'] . " badge for earning " . $wildlife_credit_badge_info[$i]['value'] . " Wildlife@Home credit.'></img>";
             break;
         }
     }
@@ -161,7 +161,7 @@ function get_bossa_badge($user) {
 
     for ($i = 0; $i < count($bossa_badge_info); $i++) {
         if ($user->bossa_total_credit > $bossa_badge_info[$i]['credit']) {
-            $badges .= "<img style='height:28px;' src='../wildlife/wildlife_badges/" . $bossa_badge_info[$i]['img_src'] . "' title='" . $bossa_badge_info[$i]['name'] . " badge for watching " . $bossa_badge_info[$i]['value'] . " of validated video.'></img>";
+            $badges .= "<img style='height:28px;' src='./wildlife/wildlife_badges/" . $bossa_badge_info[$i]['img_src'] . "' title='" . $bossa_badge_info[$i]['name'] . " badge for watching " . $bossa_badge_info[$i]['value'] . " of validated video.'></img>";
             break;
         }
     }
@@ -200,7 +200,7 @@ function print_badge_table() {
     echo "<tbody>";
     for ($i = 0; $i < count($dna_credit_badge_info); $i++) {
         echo "<tr>";
-        echo "<td style='text-align:center;'><img style='height:28px;' src='../dna/dna_badges/" . $dna_credit_badge_info[$i]['img_src'] . "' title='" . $dna_credit_badge_info[$i]['name'] . " badge for earning " . $dna_credit_badge_info[$i]['value'] . " DNA@Home credit.'></img></td>";
+        echo "<td style='text-align:center;'><img style='height:28px;' src='./dna/dna_badges/" . $dna_credit_badge_info[$i]['img_src'] . "' title='" . $dna_credit_badge_info[$i]['name'] . " badge for earning " . $dna_credit_badge_info[$i]['value'] . " DNA@Home credit.'></img></td>";
         echo "<td style='vertical-align:middle;'>" . $dna_credit_badge_info[$i]['name'] . " badge for earning " . $dna_credit_badge_info[$i]['value'] . " DNA@Home credit.</td>";
         echo "</tr>";
     }
@@ -210,7 +210,7 @@ function print_badge_table() {
 
 
     echo "<div class='well' style='padding-top:10px; padding-bottom:10px;'>";
-    echo "<h3>Wildlife@Home Watched Video Badges <small>&nbsp;These badges are earned by <a href='../wildlife/video_selector.php'>watching video</a>.</small></h3>";
+    echo "<h3>Wildlife@Home Watched Video Badges <small>&nbsp;These badges are earned by <a href='./wildlife/video_selector.php'>watching video</a>.</small></h3>";
     echo "<table class='table table-bordered table-striped'>";
     echo "<thead>";
     echo "<th>Badge</th> <th>Description</th>";
@@ -219,7 +219,7 @@ function print_badge_table() {
     echo "<tbody>";
     for ($i = 0; $i < count($bossa_badge_info); $i++) {
         echo "<tr>";
-        echo "<td style='text-align:center;'><img style='height:28px;' src='../wildlife/wildlife_badges/" . $bossa_badge_info[$i]['img_src'] . "' title='" . $bossa_badge_info[$i]['name'] . " badge for watching " . $bossa_badge_info[$i]['value'] . " of validated video.'></img></td>";
+        echo "<td style='text-align:center;'><img style='height:28px;' src='./wildlife/wildlife_badges/" . $bossa_badge_info[$i]['img_src'] . "' title='" . $bossa_badge_info[$i]['name'] . " badge for watching " . $bossa_badge_info[$i]['value'] . " of validated video.'></img></td>";
         echo "<td style='vertical-align:middle;'>" . $bossa_badge_info[$i]['name'] . " badge for watching " . $bossa_badge_info[$i]['value'] . " of validated video.</td>";
         echo "</tr>";
     }
@@ -237,7 +237,7 @@ function print_badge_table() {
     echo "<tbody>";
     for ($i = 0; $i < count($wildlife_credit_badge_info); $i++) {
         echo "<tr>";
-        echo "<td style='text-align:center;'><img style='height:28px;' src='../wildlife/wildlife_badges/" . $wildlife_credit_badge_info[$i]['img_src'] . "' title='" . $wildlife_credit_badge_info[$i]['name'] . " badge for earning " . $wildlife_credit_badge_info[$i]['value'] . " Wildlife@Home credit.'></img></td>";
+        echo "<td style='text-align:center;'><img style='height:28px;' src='./wildlife/wildlife_badges/" . $wildlife_credit_badge_info[$i]['img_src'] . "' title='" . $wildlife_credit_badge_info[$i]['name'] . " badge for earning " . $wildlife_credit_badge_info[$i]['value'] . " Wildlife@Home credit.'></img></td>";
         echo "<td style='vertical-align:middle;'>" . $wildlife_credit_badge_info[$i]['name'] . " badge for earning " . $wildlife_credit_badge_info[$i]['value'] . " Wildlife@Home credit.</td>";
         echo "</tr>";
     }
