@@ -9,7 +9,7 @@ require_once($cwd[__FILE__] . "/user.php");
 require_once $cwd[__FILE__] . '/../mustache.php/src/Mustache/Autoloader.php';
 Mustache_Autoloader::register();
 
-function print_navbar($active_title, $project_name = "Citizen Science Grid") {
+function print_navbar($active_title, $project_name = "Citizen Science Grid", $base_dir = ".") {
     global $cwd;
 
     $cwd[__FILE__] = __FILE__;
@@ -25,11 +25,11 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                                   'divider' => true,
                                   'url' => 'javascript:;'),
                             array('dropdown_title' => 'DNA@Home',
-                                  'url' => 'http://volunteer.cs.und.edu/dna'),
+                                  'url' => 'http://volunteer.cs.und.edu/csg/dna'),
                             array('dropdown_title' => 'SubsetSum@Home',
-                                  'url' => 'http://volunteer.cs.und.edu/subset_sum'),
+                                  'url' => 'http://volunteer.cs.und.edu/csg/subset_sum'),
                             array('dropdown_title' => 'Wildlife@Home',
-                                  'url' => 'http://volunteer.cs.und.edu/wildlife'),
+                                  'url' => 'http://volunteer.cs.und.edu/csg/wildlife'),
                             array('dropdown_title' => 'Affiiliated Projects',
                                   'divider' => true,
                                   'url' => 'javascript:;'),
@@ -43,19 +43,19 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                                 'classes' => '',
                                 'dropdowns' => array(
                                     array('dropdown_title' => 'Instructions, Rules & Policies',
-                                          'url' => '../csg/instructions.php'),
+                                          'url' => "$base_dir/instructions.php"),
                                     array('dropdown_title' => 'Languages',
-                                          'url' => '../csg/language_select.php'),
+                                          'url' => "$base_dir/language_select.php"),
                                     array('dropdown_title' => 'Profiles',
-                                          'url' => '../csg/profile_menu.php'),
+                                          'url' => "$base_dir/profile_menu.php"),
                                     array('dropdown_title' => 'Publications',
-                                          'url' => '../csg/publications.php'),
+                                          'url' => "$base_dir/publications.php"),
                                     array('dropdown_title' => 'Server Status',
-                                          'url' => '../csg/server_status.php'),
+                                          'url' => "$base_dir/server_status.php"),
                                     array('dropdown_title' => 'User Search',
-                                          'url' => '../csg/user_search.php'),
+                                          'url' => "$base_dir/user_search.php"),
                                     array('dropdown_title' => 'Badge Descriptions',
-                                          'url' => '../csg/badge_list.php')
+                                          'url' => "$base_dir/badge_list.php")
                                  )
                             ),
 
@@ -64,13 +64,13 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                                 'classes' => '',
                                 'dropdowns' => array(
                                     array('dropdown_title' => 'Top Users',
-                                          'url' => '../csg/top_users.php'),
+                                          'url' => "$base_dir/top_users.php"),
                                     array('dropdown_title' => 'Top Hosts',
-                                          'url' => '../csg/top_hosts.php'),
+                                          'url' => "$base_dir/top_hosts.php"),
                                     array('dropdown_title' => 'Top Teams',
-                                          'url' => '../csg/top_teams.php'),
+                                          'url' => "$base_dir/top_teams.php"),
                                     array('dropdown_title' => 'More Statistics',
-                                          'url' => '../csg/stats.php'),
+                                          'url' => "$base_dir/stats.php"),
                                     array('dropdown_title' => 'Sub-Project Lists',
                                           'divider' => true,
                                           'url' => 'javascript:;'),
@@ -84,15 +84,15 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                                           'divider' => true,
                                           'url' => 'javascript:;'),
                                     array('dropdown_title' => 'Top Bird Watchers',
-                                          'url' => 'http://volunteer.cs.und.edu/wildlife/top_bossa_users.php'),
+                                          'url' => "$base_dir/wildlife/top_bossa_users.php"),
                                     array('dropdown_title' => 'Top Bird Watching Teams',
-                                          'url' => 'http://volunteer.cs.und.edu/wildlife/top_bossa_teams.php')
+                                          'url' => "$base_dir/wildlife/top_bossa_teams.php")
                                )
                             ),
 
                             array(
                                 'title' => 'Message Boards',
-                                'url' => '../csg/forum_index.php',
+                                'url' => "$base_dir/forum_index.php",
                                 'classes' => ''
                             )
 
@@ -123,28 +123,28 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                 'classes' => '',
                 'dropdowns' => array(
                     array('dropdown_title' => 'Site and Species Descriptions',
-                    'url' => '../wildlife/video_selector.php'),
+                    'url' => './video_selector.php'),
                     array('dropdown_title' => 'Review Videos',
-                    'url' => '../wildlife/review_videos.php'),
+                    'url' => './review_videos.php'),
                     array('dropdown_title' => 'Sharp-Tailed Grouse',
                     'divider' => true,
                     'url' => 'javascript:;'),
                     array('dropdown_title' => 'Belden, ND',
-                    'url' => '../wildlife/watch.php?location=1&species=1'),
+                    'url' => './watch.php?location=1&species=1'),
                     array('dropdown_title' => 'Blaisdell, ND',
-                    'url' => '../wildlife/watch.php?location=2&species=1'),
+                    'url' => './watch.php?location=2&species=1'),
                     array('dropdown_title' => 'Lostwood Wildlife Refuge, ND',
-                    'url' => '../wildlife/watch.php?location=3&species=1'),
+                    'url' => './watch.php?location=3&species=1'),
                     array('dropdown_title' => 'Interior Least Tern',
                     'divider' => true,
                     'url' => 'javascript:;'),
                     array('dropdown_title' => 'Missouri River, ND',
-                    'url' => '../wildlife/watch.php?location=4&species=2'),
+                    'url' => './watch.php?location=4&species=2'),
                     array('dropdown_title' => 'Piping Plover',
                     'divider' => true,
                     'url' => 'javascript:;'),
                     array('dropdown_title' => 'Missouri River, ND',
-                    'url' => '../wildlife/watch.php?location=4&species=3')
+                    'url' => './watch.php?location=4&species=3')
                 )
             );
 
@@ -158,15 +158,15 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                     'divider' => true,
                     'url' => 'javascript:;'),
                     array('dropdown_title' => 'Ecology and Information',
-                    'url' => '../wildlife/sharptailed_grouse_info.php'),
+                    'url' => './sharptailed_grouse_info.php'),
                     array('dropdown_title' => 'Training Videos',
-                    'url' => '../wildlife/sharptailed_grouse_training.php'),
+                    'url' => './sharptailed_grouse_training.php'),
 
                     array('dropdown_title' => 'Interior Least Tern',
                     'divider' => true,
                     'url' => 'javascript:;'),
                     array('dropdown_title' => 'Ecology and Information',
-                    'url' => '../wildlife/least_tern_info.php'),
+                    'url' => './least_tern_info.php'),
                     array('dropdown_title' => 'Training Videos (Coming Soon)',
                     'url' => 'javascript:;'),
 
@@ -174,7 +174,7 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                     'divider' => true,
                     'url' => 'javascript:;'),
                     array('dropdown_title' => 'Ecology and Information',
-                    'url' => '../wildlife/piping_plover_info.php'),
+                    'url' => './piping_plover_info.php'),
                     array('dropdown_title' => 'Training Videos (Coming Soon)',
                     'url' => 'javascript:;'),
                 )
@@ -192,20 +192,20 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                                 'classes' => '',
                                 'dropdowns' => array(
                                     array('dropdown_title' => 'Applications',
-                                          'url' => 'apps.php'),
+                                          'url' => "$base_dir/apps.php"),
                                     array('dropdown_title' => 'Certificate',
-                                          'url' => 'cert1.php'),
+                                          'url' => "$base_dir/cert1.php"),
                                     array('dropdown_title' => 'Link Accounts',
-                                          'url' => 'link_accounts.php'),
+                                          'url' => "$base_dir/link_accounts.php"),
                                     array('dropdown_title' => 'Teams',
-                                          'url' => 'team.php'),
+                                          'url' => "$base_dir/team.php"),
                                     array('dropdown_title' => 'Your Account',
-                                          'url' => 'home.php'),
+                                          'url' => "$base_dir/home.php"),
                                     array('dropdown_title' => '',
                                           'divider' => true,
                                           'url' => 'javascript:;'),
                                     array('dropdown_title' => 'Log Out',
-                                          'url' => "logout.php?$url_tokens"),
+                                          'url' => "$base_dir/logout.php?$url_tokens"),
                                 )
                              );
 
@@ -217,9 +217,9 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid") {
                                 'classes' => '',
                                 'dropdowns' => array(
                                     array('dropdown_title' => 'Log In',
-                                          'url' => '../csg/login_form.php'),
+                                          'url' => "$base_dir/login_form.php"),
                                     array('dropdown_title' => 'Create Account',
-                                          'url' => '../csg/create_account_form.php?next_url=')
+                                          'url' => "$base_dir/create_account_form.php?next_url=")
                                )
                              );
     }

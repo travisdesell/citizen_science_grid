@@ -55,7 +55,7 @@ function show_uotd($col1, $col2, $style="", $use_base_dir) {
 
         $uotd_text = "";
         if ($uotd['has_profile']) {
-            $img_url = "../img/head_20.png";
+            $img_url = "$base_dir/img/head_20.png";
             $uotd_text .= " <a href='$base_dir/view_profile.php?userid='" . $uotd['id'] . "'><img title='View the profile of " . $uotd['name'] . "' src='" . $img_url . "' alt='Profile'></img></a>";
         }    
         $uotd_text .= " <a href='$base_dir/show_uotd.php?userid=" . $uotd['id'] . "'>" . $uotd['name'] . "</a><br>";
