@@ -30,7 +30,7 @@ echo "
 echo "
     <div class='well'>
     <h3>Notice for DNA@Home and SubsetSum@Home Users</h3>
-    <p>DNA@Home and SubsetSum@Home are transitioning to sub-projects of <a href='../csg/'>Citizen Science Grid</a>. All workunits for these sub-projects will be sent out from the Citizen Science Grid project.  You can link your old DNA@Home and SubsetSum@home accounts to your account on Citizen Science Grid by visiting the <a href='../csg/link_accounts.php'>link accounts</a> webpage. This will copy the credit over from the old projects to your account here.</p>
+    <p>DNA@Home, SubsetSum@Home and Wildlife@Home are now sub-projects of <a href='../csg/'>Citizen Science Grid</a>. All workunits for these sub-projects will be sent out from the Citizen Science Grid project.  You can link your old DNA@Home and SubsetSum@home accounts to your account on Citizen Science Grid by visiting the <a href='../csg/link_accounts.php'>link accounts</a> webpage. This will copy the credit over from the old projects to your account here. You'll need to detach your BOINC client from these old projects and attach to Citizen Science Grid.</p>
     </div>
     ";
 
