@@ -84,9 +84,9 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid", $ba
                                           'divider' => true,
                                           'url' => 'javascript:;'),
                                     array('dropdown_title' => 'Top Bird Watchers',
-                                          'url' => "$base_dir/wildlife/top_bossa_users.php"),
+                                          'url' => "$base_dir/top_watchers.php"),
                                     array('dropdown_title' => 'Top Bird Watching Teams',
-                                          'url' => "$base_dir/wildlife/top_bossa_teams.php")
+                                          'url' => "$base_dir/top_watcher_teams.php")
                                )
                             ),
 

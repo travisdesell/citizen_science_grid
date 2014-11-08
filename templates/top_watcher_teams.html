@@ -1,0 +1,22 @@
+<table class='table table-striped table-bordered'>
+    <thead>
+        <th>Rank</th>
+        <th>Name</th>
+        <th><a href='./top_watcher_teams.php?sort=events&min={{min}}'>Valid Events</a></th>
+        <th><a href='./top_watcher_teams.php?sort=seconds&min={{min}}'>Seconds Watched</a></th>
+        <th>Country</th>
+        <th>Created</th>
+    </thead>
+    <tbody>
+        {{#team}}
+        <tr>
+            <td>{{rank}}</td>
+            <td>{{name}}</td>
+            <td>{{valid_events}}</td>
+            <td>{{bossa_total_credit}}</td>
+            <td>{{country}}</td>
+            <td>{{create_time}}</td>
+        </tr>
+        {{/team}}
+    </tbody>
+</table>
