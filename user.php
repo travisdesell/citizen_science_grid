@@ -146,7 +146,7 @@ function csg_get_user($must_be_logged_in = true) {
 function csg_is_special_user($user = null, $must_be_logged_in = true) {
     if ($user == null) {
         if ($must_be_logged_in) {
-            $user = get_user($must_be_logged_in);
+            $user = csg_get_user($must_be_logged_in);
             if ($user == null) return 0;
         } else {
             return 0;

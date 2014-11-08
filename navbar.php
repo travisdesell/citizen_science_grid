@@ -102,18 +102,29 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid", $ba
                     );
 
     if ($project_name == "DNA@Home") {
-        $user = dna_get_user(false);
         $navbar_info['project_name'] = "DNA@Home";
     } else if ($project_name == "SubsetSum@Home") {
-        $user = sss_get_user(false);
         $navbar_info['project_name'] = "SubsetSum@Home";
     } else if ($project_name == "Wildlife@Home") {
-        $user = csg_get_user(false);
         $navbar_info['project_name'] = "Wildlife@Home";
     } else {
-        $user = csg_get_user(false);
         $navbar_info['project_name'] = "Citizen Science Grid";
     }
+    $user = csg_get_user(false);
+
+    if ($project_name == "DNA@Home") {
+        $navbar_info['right_headers'][] =
+            array(
+                'dropdown_title' => 'Gibbs Sampling',
+                'url' => '#',
+                'classes' => '',
+                'dropdowns' => array(
+                    array('dropdown_title' => 'Progress Information',
+                    'url' => './overview.php')
+                )
+            );
+    }
+
 
     if ($project_name == "Wildlife@Home") {
         $navbar_info['right_headers'][] =
