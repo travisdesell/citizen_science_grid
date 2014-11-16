@@ -42,6 +42,10 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid", $ba
                                 'dropdown_title' => 'Information',
                                 'classes' => '',
                                 'dropdowns' => array(
+                                    array('dropdown_title' => 'Applications',
+                                          'url' => "$base_dir/apps.php"),
+                                    array('dropdown_title' => 'Badge Descriptions',
+                                          'url' => "$base_dir/badge_list.php"),
                                     array('dropdown_title' => 'Instructions, Rules & Policies',
                                           'url' => "$base_dir/instructions.php"),
                                     array('dropdown_title' => 'Languages',
@@ -53,9 +57,7 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid", $ba
                                     array('dropdown_title' => 'Server Status',
                                           'url' => "$base_dir/server_status.php"),
                                     array('dropdown_title' => 'User Search',
-                                          'url' => "$base_dir/user_search.php"),
-                                    array('dropdown_title' => 'Badge Descriptions',
-                                          'url' => "$base_dir/badge_list.php")
+                                          'url' => "$base_dir/user_search.php")
                                  )
                             ),
 
@@ -191,8 +193,6 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid", $ba
                                 'url' => '#',
                                 'classes' => '',
                                 'dropdowns' => array(
-                                    array('dropdown_title' => 'Applications',
-                                          'url' => "$base_dir/apps.php"),
                                     array('dropdown_title' => 'Certificate',
                                           'url' => "$base_dir/cert1.php"),
                                     array('dropdown_title' => 'Link Accounts',
