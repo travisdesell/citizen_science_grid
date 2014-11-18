@@ -33,6 +33,9 @@ function print_header($page_title, $additional_scripts = "", $scheduler = "csg")
             <!-- jQuery (required by Bootstrap's JavaScript plugins) -->
             <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
 
+            <!-- Google Charts API -->
+            <script type=\"text/javascript\" src=\"https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['timeline']}]}\"></script>
+
             <!-- Latest compiled and minified JavaScript -->
             <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
 
