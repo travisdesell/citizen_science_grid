@@ -26,6 +26,8 @@ echo"
     <h3>Conference Proceedings</h3>
 
     <ul>
+        <li>Travis Desell, Kyle Goehner, Alicia Andes, Rebecca Eckroad, and Susan Ellis-Felege. <b>On the Effectiveness of Crowd Sourcing Avian Nesting Video Analysis at Wildlife@Home</b>. <i>In the 15th International Conference on Computational Science</i>. Reykjavík, Iceland. June 1-3, 2015. <a href='http://volunteer.cs.und.edu/csg/wildlife/publications/2015_iccs_wildlife.pdf'>[pdf]</a>. <b>To Appear.</b> </li>
+
         <li>Travis Desell, Lee A. Newberg, Malik Magdon-Ismail, Boleslaw K. Szymanski and William Thompson. <b>Finding Protein Binding Sites Using Volunteer Computing Grids</b>. <i>In the 2011 2nd International Congress on Computer Applications and Computational Science (CACS 2011)</i>. Bali, Indonesia. November 15-17, 2011. <a href='http://people.aero.und.edu/~tdesell/papers/2011_cacs.pdf'>[pdf]</a></li>
     </ul>
 

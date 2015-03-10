@@ -109,6 +109,8 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid", $ba
         $navbar_info['project_name'] = "SubsetSum@Home";
     } else if ($project_name == "Wildlife@Home") {
         $navbar_info['project_name'] = "Wildlife@Home";
+    } else if ($project_name == "Climate Tweets") {
+        $navbar_info['project_name'] = "Climate Tweets";
     } else {
         $navbar_info['project_name'] = "Citizen Science Grid";
     }
