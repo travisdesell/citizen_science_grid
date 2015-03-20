@@ -75,6 +75,7 @@ while ($row = $result->fetch_assoc()) {
     $row['badges'] = get_badges($user);
 
     $row['create_time'] = date("F j, Y, g:i a", $row['create_time']);
+    $row['bossa_total_credit'] = intval($row['bossa_total_credit']);
 
     $users['user'][] = $row;
 }

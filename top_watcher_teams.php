@@ -72,6 +72,7 @@ while ($row = $result->fetch_assoc()) {
     $i++;
 
     $row['create_time'] = date("F j, Y, g:i a", $row['create_time']);
+    $row['bossa_total_credit'] = intval($row['bossa_total_credit']);
 
     $teams['team'][] = $row;
 }
