@@ -268,6 +268,19 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid", $ba
         }
         $navbar_info['right_headers'][0]['dropdown_title'] .= $waiting_review;
         $navbar_info['right_headers'][0]['dropdowns'][1]['dropdown_title'] .= $waiting_review;
+
+        $lines = file('http://wildlife.und.edu/conversion_online.php');
+    }
+
+    if ($user && csg_is_special_user($user)) {
+        if ($lines[0] == 1) {
+            $navbar_info['right_headers'][] =
+                                array(
+                                    'title' => '<font color="red">CONVERSION OFFLINE</font>',
+                                    'url' => '#',
+                                    'classes' => ''
+                                );
+        }
     }
 
     $navbar_template = file_get_contents($cwd[__FILE__] . "/templates/navbar_template.html");
