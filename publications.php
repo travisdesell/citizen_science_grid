@@ -41,7 +41,11 @@ echo"
     <h2>SubsetSum@Home Publications</h2>
     <hr class='news-hr'>
 
-    We are currently preparing our first SubsetSum@Home publication.
+    <h3>Conference Proceedings</h3>
+    <ul>
+        <li><b>Thomas O'Neil and Travis Desell. Empirical Support for the High-Density Subset Sum Decision Threshold</b>. <i>In the 14th IEEE Canadian Workshop on Information Theory (CWIT'15)</i>. St. John's, Newfoundland, Canada. July 6-9, 2015. To Appear (Copyright IEEE 2015). <a href='http://people.cs.und.edu/~tdesell/papers/2015_cwit_sssathome.pdf'>[pdf]</a></li>
+    </ul>
+
 </div>
 <div class='well'>
     <h2>Wildlife@Home Publications</h2>
