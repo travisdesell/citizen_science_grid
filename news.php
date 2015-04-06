@@ -8,13 +8,13 @@ require_once($cwd[__FILE__] . "/my_query.php");
 
 require_once("/projects/csg/html/inc/text_transform.inc");
 
-function csg_show_news() {
+function csg_show_news($project_name = "", $limit = 5) {
     echo "
                 <div class='well'>
                     <h3><a href='http://volunteer.cs.und.edu/csg/forum_forum.php?id=1'>News</a> <img href='rss_main.php' src='http://volunteer.cs.und.edu/csg/img/rss_icon.gif' alt='RSS'> </h3>";
 
 
-    $thread_result = query_boinc_db("SELECT id, title, owner, timestamp FROM thread WHERE forum = 1 AND hidden = 0 ORDER BY id desc LIMIT 5");
+    $thread_result = query_boinc_db("SELECT id, title, owner, timestamp FROM thread WHERE forum = 1 AND hidden = 0 AND title like '%$project_name%' ORDER BY id desc LIMIT $limit");
 
 
     while ($thread_row = $thread_result->fetch_assoc()) {
