@@ -66,6 +66,19 @@ $dna_credit_badge_info = array(
     array( 'credit' =>     10000, 'img_src' => 'dna_bronze_32.png', 'name' => 'A bronze ', 'value' => '10 thousand' )
 );
 
+$sss_credit_badge_info = array(
+    array( 'credit' =>  50000000, 'img_src' => 'sss_emerald.png', 'name' => 'An emerald', 'value' => '50 million' ),
+    array( 'credit' =>  20000000, 'img_src' => 'sss_jade.png', 'name' => 'An emerald', 'value' => '50 million' ),
+    array( 'credit' =>  10000000, 'img_src' => 'sss_turqouise.png', 'name' => 'A ruby', 'value' => '10 million' ),
+    array( 'credit' =>   5000000, 'img_src' => 'sss_sapphire.png', 'name' => 'A sapphire', 'value' => '5 million' ),
+    array( 'credit' =>   2000000, 'img_src' => 'sss_ruby.png', 'name' => 'A sapphire', 'value' => '5 million' ),
+    array( 'credit' =>   1000000, 'img_src' => 'sss_amethyst.png', 'name' => 'A gold', 'value' => '1 million' ),
+    array( 'credit' =>    500000, 'img_src' => 'sss_gold.png', 'name' => 'A silver', 'value' => '100 thousand' ),
+    array( 'credit' =>    100000, 'img_src' => 'sss_silver.png', 'name' => 'A silver', 'value' => '100 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'sss_bronze.png', 'name' => 'A bronze ', 'value' => '10 thousand' )
+);
+
+
 
 function get_bossa_badge_str($user) {
     global $bossa_badge_info;
@@ -98,10 +111,29 @@ function get_dna_credit_badge_str($user) {
     return "";
 }
 
+function get_sss_credit_badge_str($user) {
+    global $sss_credit_badge_info;
+
+    $result = query_boinc_db("SELECT sum(total) FROM credit_user WHERE userid = " . $user['id'] . " AND appid = 15");
+    $row = $result->fetch_assoc();
+
+    $sss_total_credit = $row['sum(total)'];
+
+    for ($i = 0; $i < count($sss_credit_badge_info); $i++) {
+        if ($sss_total_credit > $sss_credit_badge_info[$i]['credit']) {
+            return $sss_credit_badge_info[$i]['img_src'];
+            break;
+        }
+    }
+
+    return "";
+}
+
+
 function get_wildlife_credit_badge_str($user) {
     global $wildlife_credit_badge_info;
 
-    $result = query_boinc_db("SELECT sum(total) FROM credit_user WHERE userid = " . $user['id'] . " AND (appid = 7 OR appid = 9 OR appid = 12)");
+    $result = query_boinc_db("SELECT sum(total) FROM credit_user WHERE userid = " . $user['id'] . " AND (appid = 7 OR appid = 9 OR appid = 12 OR appid = 22)");
     $row = $result->fetch_assoc();
 
     $wildlife_total_credit = $row['sum(total)'];
@@ -135,12 +167,32 @@ function get_dna_credit_badge($user) {
     return $badges;
 }
 
+function get_sss_credit_badge($user) {
+    global $sss_credit_badge_info;
+    $badges = "";
+
+    $result = query_boinc_db("SELECT sum(total) FROM credit_user WHERE userid = " . $user->id . " AND appid = 15");
+    $row = $result->fetch_assoc();
+
+    $sss_total_credit = $row['sum(total)'];
+
+    for ($i = 0; $i < count($sss_credit_badge_info); $i++) {
+        if ($sss_total_credit > $sss_credit_badge_info[$i]['credit']) {
+            $badges .= "<img style='height:28px;' src='./subset_sum/sss_badges/" . $sss_credit_badge_info[$i]['img_src'] . "' title='" . $sss_credit_badge_info[$i]['name'] . " badge for earning " . $sss_credit_badge_info[$i]['value'] . " SubsetSum@Home credit.'></img>";
+            break;
+        }
+    }
+
+    return $badges;
+}
+
+
 
 function get_wildlife_credit_badge($user) {
     global $wildlife_credit_badge_info;
     $badges = "";
 
-    $result = query_boinc_db("SELECT sum(total) FROM credit_user WHERE userid = " . $user->id . " AND (appid = 7 OR appid = 9 OR appid = 12)");
+    $result = query_boinc_db("SELECT sum(total) FROM credit_user WHERE userid = " . $user->id . " AND (appid = 7 OR appid = 9 OR appid = 12 OR appid = 22)");
     $row = $result->fetch_assoc();
 
     $wildlife_total_credit = $row['sum(total)'];
@@ -183,6 +235,9 @@ function get_badges($user) {
     $res = get_dna_credit_badge($user);
     if ($res != "") $badges .= "&nbsp;&nbsp;" . $res;
 
+    $res = get_sss_credit_badge($user);
+    if ($res != "") $badges .= "&nbsp;&nbsp;" . $res;
+
     return $badges;
 }
 
@@ -207,6 +262,26 @@ function print_badge_table() {
     echo "</tbody>";
     echo "</table>";
     echo "</div>";
+
+    echo "<div class='well' style='padding-top:10px; padding-bottom:10px;'>";
+    echo "<h3>SubsetSum@Home BOINC Credit Badges <small>&nbsp;These badges are earned by <a href='./instructions.php'>calculating workunits for SubsetSum@Home with BOINC</a>.</small></h3>";
+    echo "<table class='table table-bordered table-striped'>";
+    echo "<thead>";
+    echo "<th>Badge</th> <th>Description</th>";
+    echo "</thead>";
+
+    echo "<tbody>";
+    for ($i = 0; $i < count($sss_credit_badge_info); $i++) {
+        echo "<tr>";
+        echo "<td style='text-align:center;'><img style='height:28px;' src='./subset_sum/sss_badges/" . $sss_credit_badge_info[$i]['img_src'] . "' title='" . $sss_credit_badge_info[$i]['name'] . " badge for earning " . $sss_credit_badge_info[$i]['value'] . " SubsetSum@Home credit.'></img></td>";
+        echo "<td style='vertical-align:middle;'>" . $sss_credit_badge_info[$i]['name'] . " badge for earning " . $sss_credit_badge_info[$i]['value'] . " SubsetSum@Home credit.</td>";
+        echo "</tr>";
+    }
+    echo "</tbody>";
+    echo "</table>";
+    echo "</div>";
+
+
 
 
     echo "<div class='well' style='padding-top:10px; padding-bottom:10px;'>";

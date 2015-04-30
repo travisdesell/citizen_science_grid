@@ -16,6 +16,23 @@ $sss_g_logged_in_user = null;
 $sss_got_logged_in_user = false;
 
 
+function get_next_url() {
+    $next_url = '';
+    if (array_key_exists('REQUEST_URI', $_SERVER)) {
+        $next_url = $_SERVER['REQUEST_URI'];
+        $n = strpos($next_url, "/", 1);
+        if ($n) {
+            $next_url = substr($next_url, $n+1);
+        }
+    }
+    error_log("request uri: " .$_SERVER['REQUEST_URI']);
+    error_log("next url: " .$next_url);
+
+    $next_url = urlencode($next_url);
+    return $next_url;
+}
+
+
 function csg_url_tokens($auth) {
     $now = time();
     $ttok = md5((string)$now.$auth);
@@ -45,18 +62,7 @@ function sss_get_user($must_be_logged_in = true) {
     }
 
     if ($must_be_logged_in && !$sss_g_logged_in_user) {
-        $next_url = '';
-        if (array_key_exists('REQUEST_URI', $_SERVER)) {
-            $next_url = $_SERVER['REQUEST_URI'];
-            $n = strrpos($next_url, "/");
-            if ($n) {
-                $next_url = substr($next_url, $n+1);
-            }
-        }
-//        error_log("request uri: " .$_SERVER['REQUEST_URI']);
-//        error_log("next url: " .$next_url);
-
-        $next_url = urlencode($next_url);
+        $next_url = get_next_url();
         Header("Location: http://volunteer.cs.und.edu/csg/login_form.php?next_url=$next_url");
         exit;
     }
@@ -84,18 +90,7 @@ function dna_get_user($must_be_logged_in = true) {
     }
 
     if ($must_be_logged_in && !$dna_g_logged_in_user) {
-        $next_url = '';
-        if (array_key_exists('REQUEST_URI', $_SERVER)) {
-            $next_url = $_SERVER['REQUEST_URI'];
-            $n = strrpos($next_url, "/");
-            if ($n) {
-                $next_url = substr($next_url, $n+1);
-            }
-        }
-//        error_log("request uri: " .$_SERVER['REQUEST_URI']);
-//        error_log("next url: " .$next_url);
-
-        $next_url = urlencode($next_url);
+        $next_url = get_next_url();
         Header("Location: http://volunteer.cs.und.edu/csg/login_form.php?next_url=$next_url");
         exit;
     }
@@ -122,18 +117,7 @@ function csg_get_user($must_be_logged_in = true) {
     }
 
     if ($must_be_logged_in && !$csg_g_logged_in_user) {
-        $next_url = '';
-        if (array_key_exists('REQUEST_URI', $_SERVER)) {
-            $next_url = $_SERVER['REQUEST_URI'];
-            $n = strrpos($next_url, "/");
-            if ($n) {
-                $next_url = substr($next_url, $n+1);
-            }
-        }
-//        error_log("request uri: " .$_SERVER['REQUEST_URI']);
-//        error_log("next url: " .$next_url);
-
-        $next_url = urlencode($next_url);
+        $next_url = get_next_url();
         Header("Location: http://volunteer.cs.und.edu/csg/login_form.php?next_url=$next_url");
         exit;
     }
