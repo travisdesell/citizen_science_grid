@@ -18,13 +18,13 @@ print_navbar("Citizen Science Grid");
 
 $min = 0;
 if (array_key_exists('min', $_GET)) {
-    $min = mysql_real_escape_string($_GET['min']);
+    $min = $boinc_db->real_escape_string($_GET['min']);
     if ($min == '') $min = 0;
 }
 
 $sort = 'events';
 if (array_key_exists('sort', $_GET)) {
-    $sort = mysql_real_escape_string($_GET['sort']);
+    $sort = $boinc_db->real_escape_string($_GET['sort']);
     $sort_by = "valid_events DESC";
 }
 

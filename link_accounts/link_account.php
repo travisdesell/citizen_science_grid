@@ -8,10 +8,10 @@ require_once($cwd[__FILE__] . "/../user.php");
 require_once($cwd[__FILE__] . "/../my_query.php");
 require_once($cwd[__FILE__] . "/link_account.inc");
 
-$project = mysql_real_escape_string($_POST["project"]);
-$username = mysql_real_escape_string($_POST["username"]);
-$userid = mysql_real_escape_string($_POST["userid"]);
-$email = mysql_real_escape_string($_POST["project"]);
+$project = $boinc_db->real_escape_string($_POST["project"]);
+$username = $boinc_db->real_escape_string($_POST["username"]);
+$userid = $boinc_db->real_escape_string($_POST["userid"]);
+$email = $boinc_db->real_escape_string($_POST["project"]);
 
 
 $user = csg_get_user(true);

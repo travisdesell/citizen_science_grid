@@ -44,61 +44,6 @@ function csg_get_user_from_id($id) {
     return $result->fetch_assoc();
 }
 
-function sss_get_user($must_be_logged_in = true) {
-    global $sss_g_logged_in_user, $sss_got_logged_in_user;
-
-    if ($sss_got_logged_in_user) return $sss_g_logged_in_user;
-
-    $authenticator = null;
-    if (isset($_COOKIE['auth'])) {
-        $authenticator = $_COOKIE['auth'];
-        //error_log("authenticator set: '" . $authenticator . "'");
-    }
-
-    $authenticator = mysql_real_escape_string($authenticator);
-    if ($authenticator) {
-        $result = query_subset_sum_db("SELECT * FROM user WHERE authenticator = '$authenticator'");
-        $sss_g_logged_in_user = $result->fetch_assoc();
-    }
-
-    if ($must_be_logged_in && !$sss_g_logged_in_user) {
-        $next_url = get_next_url();
-        Header("Location: http://csgrid.org/csg/login_form.php?next_url=$next_url");
-        exit;
-    }
-
-    $sss_got_logged_in_user = true;
-    return $sss_g_logged_in_user;
-}
-
-
-function dna_get_user($must_be_logged_in = true) {
-    global $dna_g_logged_in_user, $dna_got_logged_in_user;
-
-    if ($dna_got_logged_in_user) return $dna_g_logged_in_user;
-
-    $authenticator = null;
-    if (isset($_COOKIE['auth'])) {
-        $authenticator = $_COOKIE['auth'];
-        //error_log("authenticator set: '" . $authenticator . "'");
-    }
-
-    $authenticator = mysql_real_escape_string($authenticator);
-    if ($authenticator) {
-        $result = query_dna_db("SELECT * FROM user WHERE authenticator = '$authenticator'");
-        $dna_g_logged_in_user = $result->fetch_assoc();
-    }
-
-    if ($must_be_logged_in && !$dna_g_logged_in_user) {
-        $next_url = get_next_url();
-        Header("Location: http://csgrid.org/csg/login_form.php?next_url=$next_url");
-        exit;
-    }
-
-    $dna_got_logged_in_user = true;
-    return $dna_g_logged_in_user;
-}
-
 function csg_get_user($must_be_logged_in = true) {
     global $csg_g_logged_in_user, $csg_got_logged_in_user, $boinc_db;
 
