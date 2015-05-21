@@ -63,7 +63,7 @@ function sss_get_user($must_be_logged_in = true) {
 
     if ($must_be_logged_in && !$sss_g_logged_in_user) {
         $next_url = get_next_url();
-        Header("Location: http://volunteer.cs.und.edu/csg/login_form.php?next_url=$next_url");
+        Header("Location: http://csgrid.org/csg/login_form.php?next_url=$next_url");
         exit;
     }
 
@@ -91,7 +91,7 @@ function dna_get_user($must_be_logged_in = true) {
 
     if ($must_be_logged_in && !$dna_g_logged_in_user) {
         $next_url = get_next_url();
-        Header("Location: http://volunteer.cs.und.edu/csg/login_form.php?next_url=$next_url");
+        Header("Location: http://csgrid.org/csg/login_form.php?next_url=$next_url");
         exit;
     }
 
@@ -100,7 +100,7 @@ function dna_get_user($must_be_logged_in = true) {
 }
 
 function csg_get_user($must_be_logged_in = true) {
-    global $csg_g_logged_in_user, $csg_got_logged_in_user;
+    global $csg_g_logged_in_user, $csg_got_logged_in_user, $boinc_db;
 
     if ($csg_got_logged_in_user) return $csg_g_logged_in_user;
 
@@ -110,7 +110,7 @@ function csg_get_user($must_be_logged_in = true) {
         //error_log("authenticator set: '" . $authenticator . "'");
     }
 
-    $authenticator = mysql_real_escape_string($authenticator);
+    $authenticator = $boinc_db->real_escape_string($authenticator);
     if ($authenticator) {
         $result = query_boinc_db("SELECT * FROM user WHERE authenticator = '$authenticator'");
         $csg_g_logged_in_user = $result->fetch_assoc();
@@ -118,7 +118,7 @@ function csg_get_user($must_be_logged_in = true) {
 
     if ($must_be_logged_in && !$csg_g_logged_in_user) {
         $next_url = get_next_url();
-        Header("Location: http://volunteer.cs.und.edu/csg/login_form.php?next_url=$next_url");
+        Header("Location: http://csgrid.org/csg/login_form.php?next_url=$next_url");
         exit;
     }
 

@@ -16,7 +16,7 @@ $wildlife_db = null;
 
 function connect_boinc_db() {
     global $boinc_db, $boinc_user, $boinc_passwd;
-    $boinc_db = new mysqli("localhost", $boinc_user, $boinc_passwd, "wildlife");
+    $boinc_db = new mysqli("localhost", $boinc_user, $boinc_passwd, "csg");
     if ($boinc_db->connect_errno) {
         echo "Failed to connect to MySQL: (" . $boinc_db->connect_errno . ") " . $boinc_db->connect_error;
     }
@@ -52,8 +52,8 @@ function connect_wildlife_db() {
 }
 
 connect_boinc_db();
-connect_dna_db();
-connect_subset_sum_db();
+//connect_dna_db();
+//connect_subset_sum_db();
 connect_wildlife_db();
 
 function mysqli_error_msg($db, $query) {

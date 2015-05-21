@@ -24,7 +24,7 @@ echo "
         <h3>Volunteer Computing (BOINC) Instructions</h3>
         <ul>
         <li>  If you're already running BOINC, select Attach to Project. If not, <a target='_new' href='http://boinc.berkeley.edu/download.php'>download, install and run BOINC</a>. </li>
-        <li> When prompted, enter <b>http://volunteer.cs.und.edu/csg/</b></li>
+        <li> When prompted, enter <b>http://csgrid.org/csg/</b></li>
         <li> If you're running a command-line or pre-5.0 version of BOINC, <a href='create_account_form.php'>create an account</a> first. </li>
         <li> If you have any problems, <a href='http://boinc.berkeley.edu/help.php'>get help here</a>. </li>
         </ul>

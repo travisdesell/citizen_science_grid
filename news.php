@@ -11,7 +11,7 @@ require_once("/projects/csg/html/inc/text_transform.inc");
 function csg_show_news($project_name = "", $limit = 5) {
     echo "
                 <div class='well'>
-                    <h3><a href='http://volunteer.cs.und.edu/csg/forum_forum.php?id=1'>News</a> <img href='rss_main.php' src='http://volunteer.cs.und.edu/csg/img/rss_icon.gif' alt='RSS'> </h3>";
+                    <h3><a href='http://csgrid.org/csg/forum_forum.php?id=1'>News</a> <img href='rss_main.php' src='http://csgrid.org/csg/img/rss_icon.gif' alt='RSS'> </h3>";
 
 
     $thread_result = query_boinc_db("SELECT id, title, owner, timestamp FROM thread WHERE forum = 1 AND hidden = 0 AND title like '%$project_name%' ORDER BY id desc LIMIT $limit");
@@ -28,7 +28,7 @@ function csg_show_news($project_name = "", $limit = 5) {
                     <p><b>" . $thread_row['title'] . "</b></p>
                     <p>" . output_transform($post_row['content']) . "</p>
                     <p style='text-align:right; margin-bottom:0px'><i>" . $owner['name'] . " on " . date("l, F jS", $thread_row['timestamp']) . "</i><br>
-                    <a href='http://volunteer.cs.und.edu/csg/forum_thread.php?id=" . $thread_row['id'] . "'>leave a comment</a></p>
+                    <a href='http://csgrid.org/csg/forum_thread.php?id=" . $thread_row['id'] . "'>leave a comment</a></p>
                     ";
     }
 

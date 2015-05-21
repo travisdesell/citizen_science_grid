@@ -134,7 +134,7 @@ function print_link_well($linked, $can_link, $project_name, $project, $userid, $
         } else {
             echo "
                 <div class='well'>
-                    <p>No account on $project_name was found with a matching email. You can only link accounts with matching emails.  If you want to change your email on $project_name, you can do so on the <a href='http://volunteer.cs.und.edu/$project/home.php'>Your Account</a> page at $project_name.</p>
+                    <p>No account on $project_name was found with a matching email. You can only link accounts with matching emails.  If you want to change your email on $project_name, you can do so on the <a href='http://csgrid.org/$project/home.php'>Your Account</a> page at $project_name.</p>
                 </div>";
         }
     }
