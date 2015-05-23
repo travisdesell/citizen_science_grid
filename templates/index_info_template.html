@@ -1,0 +1,36 @@
+<!-- Main component for a primary marketing message or call to action -->
+<div class='well'>
+    <div class='row'>
+        <div class='col-xs-12'>
+            <h3 class='project-name'>Citizen Science Grid</h3>
+            <p>
+            The Citizen Science Grid is run by <a href='http://people.cs.und.edu/~tdesell/'>Travis Desell</a>, an Assistant Professor in the Computer Science Department at the University of North Dakota. It is hosted by UND's Computational Research Center and Information Technology Systems and Services. The Citizen Science Grid is dedicated to supporting a wide range of research and educational projects using volunteer computing and citizen science, which you can read about and visit below.
+            </p>
+            <div class="btn-group btn-group-justified">
+                <a class="btn btn-primary" role="button" href='instructions.php'>Volunteer Your Computer</a>
+                <a class="btn btn-primary" role="button" href='http://csgrid.org/csg/wildlife/video_selector.php'>Volunteer Your Brain</a>
+            </div>
+
+            <!--
+            <img class='img-responsive' src='http://csgrid.org/wildlife/images/und_logo.png'></img>
+            -->
+        </div> <!-- col-xs-12 -->
+    </div>
+</div>
+
+{{#projects}}
+<!-- Main component for a primary marketing message or call to action -->
+<div class='well'>
+    <div class='row'>
+        <div class='col-xs-5'>
+            <img class='img-responsive' src='{{project_image}}'></img>
+        </div>
+        <div class='col-xs-7'>
+            <p>
+            <h3 class='project-name'><a href='{{project_url}}'>{{project_name}}</a></h3>
+            {{{project_text}}}
+            </p>
+        </div>
+    </div>
+</div>
+{{/projects}}
