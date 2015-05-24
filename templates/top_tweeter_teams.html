@@ -1,0 +1,22 @@
+<table class='table table-striped table-bordered'>
+    <thead>
+        <th>Rank</th>
+        <th>Name</th>
+        <th><a href='./top_tweeter_teams.php?sort=events&min={{min}}'>Valid Tweets</a></th>
+        <th><a href='./top_tweeter_teams.php?sort=seconds&min={{min}}'>Total Tweets</a></th>
+        <th>Country</th>
+        <th>Created</th>
+    </thead>
+    <tbody>
+        {{#team}}
+        <tr>
+            <td>{{rank}}</td>
+            <td>{{name}}</td>
+            <td>{{valid_tweets}}</td>
+            <td>{{total_tweets}}</td>
+            <td>{{country}}</td>
+            <td>{{create_time}}</td>
+        </tr>
+        {{/team}}
+    </tbody>
+</table>
