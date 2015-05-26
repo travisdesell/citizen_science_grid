@@ -37,7 +37,7 @@ function sub_sentence($sentence, $delimiter, $max_chars, $ellipsis=false) {
     return $result;
 }
 
-function show_uotd($col1, $col2, $style="", $use_base_dir) {
+function show_uotd($col1, $col2, $style="", $use_base_dir = false) {
     $uotd_result = query_boinc_db("SELECT * FROM profile ORDER BY uotd_time DESC LIMIT 1");
 
     $base_dir = "..";
@@ -58,7 +58,7 @@ function show_uotd($col1, $col2, $style="", $use_base_dir) {
             $img_url = "$base_dir/img/head_20.png";
             $uotd_text .= " <a href='$base_dir/view_profile.php?userid='" . $uotd['id'] . "'><img title='View the profile of " . $uotd['name'] . "' src='" . $img_url . "' alt='Profile'></img></a>";
         }    
-        $uotd_text .= " <a href='$base_dir/show_uotd.php?userid=" . $uotd['id'] . "'>" . $uotd['name'] . "</a><br>";
+        $uotd_text .= " <a href='$base_dir/show_user.php?userid=" . $uotd['id'] . "'>" . $uotd['name'] . "</a><br>";
         $response = output_transform($uotd_row['response1']);
         $response = strip_tags($response);
         $response = sub_sentence($response, ' ', 150, true);
