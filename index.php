@@ -22,7 +22,7 @@ echo "
 
 
 $projects_info['projects'][] = array(
-    'project_image' => './images/bluemarblewest.png',
+    'project_image' => './climate/images/bluemarblewest.png',
     'project_name' => 'Climate Tweets', 
     'project_url' => './climate', 
     'project_text' => "The Climate Tweets project is focused on personal opinions about climate change or global warming. The goal is to sort tweets and view the different views in various countries, how the discussion has changed over time, and how opinions change with political orientation. Classifying tweets allows us to discover patterns and coorelations in people's opinions about our world. It also helps us understand what people know about climate change. Please note that the tweets are unfiltered and may contain profanity or controversial views, and these are not the views of the Citizen Science Grid, any of our team, or funding agencies.  Because of this the project is <font color='red'>18+</font>.");
