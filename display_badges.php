@@ -68,12 +68,12 @@ $dna_credit_badge_info = array(
 
 $sss_credit_badge_info = array(
     array( 'credit' =>  50000000, 'img_src' => 'sss_emerald.png', 'name' => 'An emerald', 'value' => '50 million' ),
-    array( 'credit' =>  20000000, 'img_src' => 'sss_jade.png', 'name' => 'An emerald', 'value' => '50 million' ),
-    array( 'credit' =>  10000000, 'img_src' => 'sss_turqouise.png', 'name' => 'A ruby', 'value' => '10 million' ),
+    array( 'credit' =>  20000000, 'img_src' => 'sss_jade.png', 'name' => 'An jade', 'value' => '20 million' ),
+    array( 'credit' =>  10000000, 'img_src' => 'sss_turquoise.png', 'name' => 'A turquoise', 'value' => '10 million' ),
     array( 'credit' =>   5000000, 'img_src' => 'sss_sapphire.png', 'name' => 'A sapphire', 'value' => '5 million' ),
-    array( 'credit' =>   2000000, 'img_src' => 'sss_ruby.png', 'name' => 'A sapphire', 'value' => '5 million' ),
-    array( 'credit' =>   1000000, 'img_src' => 'sss_amethyst.png', 'name' => 'A gold', 'value' => '1 million' ),
-    array( 'credit' =>    500000, 'img_src' => 'sss_gold.png', 'name' => 'A silver', 'value' => '100 thousand' ),
+    array( 'credit' =>   2000000, 'img_src' => 'sss_ruby.png', 'name' => 'A ruby', 'value' => '2 million' ),
+    array( 'credit' =>   1000000, 'img_src' => 'sss_amethyst.png', 'name' => 'A amethyst', 'value' => '1 million' ),
+    array( 'credit' =>    500000, 'img_src' => 'sss_gold.png', 'name' => 'A gold', 'value' => '500 thousand' ),
     array( 'credit' =>    100000, 'img_src' => 'sss_silver.png', 'name' => 'A silver', 'value' => '100 thousand' ),
     array( 'credit' =>     10000, 'img_src' => 'sss_bronze.png', 'name' => 'A bronze ', 'value' => '10 thousand' )
 );
@@ -242,7 +242,7 @@ function get_badges($user) {
 }
 
 function print_badge_table() {
-    global $bossa_badge_info, $wildlife_credit_badge_info, $dna_credit_badge_info;
+    global $bossa_badge_info, $wildlife_credit_badge_info, $dna_credit_badge_info, $sss_credit_badge_info;
 
 
     echo "<div class='well' style='padding-top:10px; padding-bottom:10px;'>";
