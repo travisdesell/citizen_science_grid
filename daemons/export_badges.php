@@ -12,7 +12,7 @@ require_once($cwd[__FILE__] . "/display_badges.php");
 
 echo "running export_badges.php at " . date('Y/m/d h:i:s a') . "\n";
 
-$result = query_boinc_db("SELECT id, name, email_addr, total_credit, bossa_total_credit, cross_project_id FROM user WHERE total_credit > 0 OR bossa_total_credit > 0", $boinc_db);
+$result = query_boinc_db("SELECT id, name, email_addr, total_credit, bossa_total_credit, valid_events, valid_tweets, cross_project_id FROM user WHERE total_credit > 0 OR bossa_total_credit > 0", $boinc_db);
 
 $file = fopen("/projects/csg/download/badges.xml", "w");
 
@@ -22,6 +22,8 @@ while ( ($row = $result->fetch_assoc()) != null) {
     $user['bossa_total_credit'] = $row['bossa_total_credit'];
     $user['cross_project_id'] = $row['cross_project_id'];
     $user['email_addr'] = $row['email_addr'];
+    $user['valid_events'] = $row['valid_events'];
+    $user['valid_tweets'] = $row['valid_tweets'];
 
     $cpid = md5($user['cross_project_id'] . $user['email_addr']);
 
@@ -34,6 +36,8 @@ while ( ($row = $result->fetch_assoc()) != null) {
     $dna_credit_badge = get_dna_credit_badge_str($user);
     $sss_credit_badge = get_sss_credit_badge_str($user);
     $video_badge = get_bossa_badge_str($user);
+    $event_badge = get_event_badge_str($user);
+    $tweets_badge = get_tweets_badge_str($user);
 
     if ($wildlife_credit_badge != "") {
         fwrite($file, "\t<wildlife_credit_badge>" . $wildlife_credit_badge . "</wildlife_credit_badge>\n");
@@ -50,6 +54,14 @@ while ( ($row = $result->fetch_assoc()) != null) {
 
     if ($video_badge != "") {
         fwrite($file, "\t<video_badge>" . $video_badge . "</video_badge>\n");
+    }
+
+    if ($event_badge != "") {
+        fwrite($file, "\t<event_badge>" . $event_badge . "</event_badge>\n");
+    }
+
+    if ($tweets_badge != "") {
+        fwrite($file, "\t<tweets_badge>" . $tweets_badge . "</tweets_badge>\n");
     }
 
     fwrite($file, "</user>\n");

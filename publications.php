@@ -89,6 +89,12 @@ echo"
 
     <h3>Poster Presentations</h3>
     <ul>
+        <li>
+        Nickolas Conrad, John Palarski, Rebecca Eckroad, Tanner Gue, Kaylan Carrlson, and Susan Ellis-Felege. <b>Predation and Parental Care at Blue-Winged Teal (Anas discors) Nests in North Dakota.  The Wildlife Society's 22nd Annual Conference. October 19, 2015, Winnipeg, Manitoba, Canada. <a href='wildlife/publications/Final_NTWS_2015_Handout.pdf'>[pdf]</a>
+        </li>
+
+        <li> Amanda Saul, Rebeca A. Eckroad, Kyle Goehner, Rebecca VanderClute, Travis Desell and Susan Ellis-Felege. <b>Effectiveness of Citizen Science vs Expert Observation in Classification of Nesting Bird Behaviors Captured on Camera</b>. The Wildlife Society's 22nd Annual Conference. October 19, 2015, Winnipeg, Manitoba, Canada. <a href='wildlife/publications/Saul_Final_2015NTWS_Poster.pdf'>[pdf]</a> </li>
+
         <li>J. P. Johnson, Rebecca A. Eckroad,  Aaron C. Robinson, and Susan N. Ellis-Felege.  <b>Nest attendance patterns in sharp-tailed grouse in western North Dakota</b>.  <i>The North Dakota Chapter of the Wildlife Society Conference</i>. 12-14 February 2014, Mandan, ND. <a href='publications/RecessPoster_NDCTWS2014_Finalpdf.pdf'>[pdf]</a> </li>
 
         <li>Rebecca A. Eckroad, Paul C. Burr, Aaron C. Robinson, and Susan N. Ellis-Felege. <b>Impact of camera installation on nesting sharp-tailed grouse (Tympanuchus phasianellus) behavior in western North Dakota</b>.  <i>The North Dakota Chapter of the Wildlife Society Conference</i>. 12-14 February 2014, Mandan, ND. <a href='publications/Becca_ND_TWS2014_small.pdf'>[pdf]</a> </li>
@@ -97,7 +103,7 @@ echo"
 
         <li>Leila Mohsenian, Alicia K. Andes, and Susan N. Ellis-Felege. <b>The mysterious life of piping plovers: nesting behaviors of a threatened species</b>. <i>The North Dakota Chapter of the Wildlife Society Conference</i>. 12-14 February 2014, Mandan, ND. <a href='publications/mysterious_life_poster.pdf'>[pdf]</a></li>
 
-        <li>Julia P. Johnson, Rebecca A. Eckroad, Aaron C. Robinson, and Susan N. Ellis-Felege. <b>Nest attendance patterns in sharp-tailed grouse in western North Dakota</b>. <i>The Wildlife Society’s 20th Annual Conference</i>. 4 – 10 October 2013, Milwaukee, Wisconsin (Student- In- Progress Poster Presentation; won 2nd place in undergraduate presentation category). <a href='http://csgrid.org/wildlife/alpha/publications/2013_10_poster_nest_attendence_patterns.pdf'>[pdf]</a></li>
+        <li>Julia P. Johnson, Rebecca A. Eckroad, Aaron C. Robinson, and Susan N. Ellis-Felege. <b>Nest attendance patterns in sharp-tailed grouse in western North Dakota</b>. <i>The Wildlife Society’s 20th Annual Conference</i>. 4 – 10 October 2013, Milwaukee, Wisconsin (Student- In- Progress Poster Presentation; won 2nd place in undergraduate presentation category). <a href='publications/2013_10_poster_nest_attendence_patterns.pdf'>[pdf]</a></li>
     </ul>
 
 </div>

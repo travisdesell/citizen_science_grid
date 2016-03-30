@@ -1,5 +1,10 @@
 <?php
 
+### Aaron did the following temporarily:
+### I commented out lines 51-56, & 109
+### on June 25 at 2:29pm
+
+
 $cwd[__FILE__] = __FILE__;
 if (is_link($cwd[__FILE__])) $cwd[__FILE__] = readlink($cwd[__FILE__]);
 $cwd[__FILE__] = dirname($cwd[__FILE__]);

@@ -125,6 +125,21 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid", $ba
     }
     $user = csg_get_user(false);
 
+    if ($project_name == "Climate Tweets") {
+        $navbar_info['right_headers'][] =
+            array(
+                'dropdown_title' => 'Climate Tweets',
+                'url' => '#',
+                'classes' => '',
+                'dropdowns' => array(
+                    array('dropdown_title' => 'Classify Tweets',
+                    'url' => './classify_tweets.php'),
+                    array('dropdown_title' => 'Review Your Tweets',
+                    'url' => './review_tweets.php')
+                )
+            );
+    }
+
     if ($project_name == "DNA@Home") {
         $navbar_info['right_headers'][] =
             array(
@@ -139,26 +154,25 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid", $ba
     }
 
 
+
     if ($project_name == "Wildlife@Home") {
         $navbar_info['right_headers'][] =
             array(
-                'dropdown_title' => 'Wildlife Video',
+                'dropdown_title' => 'Projects',
                 'url' => '#',
                 'classes' => '',
                 'dropdowns' => array(
-                    array('dropdown_title' => 'Site and Species Descriptions',
+                    array('dropdown_title' => 'Image Project Descriptions',
+                    'url' => './image_selector.php'),
+                    array('dropdown_title' => 'Video Project Descriptions',
                     'url' => './video_selector.php'),
                     array('dropdown_title' => 'Review Videos',
                     'url' => './review_videos.php'),
-                    array('dropdown_title' => 'Sharp-Tailed Grouse',
+                    array('dropdown_title' => 'Blue Winged Teal',
                     'divider' => true,
                     'url' => 'javascript:;'),
-                    array('dropdown_title' => 'Belden, ND',
-                    'url' => './watch.php?location=1&species=1'),
-                    array('dropdown_title' => 'Blaisdell, ND',
-                    'url' => './watch.php?location=2&species=1'),
-                    array('dropdown_title' => 'Lostwood Wildlife Refuge, ND',
-                    'url' => './watch.php?location=3&species=1'),
+                    array('dropdown_title' => 'Coteau Ranch, ND',
+                    'url' => './watch.php?location=7&species=4'),
                     array('dropdown_title' => 'Interior Least Tern',
                     'divider' => true,
                     'url' => 'javascript:;'),
@@ -168,7 +182,16 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid", $ba
                     'divider' => true,
                     'url' => 'javascript:;'),
                     array('dropdown_title' => 'Missouri River, ND',
-                    'url' => './watch.php?location=4&species=3')
+                    'url' => './watch.php?location=4&species=3'),
+                    array('dropdown_title' => 'Sharp-Tailed Grouse',
+                    'divider' => true,
+                    'url' => 'javascript:;'),
+                    array('dropdown_title' => 'Belden, ND',
+                    'url' => './watch.php?location=1&species=1'),
+                    array('dropdown_title' => 'Blaisdell, ND',
+                    'url' => './watch.php?location=2&species=1'),
+                    array('dropdown_title' => 'Lostwood Wildlife Refuge, ND',
+                    'url' => './watch.php?location=3&species=1')
                 )
             );
 
@@ -178,6 +201,8 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid", $ba
                 'url' => '#',
                 'classes' => '',
                 'dropdowns' => array(
+                    array('dropdown_title' => 'Educational Material',
+                    'url' => './education.php'),
                     array('dropdown_title' => 'Sharp-Tailed Grouse',
                     'divider' => true,
                     'url' => 'javascript:;'),
@@ -277,6 +302,11 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid", $ba
         }
         $navbar_info['right_headers'][0]['dropdown_title'] .= $waiting_review;
         $navbar_info['right_headers'][0]['dropdowns'][1]['dropdown_title'] .= $waiting_review;
+
+        array_unshift($navbar_info['right_headers'][0]['dropdowns'],
+                array('dropdown_title' => 'Data Charts',
+                'url' => './charts.php'));
+
 
     }
 
