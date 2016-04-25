@@ -13,6 +13,7 @@ $boinc_db = null;
 $dna_db = null;
 $subset_sum_db = null;
 $wildlife_db = null;
+$uas_db = null;
 
 function connect_boinc_db() {
     global $boinc_db, $boinc_user, $boinc_passwd;
@@ -51,10 +52,25 @@ function connect_wildlife_db() {
     }
 }
 
+function connect_uas_db() {
+    global $uas_db, $wildlife_user, $wildlife_passwd;
+
+    $uas_db = new mysqli("wildlife.und.edu", $wildlife_user, $wildlife_passwd, "uas");
+
+    if (!$uas_db or $uas_db->connect_errno) {
+        echo "Failed to connect to MySQL: (" . $uas_db->connect_errno . ") " . $uas_db->connect_error;
+        error_log("Failed to connect to MySQL: (" . $uas_db->connect_errno . ") " . $uas_db->connect_error);
+    }
+}
+
+//connect_boinc_db();
+//connect_dna_db();
+
 connect_boinc_db();
 //connect_dna_db();
 //connect_subset_sum_db();
 connect_wildlife_db();
+//connect_uas_db();
 
 function mysqli_error_msg($db, $query) {
     error_log("MYSQL Error (" . $db->errno . "): " . $db->error . ", query: $query");
@@ -128,5 +144,34 @@ function query_wildlife_video_db_prepared($query, $a_bind_params) {
     return $result;
 }
 
+function query_uas_db($query) {
+    global $uas_db;
+
+    if (!$uas_db or !$uas_db->ping()) connect_uas_db();
+
+    $result = $uas_db->query($query);
+
+    if (!$result) mysqli_error_msg($uas_db, $query);
+
+    return $result;
+}
+
+function query_uas_db_prepared($query, $a_bind_params) {
+    global $wildlife_user, $wildlife_passwd;
+
+    $wildlife_pdo = new PDO("mysql:host=wildlife.und.edu;dbname=uas;", $wildlife_user, $wildlife_passwd);
+
+    try {
+        $stmt = $wildlife_pdo->prepare($query);
+        $stmt->execute($a_bind_params);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e) {
+        trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $e->getMessage(), E_USER_ERROR);
+        if (!$uas_db or !$uas_db->ping()) connect_uas_db();
+        mysqli_error_msg($uas_db, $query);
+    }
+
+    return $result;
+}
 
 ?>
