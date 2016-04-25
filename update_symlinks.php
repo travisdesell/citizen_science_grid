@@ -50,6 +50,10 @@ $command = "ln -s $cwd/js $target/js";
 shell_exec("rm $target/js");
 shell_exec($command);
 
+$command = "ln -s $cwd/publications $target/publications";
+shell_exec("rm $target/publications");
+shell_exec($command);
+
 $command = "ln -s $cwd/link_accounts $target/link_accounts";
 shell_exec("rm $target/link_accounts");
 shell_exec($command);

@@ -1,14 +1,126 @@
 <?php
 
+//cloud -> raincloud -> tornado -> earthquake -> volcano
+$tweets_badge_info = array(
+    array( 'credit' => 100000, 'img_src' => 'volcano_emerald.svg', 'name' => 'An emerald volcano', 'value' => '100,000 valid tweets' ),
+    array( 'credit' => 90000, 'img_src' => 'volcano_ruby.svg', 'name' => 'A ruby volcano', 'value' => '90,000 valid tweets' ),
+    array( 'credit' => 80000, 'img_src' => 'volcano_jade.svg', 'name' => 'A jade volcano', 'value' => '80,000 valid tweets' ),
+    array( 'credit' => 70000, 'img_src' => 'volcano_sapphire.svg', 'name' => 'A sapphire volcano', 'value' => '70,000 valid tweets' ),
+    array( 'credit' => 60000, 'img_src' => 'volcano_turquoise.svg', 'name' => 'A turquoise volcano', 'value' => '60,000 valid tweets' ),
+    array( 'credit' => 55000, 'img_src' => 'volcano_amethyst.svg', 'name' => 'An amethyst volcano', 'value' => '55,000 valid tweets' ),
+    array( 'credit' => 50000, 'img_src' => 'volcano_gold.svg', 'name' => 'A gold volcano', 'value' => '50,000 valid tweets' ),
+    array( 'credit' => 45000, 'img_src' => 'volcano_silver.svg', 'name' => 'A silver volcano', 'value' => '45,000 valid tweets' ),
+    array( 'credit' => 40000, 'img_src' => 'volcano_bronze.svg', 'name' => 'A bronze volcano', 'value' => '40,000 valid tweets' ),
+
+    array( 'credit' => 37500, 'img_src' => 'earthquake_emerald.svg', 'name' => 'An emerald earthquake', 'value' => '37,500 valid tweets' ),
+    array( 'credit' => 35000, 'img_src' => 'earthquake_ruby.svg', 'name' => 'A ruby earthquake', 'value' => '35,000 valid tweets' ),
+    array( 'credit' => 32500, 'img_src' => 'earthquake_jade.svg', 'name' => 'A jade earthquake', 'value' => '32,500 valid tweets' ),
+    array( 'credit' => 30000, 'img_src' => 'earthquake_sapphire.svg', 'name' => 'A sapphire earthquake', 'value' => '30,000 valid tweets' ),
+    array( 'credit' => 28000, 'img_src' => 'earthquake_turquoise.svg', 'name' => 'A turquoise earthquake', 'value' => '28,000 valid tweets' ),
+    array( 'credit' => 26000, 'img_src' => 'earthquake_amethyst.svg', 'name' => 'An amethyst earthquake', 'value' => '26,000 valid tweets' ),
+    array( 'credit' => 24000, 'img_src' => 'earthquake_gold.svg', 'name' => 'A gold earthquake', 'value' => '24,000 valid tweets' ),
+    array( 'credit' => 22000, 'img_src' => 'earthquake_silver.svg', 'name' => 'A silver earthquake', 'value' => '22,000 valid tweets' ),
+    array( 'credit' => 20000, 'img_src' => 'earthquake_bronze.svg', 'name' => 'A bronze earthquake', 'value' => '20,000 valid tweets' ),
+
+    array( 'credit' => 19000, 'img_src' => 'tornado_emerald.svg', 'name' => 'Emerald tornado', 'value' => '19,000 valid tweets' ),
+    array( 'credit' => 18000, 'img_src' => 'tornado_ruby.svg', 'name' => 'Ruby tornado', 'value' => '18,000 valid tweets' ),
+    array( 'credit' => 17000, 'img_src' => 'tornado_jade.svg', 'name' => 'Jade tornado', 'value' => '17,000 valid tweets' ),
+    array( 'credit' => 16000, 'img_src' => 'tornado_sapphire.svg', 'name' => 'Sapphire tornado', 'value' => '16,000 valid tweets' ),
+    array( 'credit' => 15000, 'img_src' => 'tornado_turquoise.svg', 'name' => 'Turquoise tornado', 'value' => '15,000 valid tweets' ),
+    array( 'credit' => 14000, 'img_src' => 'tornado_amethyst.svg', 'name' => 'Amethyst tornado', 'value' => '14,000 valid tweets' ),
+    array( 'credit' => 14000, 'img_src' => 'tornado_gold.svg', 'name' => 'Gold tornado', 'value' => '13,000 valid tweets' ),
+    array( 'credit' => 13000, 'img_src' => 'tornado_silver.svg', 'name' => 'Silver tornado', 'value' => '12,000 valid tweets' ),
+    array( 'credit' => 11000, 'img_src' => 'tornado_bronze.svg', 'name' => 'Bronze tornado', 'value' => '11,000 valid tweets' ),
+
+    array( 'credit' => 10000, 'img_src' => 'lightning_emerald.svg', 'name' => 'Emerald lightning', 'value' => '10,000 valid tweets' ),
+    array( 'credit' => 95000, 'img_src' => 'lightning_ruby.svg', 'name' => 'Ruby lightning', 'value' => '95,000 valid tweets' ),
+    array( 'credit' => 9000, 'img_src' => 'lightning_jade.svg', 'name' => 'Jade lightning', 'value' => '9,000 valid tweets' ),
+    array( 'credit' => 8500, 'img_src' => 'lightning_sapphire.svg', 'name' => 'Sapphire lightning', 'value' => '8,500 valid tweets' ),
+    array( 'credit' => 8000, 'img_src' => 'lightning_turquoise.svg', 'name' => 'Turquoise lightning', 'value' => '8,000 valid tweets' ),
+    array( 'credit' => 7500, 'img_src' => 'lightning_amethyst.svg', 'name' => 'Amethyst lightning', 'value' => '7,500 valid tweets' ),
+    array( 'credit' => 7000, 'img_src' => 'lightning_gold.svg', 'name' => 'Gold lightning', 'value' => '7,000 valid tweets' ),
+    array( 'credit' => 6500, 'img_src' => 'lightning_silver.svg', 'name' => 'Silver lightning', 'value' => '6,500 valid tweets' ),
+    array( 'credit' => 6000, 'img_src' => 'lightning_bronze.svg', 'name' => 'Bronze lightning', 'value' => '6,000 valid tweets' ),
+
+    array( 'credit' => 5500, 'img_src' => 'raincloud_emerald.svg', 'name' => 'Emerald rain clouds', 'value' => '5,500 valid tweets' ),
+    array( 'credit' => 5000, 'img_src' => 'raincloud_ruby.svg', 'name' => 'Ruby rain clouds', 'value' => '5,000 valid tweets' ),
+    array( 'credit' => 4500, 'img_src' => 'raincloud_jade.svg', 'name' => 'Jade rain clouds', 'value' => '4,500 valid tweets' ),
+    array( 'credit' => 4000, 'img_src' => 'raincloud_sapphire.svg', 'name' => 'Sapphire rain clouds', 'value' => '4,000 valid tweets' ),
+    array( 'credit' => 3500, 'img_src' => 'raincloud_turquoise.svg', 'name' => 'Turquoise rain clouds', 'value' => '3,500 valid tweets' ),
+    array( 'credit' => 3000, 'img_src' => 'raincloud_amethyst.svg', 'name' => 'Amethyst rain clouds', 'value' => '3,000 valid tweets' ),
+    array( 'credit' => 2500, 'img_src' => 'raincloud_gold.svg', 'name' => 'Gold rain clouds', 'value' => '2,500 valid tweets' ),
+    array( 'credit' => 2000, 'img_src' => 'raincloud_silver.svg', 'name' => 'Silver rain clouds', 'value' => '2,000 valid tweets' ),
+    array( 'credit' => 1500, 'img_src' => 'raincloud_bronze.svg', 'name' => 'Bronze rain clouds', 'value' => '1,500 valid tweets' ),
+
+    array( 'credit' => 1000, 'img_src' => 'clouds_emerald.svg', 'name' => 'Emerald clouds', 'value' => '1,000 valid tweets' ),
+    array( 'credit' => 850, 'img_src' => 'clouds_ruby.svg', 'name' => 'Ruby clouds', 'value' => '850 valid tweets' ),
+    array( 'credit' => 700, 'img_src' => 'clouds_jade.svg', 'name' => 'Jade clouds', 'value' => '700 valid tweets' ),
+    array( 'credit' => 400, 'img_src' => 'clouds_sapphire.svg', 'name' => 'Sapphire clouds', 'value' => '400 valid tweets' ),
+    array( 'credit' => 200, 'img_src' => 'clouds_turquoise.svg', 'name' => 'Turquoise clouds', 'value' => '200 valid tweets' ),
+    array( 'credit' => 150, 'img_src' => 'clouds_amethyst.svg', 'name' => 'Amethyst clouds', 'value' => '150 valid tweets' ),
+    array( 'credit' => 100, 'img_src' => 'clouds_gold.svg', 'name' => 'Gold clouds', 'value' => '100 valid tweets' ),
+    array( 'credit' => 50, 'img_src' => 'clouds_silver.svg', 'name' => 'Silver clouds', 'value' => '50 valid tweets' ),
+    array( 'credit' => 10, 'img_src' => 'clouds_bronze.svg', 'name' => 'Bronze clouds', 'value' => '10 valid tweets' )
+);
+
+
+$video_event_badge_info = array(
+    array( 'credit' => 35000, 'img_src' => 'least_tern_emerald.jpg', 'name' => 'An emerald least tern', 'value' => '35,000 valid events' ),
+    array( 'credit' => 30000, 'img_src' => 'least_tern_jade.jpg', 'name' => 'A jade least tern', 'value' => '30,000 valid events' ),
+    array( 'credit' => 27000, 'img_src' => 'least_tern_sapphire.jpg', 'name' => 'A sapphire least tern', 'value' => '27,000 valid events' ),
+    array( 'credit' => 24000, 'img_src' => 'least_tern_turquoise.jpg', 'name' => 'A turquoise least tern', 'value' => '24,000 valid events' ),
+    array( 'credit' => 21000, 'img_src' => 'least_tern_amethyst.jpg', 'name' => 'A amethyst least tern', 'value' => '21,000 valid events' ),
+    array( 'credit' => 19000, 'img_src' => 'least_tern_gold.jpg', 'name' => 'A gold least tern', 'value' => '19,000 valid events' ),
+    array( 'credit' => 17000, 'img_src' => 'least_tern_silver.jpg', 'name' => 'A silver least tern', 'value' => '17,000 valid events' ),
+    array( 'credit' => 15000, 'img_src' => 'least_tern_bronze.jpg', 'name' => 'A bronze least tern', 'value' => '15,000 valid events' ),
+
+    array( 'credit' => 13000, 'img_src' => 'piping_plover_emerald.jpg', 'name' => 'An emerald piping plover', 'value' => '13,000 valid events' ),
+    array( 'credit' => 12000, 'img_src' => 'piping_plover_jade.jpg', 'name' => 'A jade piping plover', 'value' => '12,000 valid events' ),
+    array( 'credit' => 11000, 'img_src' => 'piping_plover_sapphire.jpg', 'name' => 'A sapphire piping plover', 'value' => '11,000 valid events' ),
+    array( 'credit' => 10000, 'img_src' => 'piping_plover_turquoise.jpg', 'name' => 'A turquoise piping plover', 'value' => '10,000 valid events' ),
+    array( 'credit' => 9000, 'img_src' => 'piping_plover_amethyst.jpg', 'name' => 'A amethyst piping plover', 'value' => '9,000 valid events' ),
+    array( 'credit' => 8000, 'img_src' => 'piping_plover_gold.jpg', 'name' => 'A gold piping plover', 'value' => '8,000 valid events' ),
+    array( 'credit' => 7000, 'img_src' => 'piping_plover_silver.jpg', 'name' => 'A silver piping plover', 'value' => '7,000 valid events' ),
+    array( 'credit' => 6000, 'img_src' => 'piping_plover_bronze.jpg', 'name' => 'A bronze piping plover', 'value' => '6,000 valid events' ),
+
+    array( 'credit' => 5000, 'img_src' => 'blue_wing_teal_emerald.jpg', 'name' => 'An emerald blue wing teal', 'value' => '5,000 valid events' ),
+    array( 'credit' => 4500, 'img_src' => 'blue_wing_teal_jade.jpg', 'name' => 'A jade blue wing teal', 'value' => '4,500 valid events' ),
+    array( 'credit' => 4000, 'img_src' => 'blue_wing_teal_sapphire.jpg', 'name' => 'A sapphire blue wing teal', 'value' => '4,000 valid events' ),
+    array( 'credit' => 3500, 'img_src' => 'blue_wing_teal_turquoise.jpg', 'name' => 'A turquoise blue wing teal', 'value' => '3,500 valid events' ),
+    array( 'credit' => 3000, 'img_src' => 'blue_wing_teal_amethyst.jpg', 'name' => 'A amethyst blue wing teal', 'value' => '3,000 valid events' ),
+    array( 'credit' => 2500, 'img_src' => 'blue_wing_teal_gold.jpg', 'name' => 'A gold blue wing teal', 'value' => '2,500 valid events' ),
+    array( 'credit' => 2000, 'img_src' => 'blue_wing_teal_silver.jpg', 'name' => 'A silver blue wing teal', 'value' => '2,000 valid events' ),
+    array( 'credit' => 1500, 'img_src' => 'blue_wing_teal_bronze.jpg', 'name' => 'A bronze blue wing teal', 'value' => '1,500 valid events' ),
+
+    array( 'credit' => 1000, 'img_src' => 'grouse_emerald.jpg', 'name' => 'An emerald grouse', 'value' => '1,000 valid events' ),
+    array( 'credit' => 700, 'img_src' => 'grouse_jade.jpg', 'name' => 'A jade grouse', 'value' => '700 valid events' ),
+    array( 'credit' => 400, 'img_src' => 'grouse_sapphire.jpg', 'name' => 'A sapphire grouse', 'value' => '400 valid events' ),
+    array( 'credit' => 200, 'img_src' => 'grouse_turquoise.jpg', 'name' => 'A turquoise grouse', 'value' => '200 valid events' ),
+    array( 'credit' => 150, 'img_src' => 'grouse_amethyst.jpg', 'name' => 'A amethyst grouse', 'value' => '150 valid events' ),
+    array( 'credit' => 100, 'img_src' => 'grouse_gold.jpg', 'name' => 'A gold grouse', 'value' => '100 valid events' ),
+    array( 'credit' => 50, 'img_src' => 'grouse_silver.jpg', 'name' => 'A silver grouse', 'value' => '50 valid events' ),
+    array( 'credit' => 10, 'img_src' => 'grouse_bronze.jpg', 'name' => 'A bronze grouse', 'value' => '10 valid events' )
+);
+
+
 $bossa_badge_info = array(
-    array( 'credit' => 48 * 7 * 24 * 60 * 60, 'img_src' => 'Feder4Emerald.png', 'name' => 'A quad emerald', 'value' => '48 weeks' ),
-    array( 'credit' => 45 * 7 * 24 * 60 * 60, 'img_src' => 'Feder4Jade.png', 'name' => 'A quad jade', 'value' => '45 weeks' ),
-    array( 'credit' => 42 * 7 * 24 * 60 * 60, 'img_src' => 'Feder4Saph.png', 'name' => 'A quad sapphire', 'value' => '42 weeks' ),
-    array( 'credit' => 39 * 7 * 24 * 60 * 60, 'img_src' => 'Feder4Turq.png', 'name' => 'A quad turquoise', 'value' => '39 weeks' ),
-    array( 'credit' => 36 * 7 * 24 * 60 * 60, 'img_src' => 'Feder4Amethyst.png', 'name' => 'A quad amethyst', 'value' => '36 weeks' ),
-    array( 'credit' => 33 * 7 * 24 * 60 * 60, 'img_src' => 'Feder4Gold.png', 'name' => 'A quad gold', 'value' => '33 weeks' ),
-    array( 'credit' => 30 * 7 * 24 * 60 * 60, 'img_src' => 'Feder4Silber.png', 'name' => 'A quad silver', 'value' => '30 weeks' ),
-    array( 'credit' => 27 * 7 * 24 * 60 * 60, 'img_src' => 'Feder4Bronze.png', 'name' => 'A quad bronze', 'value' => '27 weeks' ),
+    array( 'credit' => 80 * 7 * 24 * 60 * 60, 'img_src' => 'Feder5Emerald.png', 'name' => 'A quintuple emerald', 'value' => '80 weeks' ),
+    array( 'credit' => 76 * 7 * 24 * 60 * 60, 'img_src' => 'Feder5Jade.png', 'name' => 'A quintuple jade', 'value' => '76 weeks' ),
+    array( 'credit' => 72 * 7 * 24 * 60 * 60, 'img_src' => 'Feder5Saph.png', 'name' => 'A quintuple sapphire', 'value' => '72 weeks' ),
+    array( 'credit' => 68 * 7 * 24 * 60 * 60, 'img_src' => 'Feder5Turq.png', 'name' => 'A quintuple turquoise', 'value' => '68 weeks' ),
+    array( 'credit' => 64 * 7 * 24 * 60 * 60, 'img_src' => 'Feder5Amethyst.png', 'name' => 'A quintuple amethyst', 'value' => '64 weeks' ),
+    array( 'credit' => 60 * 7 * 24 * 60 * 60, 'img_src' => 'Feder5Gold.png', 'name' => 'A quintuple gold', 'value' => '60 weeks' ),
+    array( 'credit' => 56 * 7 * 24 * 60 * 60, 'img_src' => 'Feder5Silber.png', 'name' => 'A quintuple silver', 'value' => '56 weeks' ),
+    array( 'credit' => 52 * 7 * 24 * 60 * 60, 'img_src' => 'Feder5Bronze.png', 'name' => 'A quintuple bronze', 'value' => '52 weeks' ),
+
+    array( 'credit' => 48 * 7 * 24 * 60 * 60, 'img_src' => 'Feder4Emerald.png', 'name' => 'A quadruple emerald', 'value' => '48 weeks' ),
+    array( 'credit' => 45 * 7 * 24 * 60 * 60, 'img_src' => 'Feder4Jade.png', 'name' => 'A quadruple jade', 'value' => '45 weeks' ),
+    array( 'credit' => 42 * 7 * 24 * 60 * 60, 'img_src' => 'Feder4Saph.png', 'name' => 'A quadruple sapphire', 'value' => '42 weeks' ),
+    array( 'credit' => 39 * 7 * 24 * 60 * 60, 'img_src' => 'Feder4Turq.png', 'name' => 'A quadruple turquoise', 'value' => '39 weeks' ),
+    array( 'credit' => 36 * 7 * 24 * 60 * 60, 'img_src' => 'Feder4Amethyst.png', 'name' => 'A quadruple amethyst', 'value' => '36 weeks' ),
+    array( 'credit' => 33 * 7 * 24 * 60 * 60, 'img_src' => 'Feder4Gold.png', 'name' => 'A quadruple gold', 'value' => '33 weeks' ),
+    array( 'credit' => 30 * 7 * 24 * 60 * 60, 'img_src' => 'Feder4Silber.png', 'name' => 'A quadruple silver', 'value' => '30 weeks' ),
+    array( 'credit' => 27 * 7 * 24 * 60 * 60, 'img_src' => 'Feder4Bronze.png', 'name' => 'A quadruple bronze', 'value' => '27 weeks' ),
 
     array( 'credit' => 24 * 7 * 24 * 60 * 60, 'img_src' => 'Feder3Emerald.png', 'name' => 'A triple emerald', 'value' => '24 weeks' ),
     array( 'credit' => 22 * 7 * 24 * 60 * 60, 'img_src' => 'Feder3Jade.png', 'name' => 'A triple jade', 'value' => '22 weeks' ),
@@ -92,6 +204,34 @@ function get_bossa_badge_str($user) {
 
     return "";
 }
+
+function get_tweets_badge_str($user) {
+    global $tweets_badge_info;
+
+    for ($i = 0; $i < count($tweets_badge_info); $i++) {
+        if ($user['valid_tweets'] > $tweets_badge_info[$i]['credit']) {
+            return $tweets_badge_info[$i]['img_src'];
+            break;
+        }
+    }
+
+    return "";
+}
+
+
+function get_event_badge_str($user) {
+    global $video_event_badge_info;
+
+    for ($i = 0; $i < count($video_event_badge_info); $i++) {
+        if ($user['valid_events'] > $video_event_badge_info[$i]['credit']) {
+            return $video_event_badge_info[$i]['img_src'];
+            break;
+        }
+    }
+
+    return "";
+}
+
 
 function get_dna_credit_badge_str($user) {
     global $dna_credit_badge_info;
@@ -207,6 +347,21 @@ function get_wildlife_credit_badge($user) {
     return $badges;
 }
 
+function get_tweets_badge($user) {
+    global $tweets_badge_info;
+    $badges = "";
+
+    for ($i = 0; $i < count($tweets_badge_info); $i++) {
+        if ($user->valid_tweets > $tweets_badge_info[$i]['credit']) {
+            $badges .= "<img style='height:28px;' src='./climate/climate_badges/" . $tweets_badge_info[$i]['img_src'] . "' title='" . $tweets_badge_info[$i]['name'] . " badge for " . $tweets_badge_info[$i]['value'] . ".'></img>";
+            break;
+        }
+    }
+
+    return $badges;
+}
+
+
 function get_bossa_badge($user) {
     global $bossa_badge_info;
     $badges = "";
@@ -221,12 +376,32 @@ function get_bossa_badge($user) {
     return $badges;
 }
 
+function get_event_badge($user) {
+    global $video_event_badge_info;
+    $badges = "";
+
+    for ($i = 0; $i < count($video_event_badge_info); $i++) {
+        if ($user->valid_events > $video_event_badge_info[$i]['credit']) {
+            $badges .= "<img style='height:28px;' src='./wildlife/wildlife_badges/" . $video_event_badge_info[$i]['img_src'] . "' title='" . $video_event_badge_info[$i]['name'] . " badge for classifying " . $video_event_badge_info[$i]['value'] . ".'></img>";
+            break;
+        }
+    }
+
+    return $badges;
+}
+
+
 function get_badges($user) {
     $badges = "";
 
     if ($user->bossa_total_credit > 2 * 60 * 60) {
         $badges .= "&nbsp;&nbsp;";
         $badges .= get_bossa_badge($user);
+    }
+
+    if ($user->valid_events >= 10) {
+        $badges .= "&nbsp;&nbsp;";
+        $badges .= get_event_badge($user);
     }
 
     $res = get_wildlife_credit_badge($user);
@@ -238,11 +413,34 @@ function get_badges($user) {
     $res = get_sss_credit_badge($user);
     if ($res != "") $badges .= "&nbsp;&nbsp;" . $res;
 
+    $res = get_tweets_badge($user);
+    if ($res != "") $badges .= "&nbsp;&nbsp;" . $res;
+
+
     return $badges;
 }
 
 function print_badge_table() {
-    global $bossa_badge_info, $wildlife_credit_badge_info, $dna_credit_badge_info, $sss_credit_badge_info;
+    global $bossa_badge_info, $wildlife_credit_badge_info, $dna_credit_badge_info, $sss_credit_badge_info, $video_event_badge_info, $tweets_badge_info;
+
+
+    echo "<div class='well' style='padding-top:10px; padding-bottom:10px;'>";
+    echo "<h3>Climate Tweets Badges <small>&nbsp;These badges are earned by <a href='./climate/classify_tweets.php'>classifying tweets</a> for the Climate Tweets Project.</small></h3>";
+    echo "<table class='table table-bordered table-striped'>";
+    echo "<thead>";
+    echo "<th>Badge</th> <th>Description</th>";
+    echo "</thead>";
+
+    echo "<tbody>";
+    for ($i = 0; $i < count($tweets_badge_info); $i++) {
+        echo "<tr>";
+        echo "<td style='text-align:center;'><img style='height:28px;' src='./climate/climate_badges/" . $tweets_badge_info[$i]['img_src'] . "' title='" . $tweets_badge_info[$i]['name'] . " badge for classifying " . $tweets_badge_info[$i]['value'] . ".'></img></td>";
+        echo "<td style='vertical-align:middle;'>" . $tweets_badge_info[$i]['name'] . " badge for classifying " . $tweets_badge_info[$i]['value'] . ".</td>";
+        echo "</tr>";
+    }
+    echo "</tbody>";
+    echo "</table>";
+    echo "</div>";
 
 
     echo "<div class='well' style='padding-top:10px; padding-bottom:10px;'>";
@@ -282,6 +480,25 @@ function print_badge_table() {
     echo "</div>";
 
 
+
+
+    echo "<div class='well' style='padding-top:10px; padding-bottom:10px;'>";
+    echo "<h3>Wildlife@Home Events Marked Badges <small>&nbsp;These badges are earned by <a href='./wildlife/video_selector.php'>watching video</a>.</small></h3>";
+    echo "<table class='table table-bordered table-striped'>";
+    echo "<thead>";
+    echo "<th>Badge</th> <th>Description</th>";
+    echo "</thead>";
+
+    echo "<tbody>";
+    for ($i = 0; $i < count($video_event_badge_info); $i++) {
+        echo "<tr>";
+        echo "<td style='text-align:center;'><img style='height:28px;' src='./wildlife/wildlife_badges/" . $video_event_badge_info[$i]['img_src'] . "' title='" . $video_event_badge_info[$i]['name'] . " badge for classifying " . $video_event_badge_info[$i]['value'] . ".'></img></td>";
+        echo "<td style='vertical-align:middle;'>" . $video_event_badge_info[$i]['name'] . " badge for classifying " . $video_event_badge_info[$i]['value'] . ".</td>";
+        echo "</tr>";
+    }
+    echo "</tbody>";
+    echo "</table>";
+    echo "</div>";
 
 
     echo "<div class='well' style='padding-top:10px; padding-bottom:10px;'>";
