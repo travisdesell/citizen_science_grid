@@ -20,51 +20,105 @@ $subset_sum_db = null;
 $wildlife_db = null;
 $uas_db = null;
 
+// default servers to connect to
+$default_servers = array(
+    'localhost',
+    'wildlife.und.edu'
+);
+
+function db_connect($server, $user, $passwd, $db) {
+    $dbcnx = new mysqli($server, $user, $passwd, $db);
+
+    if ($dbcnx->connect_errno) {
+        //echo "Failed to connect to MySQL: (" . $dbcnx->connect_errno . ") " . $dbcnx->connect_error;
+        error_log("Failed to connect to MySQL: (" . $dbcnx->connect_errno . ") " . $dbcnx->connect_error);
+    }
+
+    return $dbcnx;
+}
+
+function db_connect_default(&$server, $user, $passwd, $db) {
+    global $default_servers;
+
+    $dbcnx = null;
+
+    foreach ($default_servers as $default_server) {
+        $server = $default_server;
+        $dbcnx = db_connect($server, $user, $passwd, $db);
+        if (!$dbcnx->connect_errno)
+            break;
+    }
+
+    return $dbcnx;
+}
+
 function connect_boinc_db() {
-    global $boinc_db, $boinc_user, $boinc_passwd;
-    $boinc_db = new mysqli("localhost", $boinc_user, $boinc_passwd, "csg");
-    if ($boinc_db->connect_errno) {
-        echo "Failed to connect to MySQL: (" . $boinc_db->connect_errno . ") " . $boinc_db->connect_error;
+    global $boinc_db, $boinc_user, $boinc_passwd, $boinc_server;
+
+    // don't reconnect
+    if (isset($boinc_db))
+        return;
+
+    // if we have a defined server, just connect
+    // otherwise, try connected to our default servers in order
+    if (isset($boinc_server)) {
+        $boinc_db = db_connect($boinc_server, $boinc_user, $boinc_passwd, "csg");
+    } else {
+        $boinc_db = db_connect_default($boinc_server, $boinc_user, $boinc_passwd, "csg");
     }
 }
 
 function connect_dna_db() {
-    global $dna_db, $dna_user, $dna_passwd;
-    $dna_db = new mysqli("localhost", $dna_user, $dna_passwd, "dna");
-    if ($dna_db->connect_errno) {
-        echo "Failed to connect to MySQL: (" . $dna_db->connect_errno . ") " . $dna_db->connect_error;
+    global $dna_db, $dna_user, $dna_passwd, $dna_server;
+
+    if (isset($dna_db))
+        return;
+
+    if (isset($dna_server)) {
+        $dna_db = db_connect($dna_server, $dna_user, $dna_passwd, "dna");
+    } else {
+        $dna_db = db_connect_default($dna_server, $dna_user, $dna_passwd, "dna");
     }
 }
 
 
 function connect_subset_sum_db() {
-    global $subset_sum_db, $subset_sum_user, $subset_sum_passwd;
-    $subset_sum_db = new mysqli("localhost", $subset_sum_user, $subset_sum_passwd, "subset_sum");
-    if ($subset_sum_db->connect_errno) {
-        echo "Failed to connect to MySQL: (" . $subset_sum_db->connect_errno . ") " . $subset_sum_db->connect_error;
+    global $subset_sum_db, $subset_sum_user, $subset_sum_passwd, $subset_sum_server;
+
+    if (isset($subset_sum_db))
+        return;
+
+    if (isset($subset_sum_server)) {
+        $subset_sum_db = db_connect($subset_sum_server, $subset_sum_user, $subset_sum_passwd, "subset_sum");
+    } else {
+        $subset_sum_db = db_connect_default($subset_sum_server, $subset_sum_user, $subset_sum_passwd, "subset_sum");
     }
 }
 
 
 function connect_wildlife_db() {
-    global $wildlife_db, $wildlife_user, $wildlife_passwd;
+    global $wildlife_db, $wildlife_user, $wildlife_passwd, $wildlife_server; 
 
-    $wildlife_db = new mysqli("wildlife.und.edu", $wildlife_user, $wildlife_passwd, "wildlife_video");
+    if (isset($wildlife_db))
+        return;
 
-    if ($wildlife_db->connect_errno) {
-        echo "Failed to connect to MySQL: (" . $wildlife_db->connect_errno . ") " . $wildlife_db->connect_error;
-        error_log("Failed to connect to MySQL: (" . $wildlife_db->connect_errno . ") " . $wildlife_db->connect_error);
+    if (isset($wildlife_server)) {
+        $wildlife_db = db_connect($wildlife_server, $wildlife_user, $wildlife_passwd, "wildlife_video");
+    } else {
+        $wildlife_db = db_connect_default($wildlife_server, $wildlife_user, $wildlife_passwd, "wildlife_video");
     }
 }
 
 function connect_uas_db() {
-    global $uas_db, $wildlife_user, $wildlife_passwd;
+    global $uas_db, $wildlife_user, $wildlife_passwd, $uas_server;
 
-    $uas_db = new mysqli("wildlife.und.edu", $wildlife_user, $wildlife_passwd, "uas");
+    if (isset($uas_db))
+        return;
 
-    if (!$uas_db or $uas_db->connect_errno) {
-        echo "Failed to connect to MySQL: (" . $uas_db->connect_errno . ") " . $uas_db->connect_error;
-        error_log("Failed to connect to MySQL: (" . $uas_db->connect_errno . ") " . $uas_db->connect_error);
+    if (isset($uas_server)) {
+        $uas_db = db_connect($uas_server, $wildlife_user, $wildlife_passwd, "uas");
+    } else {
+        $uas_db = db_connect_default($uas_server, $wildlife_user, $wildlife_passwd, "uas");
     }
 }
 
