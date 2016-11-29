@@ -190,6 +190,109 @@ $sss_credit_badge_info = array(
     array( 'credit' =>     10000, 'img_src' => 'sss_bronze.png', 'name' => 'A bronze ', 'value' => '10 thousand' )
 );
 
+/////////////////
+// Images that have been validated with other users
+// canada goose -> snow goose -> snowshoe hare -> common eider
+//      -> sandhill crane -> grizzly bear -> polar bear
+/////////////////
+$image_badge_info = array(
+/*
+    // POLAR BEAR
+    array( 'credit' =>     10000, 'img_src' => 'polar_bear_28/polar_bear_emerald_28.jpg', 'name' => 'An emerald polar bear ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'polar_bear_28/polar_bear_jade_28.jpg', 'name' => 'A jade polar bear ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'polar_bear_28/polar_bear_turquoise_28.jpg', 'name' => 'A turquoise polar bear ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'polar_bear_28/polar_bear_sapphire_28.jpg', 'name' => 'A sapphire polar bear ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'polar_bear_28/polar_bear_ruby_28.jpg', 'name' => 'A ruby polar bear ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'polar_bear_28/polar_bear_amethyst_28.jpg', 'name' => 'An amethyst polar bear ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'polar_bear_28/polar_bear_gold_28.jpg', 'name' => 'A gold polar bear ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'polar_bear_28/polar_bear_silver_28.jpg', 'name' => 'A silver polar bear ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'polar_bear_28/polar_bear_bronze_28.jpg', 'name' => 'A bronze polar bear ', 'value' => '10 thousand' ),
+
+    // GRIZZLY BEAR
+    array( 'credit' =>     10000, 'img_src' => 'grizzly_bear_28/grizzly_bear_emerald_28.jpg', 'name' => 'An emerald grizzly bear ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'grizzly_bear_28/grizzly_bear_jade_28.jpg', 'name' => 'A jade grizzly bear ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'grizzly_bear_28/grizzly_bear_turquoise_28.jpg', 'name' => 'A turquoise grizzly bear ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'grizzly_bear_28/grizzly_bear_sapphire_28.jpg', 'name' => 'A sapphire grizzly bear ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'grizzly_bear_28/grizzly_bear_ruby_28.jpg', 'name' => 'A ruby grizzly bear ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'grizzly_bear_28/grizzly_bear_amethyst_28.jpg', 'name' => 'An amethyst grizzly bear ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'grizzly_bear_28/grizzly_bear_gold_28.jpg', 'name' => 'A gold grizzly bear ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'grizzly_bear_28/grizzly_bear_silver_28.jpg', 'name' => 'A silver grizzly bear ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'grizzly_bear_28/grizzly_bear_bronze_28.jpg', 'name' => 'A bronze grizzly bear ', 'value' => '10 thousand' ),
+
+    // BADGER
+    array( 'credit' =>     10000, 'img_src' => 'badger_28/badger_emerald_28.jpg', 'name' => 'An emerald badger ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'badger_28/badger_jade_28.jpg', 'name' => 'A jade badger ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'badger_28/badger_turquoise_28.jpg', 'name' => 'A turquoise badger ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'badger_28/badger_sapphire_28.jpg', 'name' => 'A sapphire badger ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'badger_28/badger_ruby_28.jpg', 'name' => 'A ruby badger ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'badger_28/badger_amethyst_28.jpg', 'name' => 'An amethyst badger ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'badger_28/badger_gold_28.jpg', 'name' => 'A gold badger ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'badger_28/badger_silver_28.jpg', 'name' => 'A silver badger ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'badger_28/badger_bronze_28.jpg', 'name' => 'A bronze badger ', 'value' => '10 thousand' ),
+
+    // SNOWSHOE HARE 
+    array( 'credit' =>     10000, 'img_src' => 'snowshoe_hare_28/snowshoe_hare_emerald_28.jpg', 'name' => 'An emerald snowshoe hare ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'snowshoe_hare_28/snowshoe_hare_jade_28.jpg', 'name' => 'A jade snowshoe hare ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'snowshoe_hare_28/snowshoe_hare_turquoise_28.jpg', 'name' => 'A turquoise snowshoe hare ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'snowshoe_hare_28/snowshoe_hare_sapphire_28.jpg', 'name' => 'A sapphire snowshoe hare ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'snowshoe_hare_28/snowshoe_hare_ruby_28.jpg', 'name' => 'A ruby snowshoe hare ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'snowshoe_hare_28/snowshoe_hare_amethyst_28.jpg', 'name' => 'An amethyst snowshoe hare ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'snowshoe_hare_28/snowshoe_hare_gold_28.jpg', 'name' => 'A gold snowshoe hare ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'snowshoe_hare_28/snowshoe_hare_silver_28.jpg', 'name' => 'A silver snowshoe hare ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'snowshoe_hare_28/snowshoe_hare_bronze_28.jpg', 'name' => 'A bronze snowshoe hare ', 'value' => '10 thousand' ),
+
+    // WHITE TAIL DEER
+    array( 'credit' =>     10000, 'img_src' => 'white_tail_28/white_tail_emerald_28.jpg', 'name' => 'An emerald white tail deer ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'white_tail_28/white_tail_jade_28.jpg', 'name' => 'A jade white tail deer ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'white_tail_28/white_tail_turquoise_28.jpg', 'name' => 'A turquoise white tail deer ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'white_tail_28/white_tail_sapphire_28.jpg', 'name' => 'A sapphire white tail deer ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'white_tail_28/white_tail_ruby_28.jpg', 'name' => 'A ruby white tail deer ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'white_tail_28/white_tail_amethyst_28.jpg', 'name' => 'An amethyst white tail deer ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'white_tail_28/white_tail_gold_28.jpg', 'name' => 'A gold white tail deer ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'white_tail_28/white_tail_silver_28.jpg', 'name' => 'A silver white tail deer ', 'value' => '10 thousand' ),
+    array( 'credit' =>     10000, 'img_src' => 'white_tail_28/white_tail_bronze_28.jpg', 'name' => 'A bronze white tail deer ', 'value' => '10 thousand' ),
+*/
+
+    // SANDHILL CRANE
+    array( 'credit' =>     35000, 'img_src' => 'sandhill_crane_28/sandhill_crane_emerald_28.jpg', 'name' => 'An emerald sandhill crane ', 'value' => '35,000 matched observations' ),
+    array( 'credit' =>     30000, 'img_src' => 'sandhill_crane_28/sandhill_crane_jade_28.jpg', 'name' => 'A jade sandhill crane ', 'value' => '30,000 matched observations' ),
+    array( 'credit' =>     27000, 'img_src' => 'sandhill_crane_28/sandhill_crane_turquoise_28.jpg', 'name' => 'A turquoise sandhill crane ', 'value' => '27,000 matched observations' ),
+    array( 'credit' =>     24000, 'img_src' => 'sandhill_crane_28/sandhill_crane_sapphire_28.jpg', 'name' => 'A sapphire sandhill crane ', 'value' => '24,000 matched observations' ),
+    array( 'credit' =>     21000, 'img_src' => 'sandhill_crane_28/sandhill_crane_amethyst_28.jpg', 'name' => 'An amethyst sandhill crane ', 'value' => '21,000 matched observations' ),
+    array( 'credit' =>     19000, 'img_src' => 'sandhill_crane_28/sandhill_crane_gold_28.jpg', 'name' => 'A gold sandhill crane ', 'value' => '19,000 matched observations' ),
+    array( 'credit' =>     17000, 'img_src' => 'sandhill_crane_28/sandhill_crane_silver_28.jpg', 'name' => 'A silver sandhill crane ', 'value' => '17,000 matched observations' ),
+    array( 'credit' =>     15000, 'img_src' => 'sandhill_crane_28/sandhill_crane_bronze_28.jpg', 'name' => 'A bronze sandhill crane ', 'value' => '15,000 matched observations' ),
+
+    // SNOW GOOSE
+    array( 'credit' =>     13000, 'img_src' => 'snow_goose_28/snow_goose_emerald_28.jpg', 'name' => 'An emerald snow goose ', 'value' => '13,000 matched observations' ),
+    array( 'credit' =>     12000, 'img_src' => 'snow_goose_28/snow_goose_jade_28.jpg', 'name' => 'A jade snow goose ', 'value' => '12,000 matched observations' ),
+    array( 'credit' =>     11000, 'img_src' => 'snow_goose_28/snow_goose_turquoise_28.jpg', 'name' => 'A turquoise snow goose ', 'value' => '11,000 matched observations' ),
+    array( 'credit' =>     10000, 'img_src' => 'snow_goose_28/snow_goose_sapphire_28.jpg', 'name' => 'A sapphire snow goose ', 'value' => '10,000 matched observations' ),
+    array( 'credit' =>     9000, 'img_src' => 'snow_goose_28/snow_goose_amethyst_28.jpg', 'name' => 'An amethyst snow goose ', 'value' => '9,000 matched observations' ),
+    array( 'credit' =>     8000, 'img_src' => 'snow_goose_28/snow_goose_gold_28.jpg', 'name' => 'A gold snow goose ', 'value' => '8,000 matched observations' ),
+    array( 'credit' =>     7000, 'img_src' => 'snow_goose_28/snow_goose_silver_28.jpg', 'name' => 'A silver snow goose ', 'value' => '7,000 matched observations' ),
+    array( 'credit' =>     6000, 'img_src' => 'snow_goose_28/snow_goose_bronze_28.jpg', 'name' => 'A bronze snow goose ', 'value' => '6,000 matched observations' ),
+
+    // CANADA GOOSE
+    array( 'credit' =>     5000, 'img_src' => 'canada_goose_28/canada_goose_emerald_28.jpg', 'name' => 'An emerald Canada goose ', 'value' => '5,000 matched observations' ),
+    array( 'credit' =>     4500, 'img_src' => 'canada_goose_28/canada_goose_jade_28.jpg', 'name' => 'A jade Canada goose ', 'value' => '4,500 matched observations' ),
+    array( 'credit' =>     4000, 'img_src' => 'canada_goose_28/canada_goose_turquoise_28.jpg', 'name' => 'A turquoise Canada goose ', 'value' => '4,000 matched observations' ),
+    array( 'credit' =>     3500, 'img_src' => 'canada_goose_28/canada_goose_sapphire_28.jpg', 'name' => 'A sapphire Canada goose ', 'value' => '3,500 matched observations' ),
+    array( 'credit' =>     3000, 'img_src' => 'canada_goose_28/canada_goose_amethyst_28.jpg', 'name' => 'An amethyst Canada goose ', 'value' => '3,000 matched observations' ),
+    array( 'credit' =>     2500, 'img_src' => 'canada_goose_28/canada_goose_gold_28.jpg', 'name' => 'A gold Canada goose ', 'value' => '2,500 matched observations' ),
+    array( 'credit' =>     2000, 'img_src' => 'canada_goose_28/canada_goose_silver_28.jpg', 'name' => 'A silver Canada goose ', 'value' => '2,000 matched observations' ),
+    array( 'credit' =>     1500, 'img_src' => 'canada_goose_28/canada_goose_bronze_28.jpg', 'name' => 'A bronze Canada goose ', 'value' => '1,500 matched observations' ),
+
+    // COMMON EIDER
+    array( 'credit' =>     1000, 'img_src' => 'common_eider_28/common_eider_emerald_28.jpg', 'name' => 'An emerald common eider ', 'value' => '1,000 matched observations' ),
+    array( 'credit' =>     700, 'img_src' => 'common_eider_28/common_eider_jade_28.jpg', 'name' => 'A jade common eider ', 'value' => '700 matched observations' ),
+    array( 'credit' =>     400, 'img_src' => 'common_eider_28/common_eider_turquoise_28.jpg', 'name' => 'A turquoise common eider ', 'value' => '400 matched observations' ),
+    array( 'credit' =>     200, 'img_src' => 'common_eider_28/common_eider_sapphire_28.jpg', 'name' => 'A sapphire common eider ', 'value' => '200 matched observations' ),
+    array( 'credit' =>     150, 'img_src' => 'common_eider_28/common_eider_amethyst_28.jpg', 'name' => 'An amethyst common eider ', 'value' => '150 matched observations' ),
+    array( 'credit' =>     100, 'img_src' => 'common_eider_28/common_eider_gold_28.jpg', 'name' => 'A gold common eider ', 'value' => '100 matched observations' ),
+    array( 'credit' =>     50, 'img_src' => 'common_eider_28/common_eider_silver_28.jpg', 'name' => 'A silver common eider ', 'value' => '50 matched observations' ),
+    array( 'credit' =>     10, 'img_src' => 'common_eider_28/common_eider_bronze_28.jpg', 'name' => 'A bronze common eider ', 'value' => '10 matched observations' ),
+);
 
 
 function get_bossa_badge_str($user) {
@@ -282,6 +385,18 @@ function get_wildlife_credit_badge_str($user) {
         if ($wildlife_total_credit > $wildlife_credit_badge_info[$i]['credit']) {
             return $wildlife_credit_badge_info[$i]['img_src'];
             break;
+        }
+    }
+
+    return "";
+}
+
+function get_image_badge_str($user) {
+    global $image_badge_info;
+
+    foreach ($image_badge_info as &$e) {
+        if ($user->image_credit >= $e['credit']) {
+            return $e['img_src'];
         }
     }
 
@@ -390,6 +505,18 @@ function get_event_badge($user) {
     return $badges;
 }
 
+function get_image_badge($user) {
+    global $image_badge_info;
+
+    foreach ($image_badge_info as &$e) {
+        if ($image_credit >= $e['credit']) {
+            return '<img style="height:28px;" src="./wildlife/wildlife_badges/' . $e['img_src'] . '" title="' . $e['name'] . '" badge for ' . $e['value'] . '."></img>';
+        }
+    }
+
+    return '';
+}
+
 
 function get_badges($user) {
     $badges = "";
@@ -416,12 +543,14 @@ function get_badges($user) {
     $res = get_tweets_badge($user);
     if ($res != "") $badges .= "&nbsp;&nbsp;" . $res;
 
+    $res = get_image_badge($user);
+    if ($res != "") $badges .= "&nbsp;&nbsp;" . $res;
 
     return $badges;
 }
 
 function print_badge_table() {
-    global $bossa_badge_info, $wildlife_credit_badge_info, $dna_credit_badge_info, $sss_credit_badge_info, $video_event_badge_info, $tweets_badge_info;
+    global $bossa_badge_info, $wildlife_credit_badge_info, $dna_credit_badge_info, $sss_credit_badge_info, $video_event_badge_info, $tweets_badge_info, $image_badge_info;
 
 
     echo "<div class='well' style='padding-top:10px; padding-bottom:10px;'>";
@@ -536,6 +665,25 @@ function print_badge_table() {
     echo "</tbody>";
     echo "</table>";
     echo "</div>";
+
+    echo "<div class='well' style='padding-top:10px; padding-bottom:10px;'>";
+    echo "<h3>Wildlife@Home Image Observations Badges <small>&nbsp;These badges are earned by <a href='./wildlife/image_selector.php'>reviewing images</a>.</small></h3>";
+    echo "<table class='table table-bordered table-striped'>";
+    echo "<thead>";
+    echo "<th>Badge</th> <th>Description</th>";
+    echo "</thead>";
+
+    echo "<tbody>";
+    foreach ($image_badge_info as &$e) {
+        echo "<tr>";
+        echo "<td style='text-align:center;'><img style='height:28px;' src='./wildlife/wildlife_badges/" . $e['img_src'] . "' title='" . $e['name'] . " badge for " . $e['value'] . ".'></img></td>";
+        echo "<td style='vertical-align:middle;'>" . $e['name'] . " badge for " . $e['value'] . ".</td>";
+        echo "</tr>";
+    }
+    echo "</tbody>";
+    echo "</table>";
+    echo "</div>";
+
 }
 
 ?>

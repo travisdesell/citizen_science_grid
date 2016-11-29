@@ -2,7 +2,7 @@
 
 require_once("../my_query.php");
 
-$results = query_boinc_db("SELECT id, name, email_addr FROM user where total_credit = 0 AND total_events = 0 AND total_tweets = 0 AND total_observations = 0 AND teamid = 0 AND total_observations = 0");
+$results = query_boinc_db("SELECT id, name, email_addr FROM user where total_credit = 0 AND total_events = 0 AND teamid = 0 AND total_observations = 0 AND total_image_reviews = 0");
 
 $delete_count = 0;
 while ($row = $results->fetch_assoc()) {
