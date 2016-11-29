@@ -75,8 +75,12 @@ echo "
 
             <p>Any and all disputes arising under your participation in Citizen Science Grid shall be subject to North Dakota law and any lawsuits shall be filed in the Northeast Central Judicial District Court of North Dakota.</p>
 
-        <h4>Copyrighted materials and limited license</h4>
+        <h4><a name='copyright'></a>Copyrighted materials and limited license</h4>
             <p>Citizen Science Grid content and viewing platforms are subject to one or more copyrights.  With respect to Citizen Science Grid content, you are granted a limited license by virtue of, and for the sole purpose of, your participation.  This license includes the right to privately view but not to publicly distribute or share Citizen Science Grid videos and data.  <b>No research publications based on Citizen Science Grid content or data should be made without written consent from Dr. Desell and the other project leaders.</b> You are solely responsible for any unauthorized use or distribution by you, or under your direction, of copyrighted materials.</p>
+
+            <p>
+            With respect to UND Writers Conference/Citizen Archivist content, you are granted a limited license by virtue of, and for the sole purpose of, your participation. This license includes the right to view the videos for educational, historical, and archival purposes, but it does not permit you to distribute or share UND Writers Conference videos, transcripts, and/or data. The UND Writers Conference recordings are subject to one or more claims of copyright and transcripts are to be verbatim.  By participating, you are waiving any claim of authorship you may have. As a condition of participation, the transcript and any original content shall become the property of UND, and, as a condition of participation, UND is granted the perpetual, exclusive, and royalty-free right to use transcripts and original content of which ownership does not transfer for any reason. No research publications based on UND Writers Conference content or data should be made without written consent from the various copyright holders, Dr. Crystal Alberts, and the University of North Dakota. You are solely responsible for any unauthorized use or distribution by you, or under your direction, of copyrighted materials.
+            </p>
 
         <h4>Other BOINC projects</h4>
             <p>Other projects use the same platform, BOINC, as Citizen Science Grid. You may want to consider participating in one or more of these projects. By doing so, your computer will do useful work even when Citizen Science Grid has no work available for it.</p>

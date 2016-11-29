@@ -304,6 +304,10 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid", $ba
         $navbar_info['right_headers'][0]['dropdowns'][1]['dropdown_title'] .= $waiting_review;
 
         array_unshift($navbar_info['right_headers'][0]['dropdowns'],
+                array('dropdown_title' => 'Survey Results',
+                'url' => './surout.php'));
+
+        array_unshift($navbar_info['right_headers'][0]['dropdowns'],
                 array('dropdown_title' => 'Data Charts',
                 'url' => './charts.php'));
 
