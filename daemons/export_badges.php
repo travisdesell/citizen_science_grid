@@ -9,22 +9,18 @@ $cwd[__FILE__] = dirname(dirname($cwd[__FILE__]));
 
 require_once($cwd[__FILE__] . "/my_query.php");
 require_once($cwd[__FILE__] . "/display_badges.php");
+require_once($cwd[__FILE__] . "/user.php");
 
 echo "running export_badges.php at " . date('Y/m/d h:i:s a') . "\n";
 
-$result = query_boinc_db("SELECT id, name, email_addr, total_credit, bossa_total_credit, valid_events, valid_tweets, cross_project_id FROM user WHERE total_credit > 0 OR bossa_total_credit > 0", $boinc_db);
+$result = query_boinc_db("SELECT id FROM user WHERE total_credit > 0 OR bossa_total_credit > 0 OR total_image_observations > 0 OR valid_tweets > 0", $boinc_db);
 
-$file = fopen("/projects/csg/download/badges.xml", "w");
+//$file = fopen("/projects/csg/download/badges.xml", "w");
+$file = fopen($cwd[__FILE__] . "/badges.xml", "w");
 
 fwrite($file, "<users>\n");
 while ( ($row = $result->fetch_assoc()) != null) {
-    $user['id'] = $row['id'];
-    $user['bossa_total_credit'] = $row['bossa_total_credit'];
-    $user['cross_project_id'] = $row['cross_project_id'];
-    $user['email_addr'] = $row['email_addr'];
-    $user['valid_events'] = $row['valid_events'];
-    $user['valid_tweets'] = $row['valid_tweets'];
-
+    $user = csg_get_user_from_id($row['id']);
     $cpid = md5($user['cross_project_id'] . $user['email_addr']);
 
     fwrite($file, "<user>\n");
@@ -38,6 +34,7 @@ while ( ($row = $result->fetch_assoc()) != null) {
     $video_badge = get_bossa_badge_str($user);
     $event_badge = get_event_badge_str($user);
     $tweets_badge = get_tweets_badge_str($user);
+    $image_badge = get_image_badge_str($user);
 
     if ($wildlife_credit_badge != "") {
         fwrite($file, "\t<wildlife_credit_badge>" . $wildlife_credit_badge . "</wildlife_credit_badge>\n");
@@ -62,6 +59,10 @@ while ( ($row = $result->fetch_assoc()) != null) {
 
     if ($tweets_badge != "") {
         fwrite($file, "\t<tweets_badge>" . $tweets_badge . "</tweets_badge>\n");
+    }
+
+    if ($image_badge != "") {
+        fwrite($file, "\t<image_badge>" . $image_badge . "</image_badge>\n");
     }
 
     fwrite($file, "</user>\n");
