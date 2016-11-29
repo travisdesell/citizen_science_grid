@@ -13,7 +13,7 @@ require_once($cwd[__FILE__] . "/user.php");
 
 echo "running export_badges.php at " . date('Y/m/d h:i:s a') . "\n";
 
-$result = query_boinc_db("SELECT id FROM user WHERE total_credit > 0 OR bossa_total_credit > 0 OR total_image_observations > 0 OR valid_tweets > 0", $boinc_db);
+$result = query_boinc_db("SELECT id FROM user WHERE total_credit > 0 OR bossa_total_credit > 0 OR image_credit > 0 OR valid_tweets > 0", $boinc_db);
 
 //$file = fopen("/projects/csg/download/badges.xml", "w");
 $file = fopen($cwd[__FILE__] . "/badges.xml", "w");

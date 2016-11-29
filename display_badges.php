@@ -394,14 +394,8 @@ function get_wildlife_credit_badge_str($user) {
 function get_image_badge_str($user) {
     global $image_badge_info;
 
-    $image_sum = (
-        $user['total_image_reviews'] +
-        2 * $user['total_image_observations'] +
-        4 * $user['matched_image_observations']
-    );
-
     foreach ($image_badge_info as &$e) {
-        if ($image_sum >= $e['credit']) {
+        if ($user->image_credit >= $e['credit']) {
             return $e['img_src'];
         }
     }
@@ -514,14 +508,8 @@ function get_event_badge($user) {
 function get_image_badge($user) {
     global $image_badge_info;
 
-    $mage_sum = (
-        $user->total_image_reviews +
-        2 * $user->total_image_observations +
-        4 * $user->matched_image_observations
-    );
-
     foreach ($image_badge_info as &$e) {
-        if ($image_sum >= $e['credit']) {
+        if ($image_credit >= $e['credit']) {
             return '<img style="height:28px;" src="./wildlife/wildlife_badges/' . $e['img_src'] . '" title="' . $e['name'] . '" badge for ' . $e['value'] . '."></img>';
         }
     }

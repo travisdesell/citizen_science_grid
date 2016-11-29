@@ -43,8 +43,15 @@ while (($current_user = $user_list->fetch_row()) != null) {
     $matched_observations = 0;
     $unmatched_observations = $total_observations - $matched_observations;
 
+    // total credit
+    $image_credit = (
+        $total_reviewed +
+        2 * $total_observations +
+        3 * $matched_observations
+    );
+
     // update the csg database
-    $result = query_boinc_db("UPDATE user SET matched_image_observations=$matched_observations, unmatched_image_observations=$unmatched_observations, total_image_observations=$total_observations, total_image_reviews=$total_reviewed WHERE id=$user_id");
+    $result = query_boinc_db("UPDATE user SET matched_image_observations=$matched_observations, unmatched_image_observations=$unmatched_observations, total_image_observations=$total_observations, total_image_reviews=$total_reviewed, image_credit=$image_credit WHERE id=$user_id");
 }
 
 ?>

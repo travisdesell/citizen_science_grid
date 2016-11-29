@@ -1,0 +1,24 @@
+<table class='table table-striped table-bordered'>
+    <thead>
+        <th>Rank</th>
+        <th>Name</th>
+        <th><a href='./top_tweeters.php?sort=valid&min={{min}}'>Matched Observations</a></th>
+        <th><a href='./top_tweeters.php?sort=total&min={{min}}'>Total Credit</a></th>
+        <th>Country</th>
+        <th>Participant Since</th>
+        <th>Badges</th>
+    </thead>
+    <tbody>
+        {{#user}}
+        <tr>
+            <td>{{rank}}</td>
+            <td>{{name}}</td>
+            <td>{{matched_image_observations}}</td>
+            <td>{{image_credit}}</td>
+            <td>{{country}}</td>
+            <td>{{create_time}}</td>
+            <td>{{{badges}}}</td>
+        </tr>
+        {{/user}}
+    </tbody>
+</table>
