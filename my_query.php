@@ -189,7 +189,7 @@ function query_wildlife_video_db($query) {
 function query_wildlife_video_db_prepared($query, $a_bind_params) {
     global $wildlife_user, $wildlife_passwd;
 
-    $wildlife_pdo = new PDO("mysql:host=wildlife.und.edu;dbname=wildlife_video;", $wildlife_user, $wildlife_passwd);
+    $wildlife_pdo = new PDO("mysql:host=localhost;dbname=wildlife_video;", $wildlife_user, $wildlife_passwd);
 
     try {
         $stmt = $wildlife_pdo->prepare($query);
@@ -218,7 +218,7 @@ function query_uas_db($query) {
 function query_uas_db_prepared($query, $a_bind_params) {
     global $wildlife_user, $wildlife_passwd;
 
-    $wildlife_pdo = new PDO("mysql:host=wildlife.und.edu;dbname=uas;", $wildlife_user, $wildlife_passwd);
+    $wildlife_pdo = new PDO("mysql:host=localhost;dbname=uas;", $wildlife_user, $wildlife_passwd);
 
     try {
         $stmt = $wildlife_pdo->prepare($query);
