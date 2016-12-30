@@ -376,7 +376,7 @@ function get_sss_credit_badge_str($user) {
 function get_wildlife_credit_badge_str($user) {
     global $wildlife_credit_badge_info;
 
-    $result = query_boinc_db("SELECT sum(total) FROM credit_user WHERE userid = " . $user['id'] . " AND (appid = 7 OR appid = 9 OR appid = 12 OR appid = 22)");
+    $result = query_boinc_db("SELECT sum(total) FROM credit_user WHERE userid = " . $user['id'] . " AND (appid = 7 OR appid = 9 OR appid = 12 OR appid = 22 OR appid = 23)");
     $row = $result->fetch_assoc();
 
     $wildlife_total_credit = $row['sum(total)'];
@@ -447,7 +447,7 @@ function get_wildlife_credit_badge($user) {
     global $wildlife_credit_badge_info;
     $badges = "";
 
-    $result = query_boinc_db("SELECT sum(total) FROM credit_user WHERE userid = " . $user->id . " AND (appid = 7 OR appid = 9 OR appid = 12 OR appid = 22)");
+    $result = query_boinc_db("SELECT sum(total) FROM credit_user WHERE userid = " . $user->id . " AND (appid = 7 OR appid = 9 OR appid = 12 OR appid = 22 OR appid = 23)");
     $row = $result->fetch_assoc();
 
     $wildlife_total_credit = $row['sum(total)'];
