@@ -254,44 +254,44 @@ $image_badge_info = array(
 */
 
     // SANDHILL CRANE
-    array( 'credit' =>     35000, 'img_src' => 'sandhill_crane_28/sandhill_crane_emerald_28.jpg', 'name' => 'An emerald sandhill crane ', 'value' => '35,000 matched observations' ),
-    array( 'credit' =>     30000, 'img_src' => 'sandhill_crane_28/sandhill_crane_jade_28.jpg', 'name' => 'A jade sandhill crane ', 'value' => '30,000 matched observations' ),
-    array( 'credit' =>     27000, 'img_src' => 'sandhill_crane_28/sandhill_crane_turquoise_28.jpg', 'name' => 'A turquoise sandhill crane ', 'value' => '27,000 matched observations' ),
-    array( 'credit' =>     24000, 'img_src' => 'sandhill_crane_28/sandhill_crane_sapphire_28.jpg', 'name' => 'A sapphire sandhill crane ', 'value' => '24,000 matched observations' ),
-    array( 'credit' =>     21000, 'img_src' => 'sandhill_crane_28/sandhill_crane_amethyst_28.jpg', 'name' => 'An amethyst sandhill crane ', 'value' => '21,000 matched observations' ),
-    array( 'credit' =>     19000, 'img_src' => 'sandhill_crane_28/sandhill_crane_gold_28.jpg', 'name' => 'A gold sandhill crane ', 'value' => '19,000 matched observations' ),
-    array( 'credit' =>     17000, 'img_src' => 'sandhill_crane_28/sandhill_crane_silver_28.jpg', 'name' => 'A silver sandhill crane ', 'value' => '17,000 matched observations' ),
-    array( 'credit' =>     15000, 'img_src' => 'sandhill_crane_28/sandhill_crane_bronze_28.jpg', 'name' => 'A bronze sandhill crane ', 'value' => '15,000 matched observations' ),
+    array( 'credit' =>     35000, 'img_src' => 'sandhill_crane_28/sandhill_crane_emerald_28.jpg', 'name' => 'An emerald sandhill crane ', 'value' => '35,000 image observation credit' ),
+    array( 'credit' =>     30000, 'img_src' => 'sandhill_crane_28/sandhill_crane_jade_28.jpg', 'name' => 'A jade sandhill crane ', 'value' => '30,000 image observation credit' ),
+    array( 'credit' =>     27000, 'img_src' => 'sandhill_crane_28/sandhill_crane_turquoise_28.jpg', 'name' => 'A turquoise sandhill crane ', 'value' => '27,000 image observation credit' ),
+    array( 'credit' =>     24000, 'img_src' => 'sandhill_crane_28/sandhill_crane_sapphire_28.jpg', 'name' => 'A sapphire sandhill crane ', 'value' => '24,000 image observation credit' ),
+    array( 'credit' =>     21000, 'img_src' => 'sandhill_crane_28/sandhill_crane_amethyst_28.jpg', 'name' => 'An amethyst sandhill crane ', 'value' => '21,000 image observation credit' ),
+    array( 'credit' =>     19000, 'img_src' => 'sandhill_crane_28/sandhill_crane_gold_28.jpg', 'name' => 'A gold sandhill crane ', 'value' => '19,000 image observation credit' ),
+    array( 'credit' =>     17000, 'img_src' => 'sandhill_crane_28/sandhill_crane_silver_28.jpg', 'name' => 'A silver sandhill crane ', 'value' => '17,000 image observation credit' ),
+    array( 'credit' =>     15000, 'img_src' => 'sandhill_crane_28/sandhill_crane_bronze_28.jpg', 'name' => 'A bronze sandhill crane ', 'value' => '15,000 image observation credit' ),
 
     // SNOW GOOSE
-    array( 'credit' =>     13000, 'img_src' => 'snow_goose_28/snow_goose_emerald_28.jpg', 'name' => 'An emerald snow goose ', 'value' => '13,000 matched observations' ),
-    array( 'credit' =>     12000, 'img_src' => 'snow_goose_28/snow_goose_jade_28.jpg', 'name' => 'A jade snow goose ', 'value' => '12,000 matched observations' ),
-    array( 'credit' =>     11000, 'img_src' => 'snow_goose_28/snow_goose_turquoise_28.jpg', 'name' => 'A turquoise snow goose ', 'value' => '11,000 matched observations' ),
-    array( 'credit' =>     10000, 'img_src' => 'snow_goose_28/snow_goose_sapphire_28.jpg', 'name' => 'A sapphire snow goose ', 'value' => '10,000 matched observations' ),
-    array( 'credit' =>     9000, 'img_src' => 'snow_goose_28/snow_goose_amethyst_28.jpg', 'name' => 'An amethyst snow goose ', 'value' => '9,000 matched observations' ),
-    array( 'credit' =>     8000, 'img_src' => 'snow_goose_28/snow_goose_gold_28.jpg', 'name' => 'A gold snow goose ', 'value' => '8,000 matched observations' ),
-    array( 'credit' =>     7000, 'img_src' => 'snow_goose_28/snow_goose_silver_28.jpg', 'name' => 'A silver snow goose ', 'value' => '7,000 matched observations' ),
-    array( 'credit' =>     6000, 'img_src' => 'snow_goose_28/snow_goose_bronze_28.jpg', 'name' => 'A bronze snow goose ', 'value' => '6,000 matched observations' ),
+    array( 'credit' =>     13000, 'img_src' => 'snow_goose_28/snow_goose_emerald_28.jpg', 'name' => 'An emerald snow goose ', 'value' => '13,000 image observation credit' ),
+    array( 'credit' =>     12000, 'img_src' => 'snow_goose_28/snow_goose_jade_28.jpg', 'name' => 'A jade snow goose ', 'value' => '12,000 image observation credit' ),
+    array( 'credit' =>     11000, 'img_src' => 'snow_goose_28/snow_goose_turquoise_28.jpg', 'name' => 'A turquoise snow goose ', 'value' => '11,000 image observation credit' ),
+    array( 'credit' =>     10000, 'img_src' => 'snow_goose_28/snow_goose_sapphire_28.jpg', 'name' => 'A sapphire snow goose ', 'value' => '10,000 image observation credit' ),
+    array( 'credit' =>     9000, 'img_src' => 'snow_goose_28/snow_goose_amethyst_28.jpg', 'name' => 'An amethyst snow goose ', 'value' => '9,000 image observation credit' ),
+    array( 'credit' =>     8000, 'img_src' => 'snow_goose_28/snow_goose_gold_28.jpg', 'name' => 'A gold snow goose ', 'value' => '8,000 image observation credit' ),
+    array( 'credit' =>     7000, 'img_src' => 'snow_goose_28/snow_goose_silver_28.jpg', 'name' => 'A silver snow goose ', 'value' => '7,000 image observation credit' ),
+    array( 'credit' =>     6000, 'img_src' => 'snow_goose_28/snow_goose_bronze_28.jpg', 'name' => 'A bronze snow goose ', 'value' => '6,000 image observation credit' ),
 
     // CANADA GOOSE
-    array( 'credit' =>     5000, 'img_src' => 'canada_goose_28/canada_goose_emerald_28.jpg', 'name' => 'An emerald Canada goose ', 'value' => '5,000 matched observations' ),
-    array( 'credit' =>     4500, 'img_src' => 'canada_goose_28/canada_goose_jade_28.jpg', 'name' => 'A jade Canada goose ', 'value' => '4,500 matched observations' ),
-    array( 'credit' =>     4000, 'img_src' => 'canada_goose_28/canada_goose_turquoise_28.jpg', 'name' => 'A turquoise Canada goose ', 'value' => '4,000 matched observations' ),
-    array( 'credit' =>     3500, 'img_src' => 'canada_goose_28/canada_goose_sapphire_28.jpg', 'name' => 'A sapphire Canada goose ', 'value' => '3,500 matched observations' ),
-    array( 'credit' =>     3000, 'img_src' => 'canada_goose_28/canada_goose_amethyst_28.jpg', 'name' => 'An amethyst Canada goose ', 'value' => '3,000 matched observations' ),
-    array( 'credit' =>     2500, 'img_src' => 'canada_goose_28/canada_goose_gold_28.jpg', 'name' => 'A gold Canada goose ', 'value' => '2,500 matched observations' ),
-    array( 'credit' =>     2000, 'img_src' => 'canada_goose_28/canada_goose_silver_28.jpg', 'name' => 'A silver Canada goose ', 'value' => '2,000 matched observations' ),
-    array( 'credit' =>     1500, 'img_src' => 'canada_goose_28/canada_goose_bronze_28.jpg', 'name' => 'A bronze Canada goose ', 'value' => '1,500 matched observations' ),
+    array( 'credit' =>     5000, 'img_src' => 'canada_goose_28/canada_goose_emerald_28.jpg', 'name' => 'An emerald Canada goose ', 'value' => '5,000 image observation credit' ),
+    array( 'credit' =>     4500, 'img_src' => 'canada_goose_28/canada_goose_jade_28.jpg', 'name' => 'A jade Canada goose ', 'value' => '4,500 image observation credit' ),
+    array( 'credit' =>     4000, 'img_src' => 'canada_goose_28/canada_goose_turquoise_28.jpg', 'name' => 'A turquoise Canada goose ', 'value' => '4,000 image observation credit' ),
+    array( 'credit' =>     3500, 'img_src' => 'canada_goose_28/canada_goose_sapphire_28.jpg', 'name' => 'A sapphire Canada goose ', 'value' => '3,500 image observation credit' ),
+    array( 'credit' =>     3000, 'img_src' => 'canada_goose_28/canada_goose_amethyst_28.jpg', 'name' => 'An amethyst Canada goose ', 'value' => '3,000 image observation credit' ),
+    array( 'credit' =>     2500, 'img_src' => 'canada_goose_28/canada_goose_gold_28.jpg', 'name' => 'A gold Canada goose ', 'value' => '2,500 image observation credit' ),
+    array( 'credit' =>     2000, 'img_src' => 'canada_goose_28/canada_goose_silver_28.jpg', 'name' => 'A silver Canada goose ', 'value' => '2,000 image observation credit' ),
+    array( 'credit' =>     1500, 'img_src' => 'canada_goose_28/canada_goose_bronze_28.jpg', 'name' => 'A bronze Canada goose ', 'value' => '1,500 image observation credit' ),
 
     // COMMON EIDER
-    array( 'credit' =>     1000, 'img_src' => 'common_eider_28/common_eider_emerald_28.jpg', 'name' => 'An emerald common eider ', 'value' => '1,000 matched observations' ),
-    array( 'credit' =>     700, 'img_src' => 'common_eider_28/common_eider_jade_28.jpg', 'name' => 'A jade common eider ', 'value' => '700 matched observations' ),
-    array( 'credit' =>     400, 'img_src' => 'common_eider_28/common_eider_turquoise_28.jpg', 'name' => 'A turquoise common eider ', 'value' => '400 matched observations' ),
-    array( 'credit' =>     200, 'img_src' => 'common_eider_28/common_eider_sapphire_28.jpg', 'name' => 'A sapphire common eider ', 'value' => '200 matched observations' ),
-    array( 'credit' =>     150, 'img_src' => 'common_eider_28/common_eider_amethyst_28.jpg', 'name' => 'An amethyst common eider ', 'value' => '150 matched observations' ),
-    array( 'credit' =>     100, 'img_src' => 'common_eider_28/common_eider_gold_28.jpg', 'name' => 'A gold common eider ', 'value' => '100 matched observations' ),
-    array( 'credit' =>     50, 'img_src' => 'common_eider_28/common_eider_silver_28.jpg', 'name' => 'A silver common eider ', 'value' => '50 matched observations' ),
-    array( 'credit' =>     10, 'img_src' => 'common_eider_28/common_eider_bronze_28.jpg', 'name' => 'A bronze common eider ', 'value' => '10 matched observations' ),
+    array( 'credit' =>     1000, 'img_src' => 'common_eider_28/common_eider_emerald_28.jpg', 'name' => 'An emerald common eider ', 'value' => '1,000 image observation credit' ),
+    array( 'credit' =>     700, 'img_src' => 'common_eider_28/common_eider_jade_28.jpg', 'name' => 'A jade common eider ', 'value' => '700 image observation credit' ),
+    array( 'credit' =>     400, 'img_src' => 'common_eider_28/common_eider_turquoise_28.jpg', 'name' => 'A turquoise common eider ', 'value' => '400 image observation credit' ),
+    array( 'credit' =>     200, 'img_src' => 'common_eider_28/common_eider_sapphire_28.jpg', 'name' => 'A sapphire common eider ', 'value' => '200 image observation credit' ),
+    array( 'credit' =>     150, 'img_src' => 'common_eider_28/common_eider_amethyst_28.jpg', 'name' => 'An amethyst common eider ', 'value' => '150 image observation credit' ),
+    array( 'credit' =>     100, 'img_src' => 'common_eider_28/common_eider_gold_28.jpg', 'name' => 'A gold common eider ', 'value' => '100 image observation credit' ),
+    array( 'credit' =>     50, 'img_src' => 'common_eider_28/common_eider_silver_28.jpg', 'name' => 'A silver common eider ', 'value' => '50 image observation credit' ),
+    array( 'credit' =>     10, 'img_src' => 'common_eider_28/common_eider_bronze_28.jpg', 'name' => 'A bronze common eider ', 'value' => '10 image observation credit' ),
 );
 
 
@@ -510,7 +510,7 @@ function get_image_badge($user) {
 
     foreach ($image_badge_info as &$e) {
         if ($user->image_credit >= $e['credit']) {
-            return '<img style="height:28px;" src="./wildlife/wildlife_badges/' . $e['img_src'] . '" title="' . $e['name'] . '" badge for ' . $e['value'] . '."></img>';
+            return '<img style="height:28px;" src="./wildlife/wildlife_badges/' . $e['img_src'] . '" title="' . $e['name'] . ' badge for ' . $e['value'] . '."></img>';
         }
     }
 
