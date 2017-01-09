@@ -15,8 +15,15 @@ echo "running export_badges.php at " . date('Y/m/d h:i:s a') . "\n";
 
 $result = query_boinc_db("SELECT id FROM user WHERE total_credit > 0 OR bossa_total_credit > 0 OR image_credit > 0 OR valid_tweets > 0", $boinc_db);
 
-//$file = fopen("/projects/csg/download/badges.xml", "w");
-$file = fopen($cwd[__FILE__] . "/badges.xml", "w");
+// LIVE
+$filename = "/projects/csg/download/badges.xml";
+
+// TESTING
+//$filename = $cwd[__FILE__] . "/badges.xml";
+//
+$file = fopen($filename, "w");
+
+echo "saving to $filename\n";
 
 fwrite($file, "<users>\n");
 while ( ($row = $result->fetch_assoc()) != null) {

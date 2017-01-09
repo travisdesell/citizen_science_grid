@@ -395,7 +395,7 @@ function get_image_badge_str($user) {
     global $image_badge_info;
 
     foreach ($image_badge_info as &$e) {
-        if ($user->image_credit >= $e['credit']) {
+        if ($user['image_credit'] >= $e['credit']) {
             return $e['img_src'];
         }
     }
@@ -509,7 +509,7 @@ function get_image_badge($user) {
     global $image_badge_info;
 
     foreach ($image_badge_info as &$e) {
-        if ($user->image_credit >= $e['credit']) {
+        if ($user['image_credit'] >= $e['credit']) {
             return '<img style="height:28px;" src="./wildlife/wildlife_badges/' . $e['img_src'] . '" title="' . $e['name'] . ' badge for ' . $e['value'] . '."></img>';
         }
     }
