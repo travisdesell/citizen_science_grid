@@ -2,8 +2,8 @@
     <thead>
         <th>Rank</th>
         <th>Name</th>
-        <th><a href='./top_tweeters.php?sort=valid&min={{min}}'>Matched Observations</a></th>
-        <th><a href='./top_tweeters.php?sort=total&min={{min}}'>Total Credit</a></th>
+        <th><a href='./top_image_reviewers.php?sort=total&min={{min}}'>Total Credit</a></th>
+        <th><a href='./top_image_reviewers.php?sort=matched&min={{min}}'>Matched Observations</a></th>
         <th>Country</th>
         <th>Participant Since</th>
         <th>Badges</th>
@@ -13,8 +13,8 @@
         <tr>
             <td>{{rank}}</td>
             <td>{{name}}</td>
-            <td>{{matched_image_observations}}</td>
             <td>{{image_credit}}</td>
+            <td>{{matched_image_observations}}</td>
             <td>{{country}}</td>
             <td>{{create_time}}</td>
             <td>{{{badges}}}</td>

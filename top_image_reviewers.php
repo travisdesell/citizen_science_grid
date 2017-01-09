@@ -1,7 +1,7 @@
 <?php
 
 $cwd[__FILE__] = __FILE__;
-if (is_link($cwd[__FILE__])) $cwd[__FILE__] = readlink($cwd[__FILE__]);
+while (is_link($cwd[__FILE__])) $cwd[__FILE__] = readlink($cwd[__FILE__]);
 $cwd[__FILE__] = dirname($cwd[__FILE__]);
 
 require_once($cwd[__FILE__] . "/header.php");
@@ -29,12 +29,20 @@ if (array_key_exists('sort', $_GET)) {
     $sort_by = "image_credit DESC";
 }
 
+$where = "";
+$count = 0;
 if ($sort == 'matched') {
     $sort_by = "matched_image_observations DESC";
+    $where = "matched_image_observations > 0";
+
 } else if ($sort == 'total') {
     $sort_by = "image_credit DESC";
+    $where = "image_credit > 0";
 }
 
+$result = query_boinc_db("SELECT COUNT(*) FROM user WHERE $where");
+$count = $result->fetch_array();
+$count = $count[0];
 
 $prev_min = $min - 20;
 if ($prev_min < 0) $prev_min = 0;
@@ -46,25 +54,27 @@ echo "
             <div class='col-sm-12'>";
 
 if ($min > 0) {
-    echo "<a type='button' class='btn btn-default pull-left' href='./top_tweeters.php?sort=$sort&min=$prev_min'>
+    echo "<a type='button' class='btn btn-default pull-left' href='./top_image_reviewers.php?sort=$sort&min=$prev_min'>
                     <span class='glyphicon glyphicon-chevron-left'></span> Previous 
                 </a>";
 }
 
+if ($next_min <= $count) {
 echo "
-                <a type='button' class='btn btn-default pull-right' href='./top_tweeters.php?sort=$sort&min=$next_min'>
+                <a type='button' class='btn btn-default pull-right' href='./top_image_reviewers.php?sort=$sort&min=$next_min'>
                     Next <span class='glyphicon glyphicon-chevron-right'></span>
-                </a>
+                </a>";
+}
 
+echo "
              </div> <!-- col-sm-12 -->
         </div> <!-- row -->";
-
 
 echo "
         <div class='row'>
             <div class='col-sm-12'>";
 
-$result = query_boinc_db("SELECT id, name, create_time, image_credit, matched_image_observations FROM user ORDER BY $sort_by LIMIT $min, 20");
+$result = query_boinc_db("SELECT id, name, country, create_time, image_credit, matched_image_observations FROM user WHERE $where ORDER BY $sort_by LIMIT $min, 20");
 
 $users['user'] = array();
 $i = $min + 1;
@@ -73,6 +83,11 @@ while ($row = $result->fetch_assoc()) {
     $i++;
 
     $user = csg_get_user_from_id($row['id']);
+    if (!isset($user)) continue;
+
+    $user = json_decode(json_encode($user), FALSE);
+    if (!isset($user) || !isset($user->id)) continue;
+
     $row['badges'] = get_badges($user);
 
     $row['create_time'] = date("F j, Y, g:i a", $row['create_time']);
