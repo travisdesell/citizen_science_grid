@@ -3,3 +3,5 @@ dna_db.php
 subset_sum_db.php
 wildlife_db.php
 nohup.out
+*.idx
+daemons/data
