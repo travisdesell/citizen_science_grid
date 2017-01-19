@@ -26,10 +26,11 @@ function usage($what = null) {
         echo "\n$what\n";
 
     echo "\nUsage: php generate_test_images.php -f file.json [--mosaic_size INT] [--type STRING] [-n] [--no_mosaic]\n";
-    echo "\tfile.json        - the JSON file created by match_images.php\n";
-    echo "\t-n / --no_mosaic - don't slice the mosaics into an idx file\n";
-    echo "\t--mosaic_size    - size of the mosiacs to be generate (DEFAULT: 256)\n";
-    echo "\t--type           - the type of object.idx file to generate (DEFAULT: both)\n";
+    echo "\tfile.json          - the JSON file created by match_images.php\n";
+    echo "\t-n / --no_mosaic   - don't slice the mosaics into an idx file\n";
+    echo "\t-o / --only_mosaic - only mosaic images\n";
+    echo "\t--mosaic_size      - size of the mosiacs to be generate (DEFAULT: 256)\n";
+    echo "\t--type             - the type of object.idx file to generate (DEFAULT: both)\n";
 
     // print out the type options
     foreach ($types as $type => &$desc) {
@@ -88,12 +89,13 @@ function get_users_count_within_bounds(int $x, int $y, int $width, int $height, 
     }
 }
 
-$shortops = "f:n";
+$shortops = "f:no";
 
 $longops = array(
     "mosaic_size:",
     "type:",
-    "no_mosaic"
+    "no_mosaic",
+    "only_mosaic"
 );
 
 $options = getopt($shortops, $longops);
@@ -107,7 +109,7 @@ $mosaic_size = 256;
 if (isset($options['mosaic_size'])) {
     $mosaic_size = (int)$options['mosaic_size'];
 }
-if ($mosaic_size < 32 || $mosaic_size > 2048) {
+if ($mosaic_size < 5) {
     usage("Mosaic size must be between 32 and 2048"); 
 }
 
@@ -119,18 +121,18 @@ if (!array_key_exists($type, $types)) {
     usage("Unknown type: '$type'");
 }
 
-// open our counts idx
-$datetime = date('Ymdhis');
-$counts_idx_filename = "${type}_${datetime}.idx";
-$counts_idx = fopen($counts_idx_filename, 'wb');
-if (!$counts_idx) {
-    echo "Fatal error: Failed to open $counts_idx_filename!\n";
-    exit();
-}
+$datetime = date('Ymd');
+$only_mosaic = isset($options['o']) || isset($options['only_mosaic']);
+$no_mosaic = isset($options['n']) || isset($options['no_mosaic']);
 
-$no_mosaic = false;
-if (isset($options['n']) || isset($options['no_mosaic'])) {
-    $no_mosaic = true;
+// open our counts idx, if needed
+if (!$only_mosaic) {
+    $counts_idx_filename = "${type}_${datetime}.idx";
+    $counts_idx = fopen($counts_idx_filename, 'wb');
+    if (!$counts_idx) {
+        echo "Fatal error: Failed to open $counts_idx_filename!\n";
+        exit();
+    }
 }
 
 $mosaics_json = json_decode(file_get_contents($infile)) or die('Unable to parse JSON file');
@@ -139,6 +141,9 @@ echo "running generate_test_images.php at " . date('Y/m/d h:i:s a') . "\n";
 echo "\tJSON file: $infile\n";
 echo "\tType: $type\n";
 echo "\tMosaic size: $mosaic_size\n";
+if ($only_mosaic) {
+    echo "\tOnly mosaic idx output.\n";
+}
 if ($no_mosaic) {
    echo "\tNo mosaic idx output.\n";
 } else {
@@ -205,15 +210,16 @@ if (!$no_mosaic) {
 }
 
 // save the counts header
-write_idx_header(
-    $counts_idx,
-    2,
-    array(
-        $total_images,
-        2
-    )
-);
-
+if (!$only_mosaic) {
+    write_idx_header(
+        $counts_idx,
+        2,
+        array(
+            $total_images,
+            2
+        )
+    );
+}
 
 echo "Total images: $total_images\n";
 
@@ -303,25 +309,27 @@ foreach ($mosaics as $mosaic_id => &$mosaic) {
             }
 
             // get the counts within the bounds
-            $counts = array();
+            if (!$only_mosaic) {
+                $counts = array();
 
-            if ($type == 'expert' || $type == 'both') {
-                get_users_count_within_bounds($x, $y, $col_width, $row_height, $mosaic['results']->expert_observations, $counts);
+                if ($type == 'expert' || $type == 'both') {
+                    get_users_count_within_bounds($x, $y, $col_width, $row_height, $mosaic['results']->expert_observations, $counts);
+                }
+
+                if ($type == 'citizen' || $type == 'both') {
+                    get_users_count_within_bounds($x, $y, $col_width, $row_height, $mosaic['results']->citizen_observations, $counts);
+                }
+
+                if ($type == 'matched') {
+                    echo "Matched supported coming soon.\n";
+                }
+
+                // write out the counts
+                // white = 2, blue = 1000000
+                $white = isset($counts['2']) ? $counts['2'] : 0;
+                $blue = isset($counts['1000000']) ? $counts['1000000'] : 0;
+                fwrite($counts_idx, pack('CC', $white, $blue));
             }
-
-            if ($type == 'citizen' || $type == 'both') {
-                get_users_count_within_bounds($x, $y, $col_width, $row_height, $mosaic['results']->citizen_observations, $counts);
-            }
-
-            if ($type == 'matched') {
-                echo "Matched supported coming soon.\n";
-            }
-
-            // write out the counts
-            // white = 2, blue = 1000000
-            $white = isset($counts['2']) ? $counts['2'] : 0;
-            $blue = isset($counts['1000000']) ? $counts['1000000'] : 0;
-            fwrite($counts_idx, pack('CC', $white, $blue));
 
             $total_width += $col_width;
         }
@@ -341,6 +349,8 @@ if (!$no_mosaic) {
     fclose($mosaic_idx);
 }
 
-fclose($counts_idx);
+if (!$only_mosaic) {
+    fclose($counts_idx);
+}
 
 ?>

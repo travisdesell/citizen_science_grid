@@ -5,6 +5,7 @@ if (is_link($cwd[__FILE__])) $cwd[__FILE__] = readlink($cwd[__FILE__]);
 $cwd[__FILE__] = dirname($cwd[__FILE__]);
 
 require_once($cwd[__FILE__] . "/user.php");
+require_once($cwd[__FILE__] . "/statuses.php");
 
 require_once $cwd[__FILE__] . '/../mustache.php/src/Mustache/Autoloader.php';
 Mustache_Autoloader::register();
@@ -317,15 +318,19 @@ function print_navbar($active_title, $project_name = "Citizen Science Grid", $ba
     }
 
     if ($user && csg_is_special_user($user)) {
-        $lines = file('http://wildlife.und.edu/conversion_online.php');
-        if ($lines[0] == 0) {
-            $navbar_info['right_headers'][] =
-                                array(
-                                    'title' => '<font color="red">CONVERSION OFFLINE</font>',
-                                    'url' => '#',
-                                    'classes' => ''
-                                );
+        $conversion_color = 'red';
+        $conversion_status = 'OFFLINE';
+        if (video_conversion_online()) {
+            $conversion_color = 'green';
+            $conversion_status = 'ONLINE';
         }
+
+        $navbar_info['right_headers'][] =
+                array(
+                    'title' => "<font color='$conversion_color'>CONVERSION $conversion_status</font>",
+                    'url' => '#',
+                    'classes' => ''
+                );
     }
 
     $navbar_template = file_get_contents($cwd[__FILE__] . "/templates/navbar_template.html");
