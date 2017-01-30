@@ -47,7 +47,7 @@ while (($current_user = $user_list->fetch_row()) != null) {
     $image_credit = (
         $total_reviewed +
         2 * $total_observations +
-        3 * $matched_observations
+        4 * $matched_observations
     );
 
     // update the csg database
