@@ -22,8 +22,7 @@ $uas_db = null;
 
 // default servers to connect to
 $default_servers = array(
-    'localhost',
-    'wildlife.und.edu'
+    'localhost'
 );
 
 function db_connect($server, $user, $passwd, $db) {
