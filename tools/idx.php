@@ -5,7 +5,7 @@ class IDXException extends Exception
 {
     public function __construct(string $msg = null, int $code = 0)
     {
-        parent::__construct("IDXReader: $msg", $code);
+        parent::__construct("$msg", $code);
     }
 };
 
@@ -90,12 +90,12 @@ class IDX implements ArrayAccess
         // open the given file as binary
         $fp = fopen($filename, 'rb');
         $size = filesize($filename);
-        if (!$this->fp || $size <= 0) {
+        if (!$fp || $size <= 0) {
             throw new IDXException("Unable to open file $filename");
         }
 
         // check the header
-        $header = unpack('C4', fread($this->fp, 4));
+        $header = unpack('C4', fread($fp, 4));
         if ($header[1] != 0x00 && $header[2] != 0x00) {
             throw new IDXException("Malformed header: '${header[1]} ${header[2]}'");
         }
@@ -114,12 +114,13 @@ class IDX implements ArrayAccess
 
         // count is always the first dimension
         --$dims;
-        $count = unpack('N', fread($this->fp, 4))[1];
+        $count = unpack('N', fread($fp, 4))[1];
 
         // get the total number of variables per element
         $datasize = self::FORMATS[$header[3]]["len"];
         $pack = self::FORMATS[$header[3]]["pack"];
         $vars = array();
+        $elementsize = 1;
         for ($i = 0; $i < $dims; ++$i) {
             $var = unpack('N', fread($fp, 4))[1];
             $vars[] = $var;
@@ -128,7 +129,7 @@ class IDX implements ArrayAccess
 
         // get he actual size of each element and the header
         $elementsize *= $datasize;
-        $headersize = 4 + 4 * $dims;
+        $headersize = 4 + 4 * ($dims + 1);
 
         // validate the length of the file
         $expected_filesize = $headersize + $elementsize * $count;
@@ -140,11 +141,11 @@ class IDX implements ArrayAccess
         // create the instance and read in the data
         $instance = new self($format, $vars);
         for ($i = 0; $i < $count; ++$i) {
-            $this->data[] = $instance->readElementFromFile($fp);
+            $instance[] = $instance->readElementFromFile($fp);
         }
 
         // make sure the count matches up
-        if (count($this->data) != $count) {
+        if ($instance->count() != $count) {
             throw new IDXException("Wrong number of elements read in.");
         }
 
@@ -156,8 +157,9 @@ class IDX implements ArrayAccess
     public function readElementFromFile($fp): array
     {
         $element = array();
-        if ($this->readDimFromFile($fp, 1, $element) != $this->elementsize) {
-            throw new IDXException("Wrong element size!");
+        $read = $this->readDimFromFile($fp, 1, $element);
+        if ($read != $this->elementsize) {
+            throw new IDXException("Wrong element size: $read vs ".$this->elementsize);
         }
 
         return $element;
@@ -174,8 +176,8 @@ class IDX implements ArrayAccess
                 $read += $this->datasize;
             }
         } else {
-            for ($i = 0; $i < $this->dims[$dim]; ++$i) {
-                $read += $this->read($dim + 1, $ret);
+            for ($i = 0; $i < $this->dims[$dim-1]; ++$i) {
+                $read += $this->readDimFromFile($fp, $dim + 1, $ret);
             }
         }
 
@@ -202,12 +204,12 @@ class IDX implements ArrayAccess
         return $this->dims[$dim];
     }
 
-    public function offsetExists(mixed $offset): boolean
+    public function offsetExists($offset)
     {
         return is_int($offset) && $offset >= 0 && $offset < $this->count();
     }
 
-    public function offsetGet(mixed $offset): mixed
+    public function offsetGet($offset)
     {
         if ($this->offsetExists($offset)) {
             return $this->data[$offset];
@@ -216,7 +218,7 @@ class IDX implements ArrayAccess
         return null;
     }
 
-    public function offsetSet(mixed $offset, mixed $value): void
+    public function offsetSet($offset, $value)
     {
         // make sure the value is correctly formatted
         if (!is_array($value) || count($value) != $this->elementlen) {
@@ -232,30 +234,30 @@ class IDX implements ArrayAccess
         }
     }
 
-    public function offsetUnset(mixed $offset): void
+    public function offsetUnset($offset)
     {
         if ($this->offsetExists($offset)) {
             unset($this->data[$offset]);
         }
     }
 
-    public function current(): mixed {
+    public function current() {
         return $this->data[$this->position];
     }
 
-    public function key(): scalar {
+    public function key() {
         return $this->position;
     }
 
-    public function next(): void {
+    public function next() {
         ++$this->position;
     }
 
-    public function rewind(): void {
+    public function rewind() {
         $this->position = 0;
     }
 
-    public function valid(): boolean {
+    public function valid() {
         return $this->position < count($this->data);
     }
 };

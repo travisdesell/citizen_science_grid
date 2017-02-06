@@ -44,6 +44,8 @@ for ($i = 0; $i <= $classes; ++$i) {
 $w = $images->dimCount(0);
 $h = $images->dimCount(1);
 
+echo "\t";
+$period = intval($counts->count() / 10);
 for ($i = 0; $i < $counts->count(); ++$i) {
     $count = $counts[$i];
     $image = $images[$i];
@@ -78,8 +80,12 @@ for ($i = 0; $i < $counts->count(); ++$i) {
     $img->clear();
 
     ++$classCounts[$class];
+
+    if ($i % $period == 0) {
+        echo ".";
+    } 
 }
 
-echo "\tDone.";
+echo "\n\tDone.\n";
 
 ?>
