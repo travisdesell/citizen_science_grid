@@ -8,80 +8,78 @@ $cwd[__FILE__] = dirname($cwd[__FILE__]);
 
 require_once($cwd[__FILE__] . '/idx.php');
 
-if ($argc < 3) {
-    echo "Please include the output filename and the filename(s) of the IDX files.\n";
+if ($argc != 4) {
+    echo "Include the filename for the counts and mosaic IDX files\n";
     exit();
 }
 
-$imgfile = $argv[1];
+// open our counts and images files
+echo "\nOpening IDX files...\n";
+$counts = IDX::fromFile($argv[1]);
+$images = IDX::fromFile($argv[2]);
 
-// open the idx file
-$args = array_slice($argv, 2);
-$idxarr = array();
-$ixcount = count($args);
-foreach ($args as $idx_filename) {
-    echo "\n";
-    $idxarr[] = new IDXReader($idx_filename);
+// make sure they are the same length
+if ($counts->count() != $images->count()) {
+    echo "\tDifferent counts, please verify.\n";
+    exit();
 }
 
-// get the total area needed for the image (assume all the same size for now)
-$ecount = $idxarr[0]->count();
-$ewidth = $idxarr[0]->getElementWidth();
-$eheight = $idxarr[0]->getElementHeight();
-foreach (array_slice($idxarr, 1) as &$idx) {
-    if ($ewidth != $idx->getElementWidth() || $eheight != $idx->getElementHeight()) {
-        "\tDifferent dimensions. Skipping.\n";
-        continue;
+echo "\tDone.\n";
+
+$outdir = $argv[3];
+echo "\nSaving images to: $outdir\n";
+
+// create our class folders
+$classes = $counts->dimCount(0);
+$classCounts = array();
+for ($i = 0; $i <= $classes; ++$i) {
+    if (!mkdir("$outdir/$i", 0777, true)) {
+        echo "\tError creating directories.\n";
+        exit();
     }
 
-    $ecount += $idx->count();
+    $classCounts[] = 0;
 }
 
-$width = $ecount * $ewidth;
-$height = $ecount * $eheight;
+$w = $images->dimCount(0);
+$h = $images->dimCount(1);
 
-// create our image
-echo "\nCreating new image: $imgfile\n";
-echo "\tCount: $ecount\n";
-echo "\tDims: $width x $height\n";
+for ($i = 0; $i < $counts->count(); ++$i) {
+    $count = $counts[$i];
+    $image = $images[$i];
 
-$img = new Imagick();
-$img->newImage($width, $height, new ImagickPixel('black'));
-$img->setImageFormat('png');
+    // create the image
+    $img = new Imagick();
+    $img->newImage($w, $h, new ImagickPixel('black'));
+    $img->setImageFormat('png');
+    $imageIterator = $img->getPixelIterator();
 
-$count = 0;
-$col = 0;
-$lastrow = -1;
-
-echo "\nIterating through IDX files...\n";
-foreach ($idxarr as &$idx) {
-    foreach ($idx as $objs) {
-        // determine the new width / height
-        $row = intval(floor($count / $ecount));
-        if ($row != $lastrow) {
-            $col = 0;
-            $lastrow = $row;
-            echo "\tMoving to new row: $row\n";
-        } else {
-            $col++;
+    // fill the image pixel-by-pixel
+    $j = 0;
+    foreach ($imageIterator as $row => $pixels) {
+        foreach ($pixels as $column => $pixel) {
+            $pixel->setColor("rgba(".$image[$j].", ".$image[$j+1].", ".$image[$j+2].", 0)");
+            $j += 3;
         }
 
-        $i = 0;
-        $areaIterator = $img->getPixelRegionIterator($col, $row, $ewidth, $eheight);
-        foreach ($areaIterator as $rowIterator) {
-            foreach ($rowIterator as $pixel) {
-                $pixel->setColor("rgba(${objs[$i]}, ${objs[$i+1]}, ${objs[$i+2]}, 0)");
-                $i += 3;
-            }
-
-            $areaIterator->syncIterator();
-        }
-
-        $count++;
+        $imageIterator->syncIterator();
     }
+
+    // determine the class
+    $class = 0;
+    for ($j = 0; $j < count($count); ++$j) {
+        if ($count[$j] > 0) {
+            $class = $j + 1;
+        }
+    }
+
+    // save the file
+    $img->writeImage("$outdir/$class/".$classCounts[$class].".png");
+    $img->clear();
+
+    ++$classCounts[$class];
 }
 
-echo "\nWriting file to: $imgfile\n";
-$img->writeImage($imgfile);
+echo "\tDone.";
 
 ?>

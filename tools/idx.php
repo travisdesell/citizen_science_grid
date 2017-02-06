@@ -193,6 +193,15 @@ class IDX implements ArrayAccess
         return count($this->data);
     }
 
+    public function dimCount(int $dim): int
+    {
+        if ($dim < 0 || $dim >= count($this->dims)) {
+            return 0;
+        }
+
+        return $this->dims[$dim];
+    }
+
     public function offsetExists(mixed $offset): boolean
     {
         return is_int($offset) && $offset >= 0 && $offset < $this->count();
