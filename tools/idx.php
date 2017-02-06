@@ -50,6 +50,8 @@ class IDXReader implements Iterator, ArrayAccess
     private $current = NULL;    /* current */
     private $format = 0;
 
+    private $data = array();    /* read in the entire file now */
+
     public function __construct(string $filename)
     {
         echo "IDX File: $filename\n";
@@ -104,7 +106,18 @@ class IDXReader implements Iterator, ArrayAccess
         $expected_filesize = $this->headersize + $this->elementsize * $this->count;
         $filesize = filesize($filename);
         if ($filesize != $expected_filesize) {
-            throw new IDXException("Mismatched files sizes: $expected_filesize vs $filesize\n");
+            throw new IDXException("Mismatched files sizes: $expected_filesize vs $filesize");
+        }
+
+        /* read in the entire file */
+        for ($i = 0; $i < $this->count; ++$i) {
+            $current = array();
+            $this->readElement($current);
+            $this->data[] = $current;
+        }
+
+        if (count($this->data) != $this->count) {
+            throw new IDXException("Read in the wrong amount of data!");
         }
     }
 
@@ -135,6 +148,30 @@ class IDXReader implements Iterator, ArrayAccess
         }
 
         return $header;
+    }
+
+    public function getWidth() {
+        return $this->count * $this->getElementWidth();
+    }
+
+    public function getHeight() {
+        return $this->count * $this->getElementHeight();
+    }
+
+    public function getElementWidth() {
+        if ($this->dims < 3) {
+            return 0;
+        }
+
+        return $this->vars[0];
+    }
+
+    public function getElementHeight() {
+        if ($this->dims < 3) {
+            return 0;
+        }
+
+        return $this->vars[1];
     }
 
     public function pack() {

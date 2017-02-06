@@ -5,3 +5,4 @@ wildlife_db.php
 nohup.out
 *.idx
 daemons/data
+wildlife

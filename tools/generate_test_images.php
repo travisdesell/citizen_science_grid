@@ -15,11 +15,18 @@ function usage($what = null) {
         echo "\n$what\n";
 
     echo "\nUsage: php generate_test_images.php -f file.json [--size INT] [--testing INT] [--background INT]\n\n";
-    echo "\tfile.json     - the JSON file created by match_images.php\n";
-    echo "\t--size        - size of the objects [DEFAULT: 20px]\n";
-    echo "\t--testing     - percentage of testing images [DEFAULT: 20]\n";
-    echo "\t--background  - percentage of background [DEFAULT: 80]\n";
-    echo "\t--outdir / -o - output directory [DEFAULT: .]\n";
+    echo "\tfile.json      - the JSON file created by match_images.php\n";
+    echo "\t--size         - size of the objects [DEFAULT: 20px]\n";
+    echo "\t--testing      - percentage of testing images [DEFAULT: 20]\n";
+    echo "\t--background   - percentage of background [DEFAULT: 80]\n";
+    echo "\t--outdir / -o  - output directory [DEFAULT: .]\n";
+    echo "\t--matched / -m - add in the matched data [DEFAULT: OFF]\n";
+    echo "\t--citizen / -c - add in all citizen data [DEFAULT: OFF]\n";
+    echo "\t--expert / -e  - add in expert data [DEFAULT: ON]\n";
+    echo "\t--rotate / -r  - randomly rotate the given amount of times\n";
+    echo "\t--noblack / -b - limits the black from the background\n";
+    echo "\t--year / -y    - year to generate for\n";
+    echo "\t--shift / -s   - correct for blueshift [DEFAULT: ON for 2015]\n";
 
     exit();
 }
@@ -92,27 +99,61 @@ function cleanup()
     }
 }
 
-/** Writes the region from the imagick to the idx */
-function exportRegion(int $x, int $y, int $size, &$imagick, &$idx) {
+/** Writes the region from the imagick to the idx 
+ * @return true if the region has color, false otherwise 
+ */
+function exportRegion(int $x, int $y, int $size, &$imagick, &$idx, $shift) {
     $areaIterator = $imagick->getPixelRegionIterator($x, $y, $size, $size);
+    $hascolor = false;
+
+    $rshift = 233.0 / 150.0;
+    $gshift = 255.0 / 189.0;
+    $bshift = 236.0 / 190.0;
+
     foreach ($areaIterator as $rowIterator) {
         foreach ($rowIterator as $pixel) { 
             // save the row pixel information
             $color = $pixel->getColor();
-            fwrite($idx, pack('CCC', $color['r'], $color['g'], $color['b']));
+            $r = $color['r'];
+            $g = $color['g'];
+            $b = $color['b'];
+
+            if ($shift) {
+                $r = intval($r * $rshift);
+                $g = intval($g * $gshift);
+                $b = intval($b * $bshift);
+
+                if ($r > 255) $r = 255;
+                if ($g > 255) $g = 255;
+                if ($b > 255) $b = 255;
+            }
+
+            fwrite($idx, pack('CCC', $r, $g, $b));
+
+            if (!$hascolor) {
+                $hascolor = $r > 0 || $g > 0 || $b > 0;
+            }
         }
     }
 
     // clear the memory for the iterator
     $areaIterator->clear();
+    return $hascolor;
 }
 
-$shortops = "f:o:";
+$shortops = "f:o:mcer:by:s";
 $longops = array(
     "size:",
     "testing:",
     "background:",
-    "outdir:"
+    "outdir:",
+    "matched",
+    "citizen",
+    "expert",
+    "rotate:",
+    "noblack",
+    "year:",
+    "shift"
 );
 
 $options = getopt($shortops, $longops);
@@ -122,11 +163,51 @@ if (!$options || !isset($options['f'])) {
 
 $infile = $options['f'];
 
+$citizen = false;
+$matched = false;
+
+if (isset($options['c']) || isset($options['citizen'])) {
+    $citizen = true;
+}
+if (!$citizen && (isset($options['m']) || isset($options['matched']))) {
+    $matched = true;
+}
+
+$expert = !$citizen && !$matched;
+if (isset($options['e']) || isset($options['expert'])) {
+    $expert = true;
+}
+
+$noblack = false;
+if (isset($options['b']) || isset($options['noblack'])) {
+    $noblack = true;
+}
+
+$year = 2015;
+if (isset($options['y'])) {
+    $year = intval($options['y']);
+} else if (isset($options['year'])) {
+    $year = intval($options['year']);
+}
+
+$shifted = $year == 2015;
+if (isset($options['s']) || isset($options['shift'])) {
+    $shifted = true;
+}
+
+
 $outdir = null;
 if (isset($options['o'])) {
     $outdir = $options['o'];
 } else if (isset($options['outdir'])) {
     $outdir = $options['outdir'];
+}
+
+$rotate = 0;
+if (isset($options['r'])) {
+    $rotate = intval($options['r']);
+} else if (isset($options['rotate'])) {
+    $rotate = intval($options['rotate']);
 }
 
 $size = 20;
@@ -147,7 +228,7 @@ if ($testing_percent < 0) {
     $testing_percent = 100;
 }
 
-$background_percent = 20;
+$background_percent = 80;
 if (isset($options['background'])) {
     $background_percent = intval($options['background']);
 }
@@ -166,9 +247,34 @@ echo "\tOutput Dir: $outdir\n";
 echo "\tSize:       $size\n";
 echo "\tTesting:    $testing_percent%\n";
 echo "\tBackground: $background_percent%\n";
+echo "\tExpert:     $expert\n";
+echo "\tCitizen:    $citizen\n";
+echo "\tMatched:    $matched\n";
+echo "\tYear:       $year\n";
+echo "\tShifting?:  $shifted\n";
+echo "\tRotations:  $rotate [NOT YET IMPLEMENTED]\n";
+echo "\tNo Black?:  $noblack [NOT YET IMPLEMENTED]\n";
+
+$basename = "${size}px_${background_percent}percent";
+if ($expert) {
+    $basename .= "_expert";
+}
+if ($citizen) {
+    $basename .= "_citizen";
+}
+if ($matched) {
+    $basename .= "_matched";
+}
+if ($rotate > 0) {
+    $basename .= "_${rotate}rot";
+}
+if ($shifted) {
+    $basename .= "_shifted";
+}
+$basename .= "_${year}_$datetime";
 
 // open our counts.idx and mosaic.idx files
-$counts_basename = "count_${size}px_${background_percent}percent_${datetime}";
+$counts_basename = "count_$basename";
 $counts_idx_filename = "training_$counts_basename.idx";
 if ($outdir) {
     $counts_idx_filename = "$outdir/$counts_idx_filename";
@@ -180,7 +286,7 @@ if (!$counts_idx) {
     exit();
 }
 
-$mosaic_basename = "mosaic_${size}px_${background_percent}percent_${datetime}";
+$mosaic_basename = "mosaic_$basename";
 $mosaic_idx_filename = "training_$mosaic_basename.idx";
 if ($outdir) {
     $mosaic_idx_filename = "$outdir/$mosaic_idx_filename";
@@ -235,8 +341,13 @@ $mosaics = array();
 echo "\nGetting object and background locations and counts...\n";
 foreach ($mosaics_json as $mosaic_filename => &$mosaic) {
     echo "\n$mosaic_filename:\n";
-    if ($mosaic->results->expert_count < 100) {
-        echo "\tNot enough expert observations (". $mosaic->results->expert_count ."). Skipping.\n";
+
+    // get the mosaic year
+    $result = query_wildlife_video_db("SELECT year FROM mosaic_images WHERE filename='$mosaic_filename' LIMIT 1");
+    $row = $result->fetch_assoc();
+    $mosaic_year = intval($row['year']);
+    if ($mosaic_year != $year) {
+        echo "\tWrong year, $mosaic_year vs $year. Skipping.\n";
         continue;
     }
 
@@ -244,7 +355,22 @@ foreach ($mosaics_json as $mosaic_filename => &$mosaic) {
     $height = $mosaic->height;
 
     // get the counts
-    $obs_count = intval($mosaic->results->expert_count);
+    $obs_count = 0;
+    if ($expert) {
+        $obs_count += intval($mosaic->results->expert_count);
+    }
+    if ($citizen) {
+        $obs_count += intval($mosaic->results->citizen_count);
+    }
+    if ($matched) {
+        $obs_count += intval($mosaic->results->matched_count);
+    }
+
+    if ($obs_count < 100) {
+        echo "\tNot enough observations ($obs_count). Skipping.\n";
+        continue;
+    }
+
     $bg_count = intval($obs_count * $bg_percent / (1 - $bg_percent));
 
     if ($testing_percent > 0) {
@@ -270,15 +396,29 @@ foreach ($mosaics_json as $mosaic_filename => &$mosaic) {
     // get all our observations
     echo "\n\tGetting observations...\n";
     $obs_arr = array();
-    foreach ($mosaic->results->expert_observations as $user_id => &$observations) {
-        foreach ($observations as &$obs) {
-            $obs_arr[] = array(
-                "x" => $obs->x,
-                "y" => $obs->y,
-                "width" => $obs->width,
-                "height" => $obs->height,
-                "species_id" => $obs->species_id
-            );
+
+    $obs_arrays = array();
+    if ($expert) {
+        $obs_arrays[] = $mosaic->results->expert_observations;
+    }
+    if ($citizen) {
+        $obs_arrays[] = $mosaic->results->citizen_observations;
+    }
+    if ($matched) {
+        $obs_arrays[] = array("0" => $mosaic->results->matched_observations);
+    }
+
+    foreach ($obs_arrays as &$obs_array) {
+        foreach ($obs_array as $user_id => &$observations) {
+            foreach ($observations as &$obs) {
+                $obs_arr[] = array(
+                    "x" => $obs->x,
+                    "y" => $obs->y,
+                    "width" => $obs->width,
+                    "height" => $obs->height,
+                    "species_id" => $obs->species_id
+                );
+            }
         }
     }
     echo "\t\tDone.\n";
@@ -443,14 +583,16 @@ foreach ($mosaics as $mosaic_filename => &$mosaic) {
     // training data is always added
     echo "\tExporting training data...\n";
     foreach ($mosaic['obs_train_arr'] as &$obs) {
-        exportRegion($x, $y, $size, $imagick, $mosaic_idx);
+        if (!exportRegion($obs['x'], $obs['y'], $size, $imagick, $mosaic_idx, $shifted)) {
+            fwrite(STDERR, "$mosaic_filename (${obs['x']}, ${obs['y']}) is all black\n");
+        }
         $white = $obs['species_id'] == 2 ? 1 : 0;
         $blue  = $obs['species_id'] == 1000000 ? 1 : 0;
         fwrite($counts_idx, pack('CC', $white, $blue));
     }
 
     foreach ($mosaic['bg_train_arr'] as &$bg) {
-        exportRegion($x, $y, $size, $imagick, $mosaic_idx);
+        exportRegion($bg['x'], $bg['y'], $size, $imagick, $mosaic_idx, $shifted);
         fwrite($counts_idx, pack('CC', 0, 0));
     }
     echo "\t\tDone.\n";
@@ -459,14 +601,16 @@ foreach ($mosaics as $mosaic_filename => &$mosaic) {
     if ($testing_percent > 0) {
         echo "\tExporting testing data...\n";
         foreach ($mosaic['obs_test_arr'] as &$obs) {
-            exportRegion($x, $y, $size, $imagick, $mosaic_testing_idx);
+            if (!exportRegion($obs['x'], $obs['y'], $size, $imagick, $mosaic_testing_idx, $shifted)) {
+                fwrite(STDERR, "$mosaic_filename (${obs['x']}, ${obs['y']}) is all black\n");
+            }
             $white = $obs['species_id'] == 2 ? 1 : 0;
             $blue  = $obs['species_id'] == 1000000 ? 1 : 0;
             fwrite($counts_testing_idx, pack('CC', $white, $blue));
         }
 
         foreach ($mosaic['bg_test_arr'] as &$bg) {
-            exportRegion($x, $y, $size, $imagick, $mosaic_testing_idx);
+            exportRegion($bg['x'], $bg['y'], $size, $imagick, $mosaic_testing_idx, $shifted);
             fwrite($counts_testing_idx, pack('CC', 0, 0));
         }
         echo "\t\tDone.\n";
