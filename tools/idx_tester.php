@@ -17,7 +17,7 @@ if ($argc < 2) {
 $args = array_slice($argv, 1);
 foreach ($args as $idx_filename) {
     echo "\n";
-    $idx = new IDXReader($idx_filename);
+    $idx = IDX::fromFile($idx_filename);
 }
 
 ?>

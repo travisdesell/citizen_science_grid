@@ -1,16 +1,18 @@
 <?php
 
+/** Generic exception class that allows. */
 class IDXException extends Exception
 {
     public function __construct(string $msg = null, int $code = 0)
     {
-        parent::__construct("IDXReader: $msg", $code);
+        parent::__construct("$msg", $code);
     }
 };
 
-class IDXReader implements Iterator, ArrayAccess
+/** Allows for the creation, loading, and saving of IDX files. */
+class IDX implements ArrayAccess, Iterator
 {
-    // the possible IDX formats
+    /** All the possible formats for IDX files */
     const FORMATS = array(
         0x08 => array(
             "len"   => 1,
@@ -38,277 +40,242 @@ class IDXReader implements Iterator, ArrayAccess
         )
     );
 
-    private $position = 0;      /* current position */
-    private $count = 0;         /* count of elements */
-    private $dims = 0;          /* the number of dimensions */
-    private $datasize = 0;      /* size of each element in bytes */
-    private $vars = array();    /* size of each variable */
-    private $elementsize = 1;   /* size of each total element in bytes */
-    private $headersize = 0;    /* size of the header */
-    private $pack = '';         /* pack character */
-    private $fp = NULL;         /* file pointer */
-    private $current = NULL;    /* current */
+    private $data = array();
+    private $dims = array();
     private $format = 0;
+    private $pack = '';
+    private $datasize = 0;
+    private $elementlen = 0;
+    private $elementsize = 0;
 
-    private $data = array();    /* read in the entire file now */
+    // iterator stuff
+    private $position = 0;
 
-    public function __construct(string $filename)
+    /** Create an empty IDX file with a given format (only required variable).
+     * @param $format the format of the IDX data (see: self::FORMATS)
+     * @param $dims the count for each dimension
+     */
+    public function __construct(int $format, array $dims = array())
     {
-        echo "IDX File: $filename\n";
+        if (!isset(self::FORMATS[$format])) {
+            throw new IDXException("Unknown format: '$format'");
+        }
 
-        $this->fp = fopen($filename, 'rb');
+        $this->elementlen = 1;
+        foreach ($dims as $dim) {
+            if (!is_int($dim)) {
+                throw new IDXException("Unknown dimension: $dim");
+            }
+
+            $this->elementlen *= $dim;
+        }
+
+        $this->dims = $dims;
+        $this->format = $format;
+        $this->datasize = self::FORMATS[$format]["len"];
+        $this->pack = self::FORMATS[$format]["pack"];
+        $this->elementsize = $this->elementlen * $this->datasize;
+        $this->position = 0;
+    }
+
+    /** Destroy all memory */
+    public function __destruct()
+    {
+
+    }
+
+    /** Load an IDX file and return the object */
+    public static function fromFile(string $filename)
+    {
+        // open the given file as binary
+        $fp = fopen($filename, 'rb');
         $size = filesize($filename);
-        if (!$this->fp || $size <= 0) {
+        if (!$fp || $size <= 0) {
             throw new IDXException("Unable to open file $filename");
         }
 
         // check the header
-        $header = unpack('C4', fread($this->fp, 4));
+        $header = unpack('C4', fread($fp, 4));
         if ($header[1] != 0x00 && $header[2] != 0x00) {
-            $this->destroy();
-            throw new IDXException("Malformed header ${header[1]} ${header[2]}");
+            throw new IDXException("Malformed header: '${header[1]} ${header[2]}'");
         }
 
-        // get the data size
-        $this->format = $header[3];
-        if (!isset(self::FORMATS[$this->format])) {
-            $this->destroy();
-            throw new IDXException("Unknown format ${header[3]}");
+        // get the format
+        $format = $header[3];
+        if (!isset(self::FORMATS[$format])) {
+            throw new IDXException("Unknown format: '${header[3]}'");
         }
 
         // get the dimensions (min 1)
-        if (($this->dims = $header[4]) < 1) {
-            $this->destroy();
-            throw new IDXException("No dimensions given ${header[4]}");
+        $dims = $header[4];
+        if ($dims < 1) {
+            throw new IDXException("No dimensions given: ${header[4]}");
         }
 
-        // remove 1 because the count is the first dimension
-        --$this->dims;
-        $this->count = unpack('N', fread($this->fp, 4))[1];
+        // count is always the first dimension
+        --$dims;
+        $count = unpack('N', fread($fp, 4))[1];
 
-        // get the size, in total, of each element
-        $this->datasize = self::FORMATS[$header[3]]["len"];
-        $this->pack = self::FORMATS[$header[3]]["pack"];
-        for ($i = 1; $i <= $this->dims; ++$i) {
-            $var = unpack('N', fread($this->fp, 4))[1];
-            $this->vars[] = $var;
-            $this->elementsize *= $var;
+        // get the total number of variables per element
+        $datasize = self::FORMATS[$header[3]]["len"];
+        $pack = self::FORMATS[$header[3]]["pack"];
+        $vars = array();
+        $elementsize = 1;
+        for ($i = 0; $i < $dims; ++$i) {
+            $var = unpack('N', fread($fp, 4))[1];
+            $vars[] = $var;
+            $elementsize *= $var;
         }
-        $this->elementsize *= $this->datasize;
 
-        $this->headersize = 4 + 4 * ($this->dims + 1);
+        // get he actual size of each element and the header
+        $elementsize *= $datasize;
+        $headersize = 4 + 4 * ($dims + 1);
 
-        echo "\tCount:        ". $this->count ."\n";
-        echo "\tHeader Size:  ". $this->headersize ."\n";
-        echo "\tElement Size: ". $this->elementsize ."\n";
-
-        // validate the file
-        $expected_filesize = $this->headersize + $this->elementsize * $this->count;
+        // validate the length of the file
+        $expected_filesize = $headersize + $elementsize * $count;
         $filesize = filesize($filename);
         if ($filesize != $expected_filesize) {
             throw new IDXException("Mismatched files sizes: $expected_filesize vs $filesize");
         }
 
-        /* read in the entire file */
-        for ($i = 0; $i < $this->count; ++$i) {
-            $current = array();
-            $this->readElement($current);
-            $this->data[] = $current;
+        // create the instance and read in the data
+        $instance = new self($format, $vars);
+        for ($i = 0; $i < $count; ++$i) {
+            $instance[] = $instance->readElementFromFile($fp);
         }
 
-        if (count($this->data) != $this->count) {
-            throw new IDXException("Read in the wrong amount of data!");
+        // make sure the count matches up
+        if ($instance->count() != $count) {
+            throw new IDXException("Wrong number of elements read in.");
         }
+
+        // we have a fully loaded IDX!
+        return $instance;
     }
 
-    public function __destruct()
+    /** Reads in an element from the given file. The file *must* be at the correct location. */
+    public function readElementFromFile($fp): array
     {
-        $this->destroy();
-    }
-
-    /** Destroys the file pointer. */
-    private function destroy()
-    {
-        if ($this->fp)
-            fclose($this->fp);
-    }
-
-    /** Gets the header for this, given a specific size. */
-    public function getHeader(int $count) {
-        $header = pack('C4',
-            0x00,
-            0x00,
-            $this->format,
-            $this->dims + 1
-        );
-
-        $header .= pack('N', $count);
-        foreach ($this->vars as $var) {
-            $header .= pack('N', $var);
+        $element = array();
+        $read = $this->readDimFromFile($fp, 1, $element);
+        if ($read != $this->elementsize) {
+            throw new IDXException("Wrong element size: $read vs ".$this->elementsize);
         }
 
-        return $header;
+        return $element;
     }
 
-    public function getWidth() {
-        return $this->count * $this->getElementWidth();
-    }
-
-    public function getHeight() {
-        return $this->count * $this->getElementHeight();
-    }
-
-    public function getElementWidth() {
-        if ($this->dims < 3) {
-            return 0;
-        }
-
-        return $this->vars[0];
-    }
-
-    public function getElementHeight() {
-        if ($this->dims < 3) {
-            return 0;
-        }
-
-        return $this->vars[1];
-    }
-
-    public function pack() {
-        return $this->pack;
-    }
-
-    /** Rewinds back to the beginning. */
-    public function rewind() {
-        fseek($this->fp, $this->headersize, SEEK_SET); 
-        $this->position = 0;
-        $this->current = null;
-    }
-
-    private function read(int $dim, array &$ret)
+    /** Reads in the specified dimension (1-indexed and recursive) from the file. */
+    private function readDimFromFile($fp, int $dim, array &$ret): int
     {
         $read = 0;
 
-        if ($dim == ($this->dims - 1)) {
-            for ($i = 0; $i < $this->vars[$dim]; ++$i) {
-                $ret[] = unpack($this->pack, fread($this->fp, $this->datasize))[1];
+        if ($dim == count($this->dims)) {
+            for ($i = 0; $i < $this->dims[$dim-1]; ++$i) {
+                $ret[] = unpack($this->pack, fread($fp, $this->datasize))[1];
                 $read += $this->datasize;
             }
         } else {
-            for ($i = 0; $i < $this->vars[$dim]; ++$i) {
-                $read += $this->read($dim + 1, $ret);
+            for ($i = 0; $i < $this->dims[$dim-1]; ++$i) {
+                $read += $this->readDimFromFile($fp, $dim + 1, $ret);
             }
         }
 
         return $read;
     }
 
-    private function readElement(array &$ret)
+    /** Save the IDX file to a given location */
+    public function saveToFile(string $filename): boolean
     {
-        return $this->read(0, $ret);
-    }
-
-    /** Gets the current element. */
-    public function current()
-    {
-        // just return our cache if we have one
-        if ($this->current)
-            return $this->current;
-
-        // read in the element
-        $this->current = array();
-        $read = $this->readElement($this->current);
-
-        // make sure the size is expected
-        if ($read != $this->elementsize) {
-            $this->current = null;
-            throw new IDXException("Mismatched sizes: $read vs ".$this->elementsize);
+        $fp = fopen($filename, 'wb');
+        if (!$fp) {
+            return false;
         }
 
-        // return
-        return $this->current;
+        // write the header and count
+        fwrite($fp, pack('C4', 0x00, 0x00, $this->format, count($this->dims) + 1), 4);
+        fwrite($fp, pack('N', count($this->data)), 4);
+
+        // write the length for each dimension
+        foreach ($this->dims as $dim) {
+            fwrite($fp, pack('N', $dim), 4);
+        }
+
+        // close
+        fclose($fp);
+        return true;
     }
 
-    /** Gets the current key. */
+    public function count(): int
+    {
+        return count($this->data);
+    }
+
+    public function dimCount(int $dim): int
+    {
+        if ($dim < 0 || $dim >= count($this->dims)) {
+            return 0;
+        }
+
+        return $this->dims[$dim];
+    }
+
+    public function offsetExists($offset)
+    {
+        return is_int($offset) && $offset >= 0 && $offset < $this->count();
+    }
+
+    public function offsetGet($offset)
+    {
+        if ($this->offsetExists($offset)) {
+            return $this->data[$offset];
+        }
+
+        return null;
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        // make sure the value is correctly formatted
+        if (!is_array($value) || count($value) != $this->elementlen) {
+            return;
+        }
+
+        if (is_null($offset)) {
+            $this->data[] = $value;
+        } else {
+            if ($this->offsetExists($offset)) {
+                $this->data[$offset] = $value;
+            }
+        }
+    }
+
+    public function offsetUnset($offset)
+    {
+        if ($this->offsetExists($offset)) {
+            unset($this->data[$offset]);
+        }
+    }
+
+    public function current() {
+        return $this->data[$this->position];
+    }
+
     public function key() {
         return $this->position;
     }
 
-    /** Goes to the next element. */
     public function next() {
         ++$this->position;
-        $this->current = null;
     }
 
-    private function fileOffset($index) {
-        if (!$this->offsetExists($index)) {
-            throw new IDXException("Index out of bounds: $index.");
-        }
-
-        return $this->headersize + $this->elementsize * $index;
+    public function rewind() {
+        $this->position = 0;
     }
 
-    private function seek($index) {
-        if (!$this->offsetExists($index)) {
-            throw new IDXException("Index out of bounds: $index.");
-        }
-
-        fseek($this->fp, $this->fileOffset($index), SEEK_SET); 
-    }
-
-    /** Is this element valid? */
     public function valid() {
-        return ($this->position < $this->count);
+        return $this->position < count($this->data);
     }
-
-    /** Array functions */
-    public function offsetExists($offset) {
-        if (!is_int($offset)) {
-            return false;
-        }
-
-        $index = intval($offset);
-        if ($index < 0 || $index >= $this->count) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public function get($index) {
-        if (!$this->offsetExists($index)) {
-            throw new IDXException("Index out of bounds: $index.");
-        }
-        
-        $offset = intval($index);
-        $this->seek($offset);
-        $value = array();
-        $this->readElement($value);
-        if ($this->position == $this->count) {
-            $this->seek($this->position - 1);
-        } else {
-            $this->seek($this->position);
-        }
-
-        return $value;
-    }
-
-    public function offsetGet($offset) {
-        return $this->get($offset);
-    }
-
-    public function offsetSet($offset, $value) {
-        throw new IDXException("Array setting not available.");
-    }
-
-    public function offsetUnset($offset) {
-        throw new IDXException("Array unsetting not available.");
-    }
-
-    public function count() {
-        return $this->count;
-    }
-
 };
 
 ?>
