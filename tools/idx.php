@@ -10,7 +10,7 @@ class IDXException extends Exception
 };
 
 /** Allows for the creation, loading, and saving of IDX files. */
-class IDX implements ArrayAccess
+class IDX implements ArrayAccess, Iterator
 {
     /** All the possible formats for IDX files */
     const FORMATS = array(
@@ -55,7 +55,7 @@ class IDX implements ArrayAccess
      * @param $format the format of the IDX data (see: self::FORMATS)
      * @param $dims the count for each dimension
      */
-    public function __construct(int $format, array $dims)
+    public function __construct(int $format, array $dims = array())
     {
         if (!isset(self::FORMATS[$format])) {
             throw new IDXException("Unknown format: '$format'");
@@ -187,6 +187,22 @@ class IDX implements ArrayAccess
     /** Save the IDX file to a given location */
     public function saveToFile(string $filename): boolean
     {
+        $fp = fopen($filename, 'wb');
+        if (!$fp) {
+            return false;
+        }
+
+        // write the header and count
+        fwrite($fp, pack('C4', 0x00, 0x00, $this->format, count($this->dims) + 1), 4);
+        fwrite($fp, pack('N', count($this->data)), 4);
+
+        // write the length for each dimension
+        foreach ($this->dims as $dim) {
+            fwrite($fp, pack('N', $dim), 4);
+        }
+
+        // close
+        fclose($fp);
         return true;
     }
 
