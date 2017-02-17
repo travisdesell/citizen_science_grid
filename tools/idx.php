@@ -85,7 +85,7 @@ class IDX implements ArrayAccess, Iterator
     }
 
     /** Load an IDX file and return the object */
-    public static function fromFile(string $filename)
+    public static function fromFile(string $filename, array &$meta)
     {
         // open the given file as binary
         $fp = fopen($filename, 'rb');
@@ -140,9 +140,11 @@ class IDX implements ArrayAccess, Iterator
 
         // create the instance and read in the data
         $instance = new self($format, $vars);
+        $instance->getMetaInformation($meta);
         for ($i = 0; $i < $count; ++$i) {
             $instance[] = $instance->readElementFromFile($fp);
         }
+        $instance->getMetaInformation($meta);
 
         // make sure the count matches up
         if ($instance->count() != $count) {
@@ -153,13 +155,34 @@ class IDX implements ArrayAccess, Iterator
         return $instance;
     }
 
+    public function getMetaInformation(array &$meta)
+    {
+        $structure = "" . $this->count();
+        foreach ($this->dims as $dim) {
+            $structure .= " x $dim";
+        }
+
+        $meta["Dimensions"] = count($this->dims) + 1;
+        $meta["Structure"] = $structure;
+        $meta["Data Size"] = $this->datasize;
+        $meta["Element Size"] = $this->elementsize;
+        $meta["Elements"] = count($this->data);
+        $meta["Pack"] = $this->pack;
+    }
+
     /** Reads in an element from the given file. The file *must* be at the correct location. */
     public function readElementFromFile($fp): array
     {
         $element = array();
-        $read = $this->readDimFromFile($fp, 1, $element);
+        if (count($this->dims) > 0) {
+            $read = $this->readDimFromFile($fp, 1, $element);
+        } else {
+            $element[] = unpack($this->pack, fread($fp, $this->datasize))[1];
+            $read += $this->datasize;
+        } 
+
         if ($read != $this->elementsize) {
-            throw new IDXException("Wrong element size: $read vs ".$this->elementsize);
+            throw new IDXException("[" . count($this->data) . "] Wrong element size: $read vs ".$this->elementsize);
         }
 
         return $element;
