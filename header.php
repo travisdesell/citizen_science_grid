@@ -34,7 +34,8 @@ function print_header($page_title, $additional_scripts = "", $scheduler = "csg")
             <link href='http://csgrid.org/csg/css/custom.css' rel='stylesheet'>
 
             <!-- jQuery (required by Bootstrap's JavaScript plugins) -->
-            <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script>
+            <!-- <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js'></script> -->
+            <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 
             <!-- Google Charts API -->
             <script type=\"text/javascript\" src=\"https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['timeline']}]}\"></script>
